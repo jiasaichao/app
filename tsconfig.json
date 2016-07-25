@@ -1,0 +1,19 @@
+{
+
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "module": "commonjs",
+    "sourceMap": true,
+    "target": "es5",
+    "jsx": "react",
+    "experimentalDecorators": true
+  },
+  //排除的文件，发现好像只有一级目录起作用，深了不行
+  "exclude": [
+    "typings",
+    "node_modules",
+    "wwwroot"
+  ]
+}
