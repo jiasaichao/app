@@ -23,6 +23,22 @@ class Styles {
         return this;
     }
 }
+/**处理class样式 */
+class ClassName {
+    o = '';
+    constructor(...s: string[]) {
+        s.forEach((value) => {
+            this.merge(value);
+        });
+    }
+    merge(...s: string[]): ClassName {
+        s.forEach((value) => {
+            this.o += ' ' + value;
+        });
+        return this;
+    }
+}
+
 class Color_O implements IColorState {
     /**正常*/
     Normal: IColor_O;
@@ -68,11 +84,11 @@ class Color_O implements IColorState {
 //颜色组
 class Colors {
     /**主要色调,蓝绿色，激活状态颜色，深色，显示重要的颜色，提交按钮颜色 */
-    static mainActive="#36c6d3";
+    static mainActive = "#36c6d3";
     /**深一个颜色 */
-    static mainActive_deep1="#26a1ab";
+    static mainActive_deep1 = "#26a1ab";
     /**主要色调，背景色，深的颜色，滑动菜单背景色，比头部背景色要浅 */
-    static mainBackground="#364150";
+    static mainBackground = "#364150";
     /**头部背景色 */
     static bgHeader = '#2b3643';
     /**头部鼠标移上背景色 */
@@ -133,8 +149,14 @@ class Global {
             if (l !== null) { ret.merge({ left: l }) };
             return ret.o;
         },
-        create:  Common.prepareStyles
+        create: Common.prepareStyles
     };
+    static className={
+        flex:'display-flex',
+        justifyContent:'justify-content',
+        alignItems:'align-items',
+        flexDirection:'flex-direction',
+    }
 }
 
 

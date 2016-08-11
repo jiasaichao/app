@@ -35,9 +35,6 @@ export class NavBar extends React.Component<IP, IS> {
         return (
             <div>
                 <Placeholder.Statusbar />
-                <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
-        {items}
-      </ReactCSSTransitionGroup>
                 <div style={styles.root.o}>
                     <div style={styles.left.o}> <Button.Base lable='返回' leftIcon='chevron-left'></Button.Base></div>
                     <h1 style={styles.h1.o} >{this.props.title}</h1>
