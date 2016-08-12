@@ -13,9 +13,9 @@ namespace Button {
         /**标题*/
         lable?: string;
         /**左图标 */
-        leftIcon?:string;
+        leftIcon?: string;
         /**右图标 */
-        rightIcon?:string;
+        rightIcon?: string;
     }
     /**
      * 基础按钮
@@ -25,7 +25,7 @@ namespace Button {
             super(props);
         }
         render() {
-            let leftIcon,rightIcon;
+            let leftIcon, rightIcon;
             let styles = {
                 root: SL.create({ padding: '.15rem' }).merge(SL.czspjz)
             }
@@ -33,15 +33,15 @@ namespace Button {
                 styles.root.merge(this.props.amStyle);
             }
             if (this.props.leftIcon) {
-                leftIcon=<span style={{ fontSize: ".24rem", color: "#fff" }} className={'icon-'+this.props.leftIcon}></span>;
+                leftIcon = <span style={{ fontSize: ".24rem", color: "#fff" }} className={'icon-' + this.props.leftIcon}></span>;
             }
             if (this.props.rightIcon) {
-                rightIcon=<span style={{ fontSize: ".24rem", color: "#fff" }} className={'icon-'+this.props.rightIcon}></span>;
+                rightIcon = <span style={{ fontSize: ".24rem", color: "#fff" }} className={'icon-' + this.props.rightIcon}></span>;
             }
             return (
                 <Tappable style={styles.root.o} component='a'>
-                {leftIcon}
-                    <span style={{fontSize:'.28rem'}}>{this.props.lable}</span>
+                    {leftIcon}
+                    <span style={{ fontSize: '.28rem' }}>{this.props.lable}</span>
                     {rightIcon}
                 </Tappable>
             );
