@@ -152,10 +152,15 @@ class Global {
         create: Common.prepareStyles
     };
     static className={
+        /**display:flex兼容写法 */
         flex:'display-flex',
         justifyContent:'justify-content',
         alignItems:'align-items',
         flexDirection:'flex-direction',
+        flexDirectionColumn:'flex-direction-column',
+        flexGrow:'flex-grow',
+        spjz:'display-flex justify-content',
+        spczjz:'display-flex justify-content align-items'
     }
 }
 
