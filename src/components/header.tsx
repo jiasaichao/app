@@ -1,6 +1,7 @@
 ﻿/// <reference path="../../typings/browser.d.ts" />
 
 import {Common, Global} from "../utils/common";
+import * as React from 'react';
 interface IHeaderProps extends React.Props<Header> {
     colorState?: IColorState;
 }

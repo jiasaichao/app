@@ -1,5 +1,6 @@
 ﻿/// <reference path="../../typings/browser.d.ts" />
 import {Common, Global,Colors} from "../utils/common";
+import * as React from 'react';
 interface IPSidebar extends React.Props<Sidebar> {
     active?:number;
     parent?:any[];

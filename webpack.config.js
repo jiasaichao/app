@@ -1,8 +1,26 @@
+var webpack = require('webpack');
+var path = require('path');
 module.exports = {
-    entry: "./src/index.tsx",
-    output: {
-        filename: "./wwwroot/js/index.bundle.js",//filename: "./wwwroot/js/[name].bundle.js" 不知道为啥显示main而不是应该显示的文件名称index
+    entry: {
+        index: "./src/index.tsx",
+        //vendor: ['react', 'react-dom', 'react-router']
     },
+    output: {
+        path: path.resolve(__dirname, './wwwroot/js'),
+        filename: "[name].bundle.js"
+    },
+    // output: {
+    //     path: path.resolve(__dirname, './wwwroot/js'),
+    //     filename: "[name].[chunkHash:8].js",
+    //     publicPath: '',
+    //     chunkFilename: "[name].[chunkHash:8].js",
+    // },
+    //
+    // plugins: [
+    //     new webpack.optimize.CommonsChunkPlugin({
+    //         names: ['vendor'/*,'manifest'*/],
+    //     }),
+    // ],
     // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
     resolve: {
@@ -27,9 +45,7 @@ module.exports = {
     externals: {
         "react": "React",
         "./React": "React",
-        "./react": "React",
         "react-dom": "ReactDOM",
-        "./ReactDOM": "ReactDOM",
-        "./reactDOM": "ReactDOM"
+        "./ReactDOM": "ReactDOM"
     }
 };

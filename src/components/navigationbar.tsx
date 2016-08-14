@@ -1,5 +1,6 @@
 /// <reference path="../../typings/browser.d.ts" />
 import {Common, Global} from "../utils/common";
+import * as React from 'react';
 /**当前状态*/
 enum CurrentState {
     /**正常*/

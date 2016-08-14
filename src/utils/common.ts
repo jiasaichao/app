@@ -83,6 +83,7 @@ class Color_O implements IColorState {
 
 //颜色组
 class Colors {
+    static line="#e6e6e6";
     /**主要色调,蓝绿色，激活状态颜色，深色，显示重要的颜色，提交按钮颜色 */
     static mainActive = "#36c6d3";
     /**深一个颜色 */

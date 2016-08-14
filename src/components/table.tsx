@@ -1,6 +1,7 @@
 ﻿/// <reference path="../../typings/browser.d.ts" />
 import {Common, Global, Colors} from "../utils/common";
 import {Placeholder} from "./public";
+import * as React from 'react';
 let SL = Global.styles;
 class Pagination {
     

@@ -2,6 +2,7 @@
 import {Common, Global} from "../utils/common";
 import {Alert} from "../components/alert";
 import { Provider, connect} from 'react-redux';
+import * as React from 'react';
 let SL = Global.styles;
 let CL = Global.colors;
 /**404页面 */

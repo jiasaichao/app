@@ -1,6 +1,7 @@
 ﻿/// <reference path="../../typings/browser.d.ts" />
 import {Common, Global} from "../utils/common";
 import {Alert} from "./alert";
+import * as React from 'react';
 
 let SL = Global.styles;
 let CL = Global.colors;

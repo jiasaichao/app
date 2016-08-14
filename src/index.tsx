@@ -1,4 +1,5 @@
 ﻿/// <reference path="../typings/browser.d.ts" />
+import * as ReactDom from 'react-dom';
 window.onresize = function () {
     document.querySelector("html").setAttribute("style", "font-size:" + document.body.clientWidth / 7.5 + "px");
 };
@@ -6,7 +7,6 @@ document.querySelector("html").setAttribute("style", "font-size:" + document.bod
 
 import appRootComponent from "./routers";
 ReactDOM.render(appRootComponent, document.getElementById('app'));
-
 
 //interface IAppProps extends React.Props<App1> {
 //}

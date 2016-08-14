@@ -4,6 +4,7 @@ import {Header, Sidebar, NavigationBar, NavigationBarItem} from "../components/i
 import { Provider, connect} from 'react-redux';
 //import { routerMiddleware, push } from 'react-router-redux'
 import {hashHistory,browserHistory} from 'react-router';
+import * as React from 'react';
 interface IMainLayout extends React.Props<MainLayout> {
     sidebar: {
         active?:number;

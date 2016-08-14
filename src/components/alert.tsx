@@ -1,5 +1,6 @@
 ﻿/// <reference path="../../typings/browser.d.ts" />
 import {Common, Global} from "../utils/common";
+import * as React from 'react';
 namespace Alert {
     let SL = Global.styles;
     interface IS {

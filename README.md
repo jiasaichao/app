@@ -68,6 +68,10 @@ Redux 提供了 combineReducers() 工具类
 
     // 任何地方都能调用
     store.dispatch(push('/foo'))
+
+    //另一种
+    import {hashHistory,browserHistory} from 'react-router';
+    hashHistory.push(this.props.href);
 ### 历史记录及其他看说明
 ## 参考网站
 [Redux 官方文档中文翻译](https://leecade.gitbooks.io/redux-in-chinese/content/)     

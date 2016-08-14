@@ -4,6 +4,8 @@ import {Button} from "./button";
 import * as Tappable from 'react-tappable';
 import {Placeholder} from "./public";
 import * as ReactCSSTransitionGroup  from "react-addons-css-transition-group";
+ import {hashHistory,browserHistory} from 'react-router';
+    import * as React from 'react';
 let SL = Global.styles;
 let CN=Global.className;
 interface IS {
@@ -33,7 +35,7 @@ export class NavBar extends React.Component<IP, IS> {
             <div>
                 <Placeholder.Statusbar />
                 <div className={CN.czjz} style={styles.root.o}>
-                    <div className={CN.czjz} style={styles.left.o}> <Button.Base lable='返回' leftIcon='chevron-left'></Button.Base></div>
+                    <div className={CN.czjz} style={styles.left.o}> <Button.Base lable='返回' onTap={()=>{hashHistory.goBack();}} leftIcon='chevron-left'></Button.Base></div>
                     <h1 className={CN.spczjz} style={styles.h1} >{this.props.title}</h1>
                 </div>
             </div>

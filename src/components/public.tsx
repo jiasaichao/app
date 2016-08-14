@@ -1,5 +1,7 @@
 ﻿/// <reference path="../../typings/browser.d.ts" />
 import {Common, Global} from "../utils/common";
+import * as React from 'react';
+/**占位符 */
 namespace Placeholder {
     /**占满剩余，多个则是等分 */
     export class Full extends React.Component<{}, {}> {
@@ -50,4 +52,4 @@ namespace Icon {
         }
     }
 }
-export {Placeholder}
+export {Placeholder,Icon}
