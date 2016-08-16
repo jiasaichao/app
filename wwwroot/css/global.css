@@ -1,7 +1,14 @@
 ﻿html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%}legend{color:#000}
+#app{
+  height: 100vh;
+  position: relative;
+}
 
 .Tappable-active {
-  opacity: 0.8;
+  opacity: 0.3;
+}
+.Tappable-bg-active {
+  background: #d9d9d9;
 }
 
 .display-flex{
@@ -58,59 +65,57 @@
 }
 .page-enter {
   opacity: 0.01;
-  -webkit-transition: opacity 2s ease-out;
-  transition: opacity 2s ease-out;
+  -webkit-transition: opacity 0.2s ease-out;
+  transition: opacity 0.2s ease-out;
 }
 .page-enter.page-enter-active {
   opacity: 1;
 }
 .page-leave {
   opacity: 1;
-  -webkit-transition: opacity 2s ease-out;
-  transition: opacity 2s ease-out;
+  -webkit-transition: opacity 0.2s ease-out;
+  transition: opacity 0.2s ease-out;
 }
 .page-leave.page-leave-active {
   opacity: 0;
 }
 .page-r2l-enter {
-  opacity: 0;
   z-index: 2;
   -webkit-transform: translate3d(100%, 0, 0);
           transform: translate3d(100%, 0, 0);
-  -webkit-transition: opacity 2s ease-out, -webkit-transform 2s ease-out;
-  transition: opacity 2s ease-out, -webkit-transform 2s ease-out;
-  transition: opacity 2s ease-out, transform 2s ease-out;
-  transition: opacity 2s ease-out, transform 2s ease-out, -webkit-transform 2s ease-out;
+  -webkit-transition:  -webkit-transform 0.2s ease-out;
+  transition:  -webkit-transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+  transition:transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
 }
 .page-r2l-enter.page-r2l-enter-active {
-  opacity: 1;
+ 
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
 }
 .page-r2l-leave {
-  opacity: 1;
   z-index: 1;
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
-  -webkit-transition: opacity 2s ease-out, -webkit-transform 2s ease-out;
-  transition: opacity 2s ease-out, -webkit-transform 2s ease-out;
-  transition: opacity 2s ease-out, transform 2s ease-out;
-  transition: opacity 2s ease-out, transform 2s ease-out, -webkit-transform 2s ease-out;
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  transition:  -webkit-transform 0.2s ease-out;
+  transition:  transform 0.2s ease-out;
+  transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
 }
 .page-r2l-leave.page-r2l-leave-active {
-  opacity: 0;
-  -webkit-transform: translate3d(-10%, 0, 0);
-          transform: translate3d(-10%, 0, 0);
+ 
+  -webkit-transform: translate3d(-20%, 0, 0);
+          transform: translate3d(-20%, 0, 0);
 }
 .page-l2r-enter {
-  opacity: 0;
+ 
   z-index: 2;
-  -webkit-transform: translate3d(-100%, 0, 0);
-          transform: translate3d(-100%, 0, 0);
-  -webkit-transition: opacity 2s ease-out, -webkit-transform 2s ease-out;
-  transition: opacity 2s ease-out, -webkit-transform 2s ease-out;
-  transition: opacity 2s ease-out, transform 2s ease-out;
-  transition: opacity 2s ease-out, transform 2s ease-out, -webkit-transform 2s ease-out;
+  -webkit-transform: translate3d(-20%, 0, 0);
+          transform: translate3d(-20%, 0, 0);
+  -webkit-transition:  -webkit-transform 0.2s ease-out;
+  transition:  -webkit-transform 0.2s ease-out;
+  transition:  transform 0.2s ease-out;
+  transition:  transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
 }
 .page-l2r-enter.page-l2r-enter-active {
   opacity: 1;
@@ -122,13 +127,12 @@
   z-index: 1;
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
-  -webkit-transition: opacity 2s ease-out, -webkit-transform 2s ease-out;
-  transition: opacity 2s ease-out, -webkit-transform 2s ease-out;
-  transition: opacity 2s ease-out, transform 2s ease-out;
-  transition: opacity 2s ease-out, transform 2s ease-out, -webkit-transform 2s ease-out;
+  -webkit-transition:  -webkit-transform 0.2s ease-out;
+  transition:  -webkit-transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
 }
 .page-l2r-leave.page-l2r-leave-active {
-  opacity: 0;
-  -webkit-transform: translate3d(10%, 0, 0);
-          transform: translate3d(10%, 0, 0);
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
 }

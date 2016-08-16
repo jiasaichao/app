@@ -10,7 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "source-map-loader": "^0.1.5",
-    "ts-loader": "^0.8.2"
+    "ts-loader": "^0.8.2",
+    "svg-sprite-loader": "^0.0.26"
   },
   "dependencies": {
     "lodash": "^4.13.1",

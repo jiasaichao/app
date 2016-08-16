@@ -6,24 +6,28 @@ import {Icon, Placeholder} from "./index";
 import * as Tappable from 'react-tappable';
 import {hashHistory,browserHistory} from 'react-router';
 import * as React from 'react';
-namespace List {
+namespace Form {
     let SL = Global.styles;
     let CN = Global.className;
-    interface LinkProps extends React.Props<Link> {
+    interface InputProps extends React.Props<Input> {
         /**样式 */
         style?: CSSProperties;
-        /**标题*/
+        /**名称*/
         lable?: string;
-        /**右侧内容 */
-        rightLable?:string;
+        /**占位名称 */
+        placeholder?:string;
+        /**左侧图标 */
+        leftIcon?:string;
+        /**左侧图片 */
+        leftImg?:string;
         /**点击事件 */
         onTap?:()=>void;
         /**跳转地址，此值若有则不会执行onTap */
         href?:string;
     }
     /**链接 */
-    export class Link extends React.Component<LinkProps, {}>{
-        constructor(props: LinkProps) {
+    export class Input extends React.Component<InputProps, {}>{
+        constructor(props: InputProps) {
             super(props)
         }
         render() {
@@ -33,13 +37,13 @@ namespace List {
                 right:{marginRight:'.2rem'}
             }
             return (
-                <Tappable style={styles.root.o} component='div' classBase='Tappable-bg'  onTap={this.handleClick}>
+                <div style={styles.root.o}>
                     <div className={CN.czjz} style={styles.container}>
                         <div>{this.props.lable}</div>
                         <Placeholder.Full/>
-                        <div style={styles.right}><span>{this.props.rightLable}</span> <Icon.Normal iconName='chevron-right'></Icon.Normal></div>
+                        <div style={styles.right}><span>{}</span> <Icon.Normal iconName='chevron-right'></Icon.Normal></div>
                     </div>
-                </Tappable>
+                </div>
             );
         }
         handleClick=()=>{
@@ -53,4 +57,4 @@ namespace List {
         }
     }
 }
-export {List}
+export {Form}

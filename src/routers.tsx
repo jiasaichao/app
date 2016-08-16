@@ -19,7 +19,7 @@ let appRootComponent = (
          <Router history={hashHistory}>
         <Route path="/" component={App}>
             <IndexRoute component={Index} />
-            <Route path='list'  component={ListPage}></Route>
+            <Route path='/list'  component={ListPage}></Route>
             </Route>
             {/*404, <NotFoundRoute handler={CourseRouteNotFound} /> NotFoundRoute这个好像也行*/}
             <Route path="*" component={NotFound}></Route>

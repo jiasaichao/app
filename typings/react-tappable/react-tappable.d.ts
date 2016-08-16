@@ -12,6 +12,8 @@ declare namespace ReactTappable {
         style?: Object;
         preventDefault?: boolean;
         stopPropagation?: boolean;
+        /**点击时加样式的名称默认Tappable， [classBase]-active*/
+        classBase?:string; 
          onTap ?: (e) => void;
     }
     interface Tappable extends __React.ComponentClass<TappableProps> {}

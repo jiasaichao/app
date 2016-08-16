@@ -58,10 +58,10 @@ export default function AppReducer(state = AppState, action) {
             case 'sidebar-active':
                 let r2 = _.cloneDeep(state);
                 r2.active=action.id;
-                console.log(r2);
+                //console.log(r2);
                 return r2;
             case 'url':
-            console.log('页面跳转：'+action.url);
+            //console.log('页面跳转：'+action.url);
                 //store.dispatch(push(action.url))
                 return state;
             default:

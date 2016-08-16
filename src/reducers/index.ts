@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 /**
  * 将路由跳转注定到全局
  */
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+//import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import sidebar from './sidebarReducer';
 import router from './routerReducer';
 /**
@@ -10,8 +10,8 @@ import router from './routerReducer';
  */
 const index = combineReducers({
   sidebar,
-  router,
-  routing: routerReducer
+  // router,
+  // routing: routerReducer
 })
 
 export default index;

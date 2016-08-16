@@ -31,7 +31,12 @@ module.exports = {
     module: {
         loaders: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-            { test: /\.tsx?$/, loader: "ts-loader" }
+            { test: /\.tsx?$/, loader: "ts-loader" },
+            {
+                test: /\.svg$/,
+                loader: 'svg-sprite-loader',
+                include: /src\/assets/
+            }
         ],
 
         preLoaders: [

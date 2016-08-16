@@ -140,9 +140,9 @@ class Global {
          * 绝对定位
         * @param t top值
         */
-        (t?: string, r?: string, b?: string, l?: string) => {
+        (t?: string|number, r?: string|number, b?: string|number, l?: string|number) => {
 
-            console.log(t !== null);
+            //console.log(t !== null);
             let ret = Common.prepareStyles({ position: 'absolute' });
             if (t !== null) { ret.merge({ top: t }) };
             if (r !== null) { ret.merge({ right: r }) };

@@ -12,7 +12,9 @@ class App extends React.Component<any, any> {
         super(props);
     }
     render() {
+        
          const action = this.props.location.action;
+         console.log(this.props.location);
         let transitionName = 'page';
         // REPLEASE
         if (action === 'PUSH') {
@@ -23,8 +25,9 @@ class App extends React.Component<any, any> {
         return (
             <ReactCSSTransitionGroup
                 transitionName={transitionName}
-                transitionEnterTimeout={2000}
-                transitionLeaveTimeout={2000}
+                transitionEnterTimeout={200}
+                transitionLeaveTimeout={200}
+                component='div'
             >
                 {React.cloneElement(this.props.children, {
                     key: this.props.location.pathname

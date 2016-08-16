@@ -8,7 +8,8 @@ import {Portlet} from "./portlet";
 import {NavBar} from "./navbar";
 import {List} from "./list";
 import {Placeholder,Icon} from "./public";
+import {Container} from "./container";
 
 export {
-Header, Table, NavigationBar, NavigationBarItem, Sidebar, Alert, Portlet,NavBar,Placeholder,Icon,List
+Header, Table, NavigationBar, NavigationBarItem, Sidebar, Alert, Portlet,NavBar,Placeholder,Icon,List,Container
 }

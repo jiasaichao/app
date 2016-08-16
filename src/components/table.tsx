@@ -46,7 +46,7 @@ class Table extends React.Component<ITableProps, {}>{
         let columns = this.renderColumns(this.props.columns);
         let body = this.renderBody(this.props.dataSource);
         let page = this.renderPage();
-        console.log(body);
+        //console.log(body);
         return (
             <div>
             <table style={{ width: '100%', border: 'solid #e7ecf1', borderWidth:'1px 0 0 1px' }}>
@@ -100,7 +100,7 @@ class Table extends React.Component<ITableProps, {}>{
     *
     */
     renderPage = () => {
-        console.log(SL.czjz);
+        //console.log(SL.czjz);
         return (
             <div style={SL.create(SL.czjz).merge({height:45}).o}>
                 <Placeholder.Full/>
