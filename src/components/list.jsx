@@ -32,7 +32,7 @@ import * as icons from "../utils/icons";
         }
         handleClick(){
             if (this.props.href) {
-                console.log('执行了list点击');
+                //console.log('执行了list点击');
                 hashHistory.push(this.props.href);
             }
             else if(this.props.onTap){
