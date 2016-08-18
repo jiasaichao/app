@@ -1,7 +1,8 @@
 # 说明
-## Typescript的使用
-1.没有使用typings直接去 https://github.com/DefinitelyTyped/DefinitelyTyped/find/master 下载。   
-2.引用 `/// <reference path="../typings/browser.d.ts" />`。
+## ES6的使用
+* 不支持getInitialState，如需在constructor通过this.state={}赋值
+* propTypes、defaultProps 作为properties定义。
+* 不支持mixins，如果需要minxins,可以使用React.createClass
 ## 文件
 * components：组件文件，放置基本组件，也就是[redux](https://leecade.gitbooks.io/redux-in-chinese/content/docs/basics/UsageWithReact.html)中说的“笨拙组件”。   
  * 读取数据：从 props 获取数据。   

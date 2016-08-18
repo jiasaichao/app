@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 module.exports = {
     entry: {
-        index: "./src/index.tsx",
+        index: "./src/index.jsx",
         //vendor: ['react', 'react-dom', 'react-router']
     },
     output: {
@@ -25,18 +25,30 @@ module.exports = {
     devtool: "source-map",
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
+        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js", ".jsx"]
     },
 
     module: {
         loaders: [
+            {
+        test: /\.svg$/,
+        loader: 'svg-sprite'
+      },
+            {
+          test: /\.jsx?$/,
+          exclude: /(node_modules|bower_components)/,
+          loader: 'babel-loader', // 'babel-loader' is also a legal name to reference
+          query: {
+            presets: ['es2015','react']
+          }
+        },
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
             { test: /\.tsx?$/, loader: "ts-loader" },
-            {
-                test: /\.svg$/,
-                loader: 'svg-sprite-loader',
-                include: /src\/assets/
-            }
+             {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loaders: ['babel-loader?presets=es2015']
+      }
         ],
 
         preLoaders: [
