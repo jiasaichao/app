@@ -48,7 +48,7 @@ const styles={
         /**绝对定位，不设置的项填写null*/
         absolute:
         /**
-         * 绝对定位
+         * 绝对定位，不设置的项填写null
         * @param t top值
         */
         (t, r, b, l) => {

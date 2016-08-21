@@ -39,7 +39,7 @@ module.exports = {
           exclude: /(node_modules|bower_components)/,
           loader: 'babel-loader', // 'babel-loader' is also a legal name to reference
           query: {
-            presets: ['es2015','react']
+             presets: ['react', 'es2015', 'stage-0']
           }
         },
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
@@ -47,7 +47,10 @@ module.exports = {
              {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['babel-loader?presets=es2015']
+          loader: 'babel-loader', // 'babel-loader' is also a legal name to reference
+          query: {
+             presets: ['react', 'es2015', 'stage-0']
+          }
       }
         ],
 

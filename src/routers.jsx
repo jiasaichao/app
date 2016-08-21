@@ -6,6 +6,8 @@ import App from "./app";
 import Index from "./containers/index";
 import ListPage from "./containers/list";
 import FormPage from "./containers/form";
+import DialogPage from "./containers/dialog";
+import ListSwipePage from "./containers/listswipe";
 import NotFound from "./containers/notFound";
 
 
@@ -23,6 +25,8 @@ let appRootComponent = (
             <IndexRoute component={Index} />
            <Route path='/list'  component={ListPage}></Route>
            <Route path='/form'  component={FormPage}></Route>
+           <Route path='/dialog'  component={DialogPage}></Route>
+           <Route path='/listswipe'  component={ListSwipePage}></Route>
             </Route>
             {/*404, <NotFoundRoute handler={CourseRouteNotFound} /> NotFoundRoute这个好像也行*/}
             <Route path="*" component={NotFound}></Route>
