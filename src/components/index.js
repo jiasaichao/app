@@ -6,8 +6,9 @@ import  * as Button from "./button";
 import  * as Form from "./form";
 import  * as Common from "./common";
 import  * as Dialog from "./dialog";
+import  * as Slider from "./slider";
 import {Container} from "./container";
 
 export {
-NavBar,Placeholder,Icon,List,Container,Button,Form,Common,Dialog
+NavBar,Placeholder,Icon,List,Container,Button,Form,Common,Dialog,Slider
 }

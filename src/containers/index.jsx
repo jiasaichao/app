@@ -10,6 +10,7 @@ let Index = React.createClass({
 <List.Link lable='列表' href='/list'></List.Link>
 <List.Link lable='表单' href='/form'></List.Link>
 <List.Link lable='对话框' href='/dialog'></List.Link>
+<List.Link lable='轮播' href='/slider'></List.Link>
 <List.Link lable='可移动操作列表' href='/listswipe'></List.Link>
             </Container>
             )

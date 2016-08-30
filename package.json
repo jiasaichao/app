@@ -9,11 +9,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "source-map-loader": "^0.1.5",
-    "ts-loader": "^0.8.2",
-    "svg-sprite-loader": "^0.0.26",
+    "babel-core": "^6.13.2",
     "babel-loader": "^6.2.4",
-    "babel-core": "^6.13.2"
+    "source-map-loader": "^0.1.5",
+    "svg-sprite-loader": "^0.0.26",
+    "ts-loader": "^0.8.2"
   },
   "dependencies": {
     "babel-loader": "^6.2.4",

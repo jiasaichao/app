@@ -8,6 +8,11 @@ import * as Icon from "./icon"
     let CN = Global.className;
     /**基本按钮
      * lable:按钮名称
+     * leftIcon:左icon
+     * rightIcon：右icon
+     * style最外层style
+     * leftStyle
+     * rightStyle
      * href:链接地址
      * onTap:点击函数
      */
@@ -18,16 +23,18 @@ export class Base extends React.Component {
         render() {
             let leftIcon, rightIcon;
             let styles = {
-                root: SL.create({ padding: '.15rem' }).merge(SL.czspjz)
+                root: SL.create({ padding: '.15rem' }).merge(SL.czspjz),
+                leftStyle:SL.create({width:'.25rem',height:'.3rem'}).merge(this.props.leftStyle),
+                rightStyle:SL.create({width:'.25rem',height:'.3rem'}).merge(this.props.rightStyle),
             }
             if (this.props.style) {
                 styles.root.merge(this.props.style);
             }
             if (this.props.leftIcon) {
-                leftIcon =<Icon.Normal iconName={this.props.leftIcon} style={{width:'.25rem',height:'.3rem'}} /> //<span style={{ fontSize: ".32rem", color: "#fff" }} className={'icon-' + this.props.leftIcon}></span>;
+                leftIcon =<Icon.Normal iconName={this.props.leftIcon} style={styles.leftStyle.o} /> //<span style={{ fontSize: ".32rem", color: "#fff" }} className={'icon-' + this.props.leftIcon}></span>;
             }
             if (this.props.rightIcon) {
-                rightIcon = <Icon.Normal iconName={this.props.rightIcon} style={{width:'.25rem',height:'.3rem'}} /> //<span style={{ fontSize: ".32rem", color: "#fff" }} className={'icon-' + this.props.rightIcon}></span>;
+                rightIcon = <Icon.Normal iconName={this.props.rightIcon} style={styles.rightStyle.o} /> //<span style={{ fontSize: ".32rem", color: "#fff" }} className={'icon-' + this.props.rightIcon}></span>;
             }
             return (
                 <Tappable style={styles.root.o} component='div' onTap={this.handleClick.bind(this)}>
@@ -41,7 +48,9 @@ export class Base extends React.Component {
             if (this.props.href) {
                 hashHistory.push(this.props.href);
             }
-            else{
+            else
+            if(this.props.onTap)
+            {
                 this.props.onTap();
             }
         }
@@ -84,7 +93,9 @@ export class Base extends React.Component {
             if (this.props.href) {
                 hashHistory.push(this.props.href);
             }
-            else{
+            else
+            if(this.props.onTap)
+            {
                 this.props.onTap();
             }
         }
