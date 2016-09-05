@@ -27,20 +27,6 @@ export class Root extends React.Component {
         }
         this.setIntervalId = null;
     }
-    static defaultProps = {
-        /**速度毫秒 */
-        speed: 300,
-        /**自动播放 */
-        autoPlay: false,
-        /**自动播放间隔 */
-        autoPlayInterval: 3000,
-        /**循环 */
-        loop: false,
-        /**是否有左右按钮 */
-        isLeftRight: false,
-        /**是否存在指示标志 */
-        isIndicators: false
-    }
     render() {
         let bodywidth = document.body.clientWidth;
         /**移动偏移量 */
@@ -111,141 +97,158 @@ export class Root extends React.Component {
                 }
             }
         });
+        /**指示当前第几页的小白点 */
         let indicatorsitem = [];
         for (var i = 1; i <= actualNumber; i++) {
             if (this.props.loop && (this.state.idx - 1) == i) {
-                indicatorsitem.push(<span key={i} style={{...styles.indicatorsItem.o, background: '#fff' }}></span >)
-    }
+                indicatorsitem.push(<span key={i} style={styles.indicatorsItem.notmerge({ background: '#fff' }) }></span >)
+            }
             else {
-    indicatorsitem.push(<span key={i} style={styles.indicatorsItem.o}></span>)
-}
+                indicatorsitem.push(<span key={i} style={styles.indicatorsItem.o}></span>)
+            }
         }
-/**指示标志 */
-let indicators
-if (this.props.isIndicators) {
-    indicators = <div className={CN.spjz} style={styles.indicators.o}>
-        {indicatorsitem}
-    </div>;
-}
-let leftRightButton = [];
-if (this.props.isLeftRight) {
-    leftRightButton = [<Button.Base key='left' leftIcon={icons.Chevron_Left} onTap={() => { this._goIndex(this.state.idx - 1); this._resetAutoPlay() } } style={styles.leftIcon}/>,
-        <Button.Base key='right' leftIcon={icons.Chevron_Right} onTap={() => { this._goIndex(this.state.idx + 1); this._resetAutoPlay() } } style={styles.rightIcon} />];
-}
-//console.log('render:' + offsetX);
+        /**指示标志 */
+        let indicators
+        if (this.props.isIndicators) {
+            indicators = <div className={CN.spjz} style={styles.indicators.o}>
+                {indicatorsitem}
+            </div>;
+        }
+        let leftRightButton = [];
+        if (this.props.isLeftRight) {
+            leftRightButton = [<Button.Base key='left' leftIcon={icons.Chevron_Left} onTap={() => { this._goIndex(this.state.idx - 1); this._resetAutoPlay() } } style={styles.leftIcon}/>,
+                <Button.Base key='right' leftIcon={icons.Chevron_Right} onTap={() => { this._goIndex(this.state.idx + 1); this._resetAutoPlay() } } style={styles.rightIcon} />];
+        }
+        //console.log('render:' + offsetX);
 
-return (
-    <div style={{ overflow: 'hidden', width: '100%', position: 'relative' }}>
-        <div ref="container" className={CN.flex} style={styles.container} onTouchStart={this._handleTouchStart} onTouchMove={this._handleTouchMove} onTouchEnd={this._handleTouchEnd}>
-            {content}
-            {/**
+        return (
+            <div style={{ overflow: 'hidden', width: '100%', position: 'relative' }}>
+                <div ref="container" className={CN.flex} style={styles.container} onTouchStart={this._handleTouchStart} onTouchMove={this._handleTouchMove} onTouchEnd={this._handleTouchEnd}>
+                    {content}
+                    {/**
                     <div style={{ overflow: 'hidden', width: bodywidth, height: '3rem', background: '#FEFABE' }}></div>
                     <div style={{ overflow: 'hidden', width: bodywidth, height: '3rem', background: '#BEFEC1' }}></div>
                     <div style={{ overflow: 'hidden', width: bodywidth, height: '3rem', background: '#BEE0FE' }}></div>
                     <div style={{ overflow: 'hidden', width: bodywidth, height: '3rem', background: '#EEBEFE' }}></div>   
                      */}
-        </div>
-        {indicators}
-        {
-            leftRightButton
+                </div>
+                {indicators}
+                {
+                    leftRightButton
+                }
+
+            </div>
+        );
+    }
+    componentWillMount() {
+        let pageNumber = this.props.children.filter((item) => { return item.type.name === 'Item' }).length;
+        console.log(pageNumber);
+        if (this.props.loop) {
+            pageNumber = pageNumber + 2
+            this.setState({ pageNumber: pageNumber, idx: 2 });
+        }
+        this.setState({ pageNumber: pageNumber });
+
+    }
+    componentDidMount() {
+        /**轮播如果存在循环播放，播放到最后一张，或者第一张都会切换到对应的页面上 */
+        if (this.props.loop) {
+            this.refs.container.addEventListener('webkitTransitionEnd', () => {
+                if (this.state.idx === 1) {
+                    this.setState({ touch: true, idx: this.state.pageNumber - 1 });
+                }
+                if (this.state.idx === this.state.pageNumber) {
+                    this.setState({ touch: true, idx: 2 });
+                }
+                window.setTimeout(() => {
+                    this.setState({ touch: false });
+                }, 100);
+            });
         }
 
-    </div>
-);
-    }
-componentWillMount() {
-    let pageNumber = this.props.children.filter((item) => { return item.type.name === 'Item' }).length;
-    console.log(pageNumber);
-    if (this.props.loop) {
-        pageNumber = pageNumber + 2
-        this.setState({ pageNumber: pageNumber, idx: 2 });
-    }
-    this.setState({ pageNumber: pageNumber });
+        if (this.props.autoPlay) {
+            this._autoPlay();
+        }
 
-}
-componentDidMount() {
-    /**轮播如果存在循环播放，播放到最后一张，或者第一张都会切换到对应的页面上 */
-    if (this.props.loop) {
-        this.refs.container.addEventListener('webkitTransitionEnd', () => {
-            if (this.state.idx === 1) {
-                this.setState({ touch: true, idx: this.state.pageNumber - 1 });
-            }
-            if (this.state.idx === this.state.pageNumber) {
-                this.setState({ touch: true, idx: 2 });
-            }
-            window.setTimeout(() => {
-                this.setState({ touch: false });
-            }, 100);
-        });
+        //this.setState({ optionWidth: this.refs.option.clientWidth });
     }
-
-    if (this.props.autoPlay) {
-        this._autoPlay();
-    }
-
-    //this.setState({ optionWidth: this.refs.option.clientWidth });
-}
-_autoPlay = () => {
-    if (this.setIntervalId == null) {
-        this.setIntervalId = window.setInterval(() => {
-            this._goIndex(this.state.idx + 1);
-        }, this.props.autoPlayInterval);
-    }
-
-}
-_clearAutoPlay = () => {
-    clearInterval(this.setIntervalId);
-    this.setIntervalId = null;
-}
-/**重置自动播放 */
-_resetAutoPlay = () => {
-    if (this.props.autoPlay && this.setIntervalId !== null) {
+    componentWillUnmount() {
         this._clearAutoPlay();
-        this._autoPlay();
+    }
+    _autoPlay = () => {
+        if (this.setIntervalId == null) {
+            this.setIntervalId = window.setInterval(() => {
+                this._goIndex(this.state.idx + 1);
+            }, this.props.autoPlayInterval);
+        }
+
+    }
+    _clearAutoPlay = () => {
+        clearInterval(this.setIntervalId);
+        this.setIntervalId = null;
+    }
+    /**重置自动播放 */
+    _resetAutoPlay = () => {
+        if (this.props.autoPlay && this.setIntervalId !== null) {
+            this._clearAutoPlay();
+            this._autoPlay();
+        }
+    }
+    _handleTouchStart = (e) => {
+        this.setState({ touch: true, startX: e.touches[0].clientX, clientX: e.touches[0].clientX })
+    }
+    _handleTouchMove = (e) => {
+        //console.log('TouchMove:' + e.touches[0].clientX);
+        this.setState({ clientX: e.touches[0].clientX })
+    }
+    _handleTouchEnd = (e) => {
+        /** */
+        if ((this.state.clientX - this.state.startX) > document.body.clientWidth / 8) {
+            this._goIndex(this.state.idx - 1)
+            //window.setTimeout(()=>{this.setState({idx:this.state.ide-1});},100);
+        } else
+            if ((this.state.clientX - this.state.startX) < -document.body.clientWidth / 8) {
+                this._goIndex(this.state.idx + 1)
+            }
+            else {
+                this.setState({ touch: false, startX: 0, clientX: 0 });
+            }
+        //this.setState({offsetX: this.state.clientX - this.state.startX})
+        // this.setState({ transition: true }); window.setTimeout(() => {
+        //     if (-offsetX > (this.state.optionWidth / 3)) {
+        //         this.setState({ startX: this.state.clientX + this.state.optionWidth });
+        //         this.setState({ show: true });
+        //     } else {
+        //         this.setState({ startX: this.state.clientX });
+        //         this.setState({ show: false });
+        //     }
+
+        // }, 100)
+    }
+    _goIndex = (page) => {
+        if (page < 1) {
+            page = 1
+        } else if (page > this.state.pageNumber) {
+            page = this.state.pageNumber
+        }
+
+        this.setState({ touch: false, idx: page, startX: 0, clientX: 0 });
     }
 }
-_handleTouchStart = (e) => {
-    this.setState({ touch: true, startX: e.touches[0].clientX, clientX: e.touches[0].clientX })
+Root.defaultProps = {
+    /**速度毫秒 */
+    speed: 300,
+    /**自动播放 */
+    autoPlay: false,
+    /**自动播放间隔 */
+    autoPlayInterval: 3000,
+    /**循环 */
+    loop: false,
+    /**是否有左右按钮 */
+    isLeftRight: false,
+    /**是否存在指示标志 */
+    isIndicators: false
 }
-_handleTouchMove = (e) => {
-    //console.log('TouchMove:' + e.touches[0].clientX);
-    this.setState({ clientX: e.touches[0].clientX })
-}
-_handleTouchEnd = (e) => {
-    /** */
-    if ((this.state.clientX - this.state.startX) > document.body.clientWidth / 8) {
-        this._goIndex(this.state.idx - 1)
-        //window.setTimeout(()=>{this.setState({idx:this.state.ide-1});},100);
-    } else
-        if ((this.state.clientX - this.state.startX) < -document.body.clientWidth / 8) {
-            this._goIndex(this.state.idx + 1)
-        }
-        else {
-            this.setState({ touch: false, startX: 0, clientX: 0 });
-        }
-    //this.setState({offsetX: this.state.clientX - this.state.startX})
-    // this.setState({ transition: true }); window.setTimeout(() => {
-    //     if (-offsetX > (this.state.optionWidth / 3)) {
-    //         this.setState({ startX: this.state.clientX + this.state.optionWidth });
-    //         this.setState({ show: true });
-    //     } else {
-    //         this.setState({ startX: this.state.clientX });
-    //         this.setState({ show: false });
-    //     }
-
-    // }, 100)
-}
-_goIndex = (page) => {
-    if (page < 1) {
-        page = 1
-    } else if (page > this.state.pageNumber) {
-        page = this.state.pageNumber
-    }
-
-    this.setState({ touch: false, idx: page, startX: 0, clientX: 0 });
-}
-}
-
 export class Item extends React.Component {
     constructor(props) {
         super(props)

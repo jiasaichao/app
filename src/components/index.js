@@ -7,8 +7,9 @@ import  * as Form from "./form";
 import  * as Common from "./common";
 import  * as Dialog from "./dialog";
 import  * as Slider from "./slider";
-import {Container} from "./container";
+import  * as NineGrid from "./ninegrid";
+import * as Container from "./container";
 
 export {
-NavBar,Placeholder,Icon,List,Container,Button,Form,Common,Dialog,Slider
+NavBar,Placeholder,Icon,List,Container,Button,Form,Common,Dialog,Slider,NineGrid
 }

@@ -4,12 +4,12 @@ import * as icons from "../utils/icons";
 let FormPage = React.createClass({
     render: function () {
         return (
-            <Container>
+            <Container.Page>
             <NavBar title="表单"></NavBar>
 <Form.Input leftIcon={icons.User} placeholder="用户名"  />
 <Form.Input leftIcon={icons.Email} placeholder="邮箱"  />
 <Form.Input leftIcon={icons.Printer} placeholder="传真"  />
-            </Container>
+            </Container.Page>
             )
     }
 })

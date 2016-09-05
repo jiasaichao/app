@@ -9,7 +9,7 @@ import * as icons from "../utils/icons";
 let SL = Global.styles;
 let CN = Global.className;
 /**链接 */
-/**leftIcon:左边icon图标；placeholder:展位字符 */
+/**leftIcon:左边icon图标；placeholder:占位字符 */
 export class Input extends React.Component {
     constructor(props) {
         super(props)

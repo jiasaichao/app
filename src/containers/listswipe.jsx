@@ -3,7 +3,7 @@ import * as React from 'react';
 let ListSwipePage = React.createClass({
     render: function () {
         return (
-            <Container>
+            <Container.Page>
                 <NavBar title="可移动操作列表"></NavBar>
                 <List.Swipe lable='可移动操作列表3'/>
                 <List.Swipe lable='可移动操作列表4'/>
@@ -11,7 +11,7 @@ let ListSwipePage = React.createClass({
                 <List.Swipe lable='可移动操作列表3'/>
                 <List.Swipe lable='可移动操作列表4'/>
                 <List.Swipe lable='可移动操作列表5'/>
-            </Container>
+            </Container.Page>
         )
     }
 })

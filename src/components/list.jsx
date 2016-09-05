@@ -1,5 +1,5 @@
 
-/**列表*/
+/**列表List*/
 import {Common, Global} from "../utils/common";
 import {Icon, Placeholder} from "./index";
 import Tappable from 'react-tappable';
@@ -76,8 +76,8 @@ export class Swipe extends React.Component {
                         if (this.state.show) {
                             this.setState({ transition: true });
                             window.setTimeout(() => {
-                               this.setState({ startX: this.state.clientX });
-                                    this.setState({ show: false });
+                                this.setState({ startX: this.state.clientX });
+                                this.setState({ show: false });
                             }, 100)
                         } else {
                             this.setState({ transition: false, startX: e.touches[0].clientX, clientX: e.touches[0].clientX })
@@ -125,3 +125,42 @@ export class Swipe extends React.Component {
         }
     }
 }
+
+/**
+ * 小标题
+ * 一般做一个页面两个模块之间的分割
+ * lable
+ * style
+ * background:
+ * color
+ */
+export class SmallTitle extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        let styles = {
+            root: SL.create({
+                height: '.5rem',
+                fontSize: '.26rem',
+                background: '#e0e0e0',
+                paddingLeft: '.2rem'
+            }).merge(this.props.style)
+        }
+        if (this.props.background) {
+            styles.root.merge({ background: this.props.background });
+        }
+        if (this.props.color) {
+            styles.root.merge({ color: this.props.color });
+        }
+        return (
+            <div className={CN.czjz} style={styles.root.o}>
+                {this.props.lable}
+            </div>
+        );
+    }
+}
+// SmallTitle.defaultProps = {
+//     background: null,
+//     color: null
+// }

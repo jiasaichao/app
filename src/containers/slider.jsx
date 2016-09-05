@@ -3,8 +3,8 @@ import * as React from 'react';
 let ListPage = React.createClass({
     render: function () {
         return (
-            <Container>
-                <NavBar title="列表"></NavBar>
+            <Container.Page>
+                <NavBar title="轮播"></NavBar>
                 <div>
                 <Slider.Root loop={true} autoPlay={true} isLeftRight={true} isIndicators={true}>
                     <Slider.Item><img src="image/bing-1.jpg" style={{ width: '100%' }} /> </Slider.Item>
@@ -23,7 +23,7 @@ let ListPage = React.createClass({
                     <Slider.Item><img src="image/bing-3.jpg" style={{ width: '100%' }} /></Slider.Item>
                 </Slider.Root>
                 </div>
-            </Container>
+            </Container.Page>
         )
     }
 })

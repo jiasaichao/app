@@ -19,7 +19,7 @@ export class DialogPage extends React.Component {
             popupDown:{}
         }
         return (
-            <Container>
+            <Container.Page>
                 <Dialog.Modal title="提示标题" content="提示内容" show={this.state.modal} onCancel={() => { this.setState({ modal: false }) } } onOk={() => { this.setState({ modal: false }) } } />
                 <Dialog.Overlay show={this.state.overlay}>
                     <div>
@@ -69,7 +69,7 @@ export class DialogPage extends React.Component {
                 <Button.Submit style={{marginTop:'.1rem'}} lable='确认Confirm' onTap={this._handleModal}/>
                 <Button.Submit style={{marginTop:'.1rem'}} lable='整页弹出Overlay' onTap={() => { this.setState({ overlay: true }) } }/>
                 <Button.Submit style={{marginTop:'.1rem'}} lable='下弹出PopupDown' onTap={() => { this.setState({ popupDown: true }) } }/>
-            </Container>
+            </Container.Page>
         )
     }
     _handleModal = () => {

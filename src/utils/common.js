@@ -11,6 +11,7 @@ class Styles {
         this.o={};
         this.merge(style);
     }
+    /**合并 */
     merge(...s) {
         for (var i = 0; i < s.length; i++) {
             let properties = s[i];
@@ -21,6 +22,20 @@ class Styles {
             }
         }
         return this;
+    }
+    /**不合并，直接返回this和加入的对象，不改变this */
+    notmerge(...s) {
+        let tmp={};
+        s.push(this.o);
+        for (var i = 0; i < s.length; i++) {
+            let properties = s[i];
+            for (var p in properties) {
+                if (typeof (properties[p]) != "function") {
+                    tmp[p] = properties[p];
+                }
+            }
+        }
+        return tmp;
     }
 }
 /**处理class样式 */
