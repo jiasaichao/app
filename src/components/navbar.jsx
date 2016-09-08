@@ -9,6 +9,8 @@ let SL = Global.styles;
 let CN = Global.className;
 /**
  * 导航条组件。
+ * title
+ * back:bool,default:true
  */
 export class NavBar extends React.Component {
     constructor(props) {
@@ -24,15 +26,23 @@ export class NavBar extends React.Component {
         if (this.props.style) {
             styles.root.merge(this.props.style);
         }
+        let back
+        if(this.props.back)
+        {
+            back=<Button.Base lable='返回' onTap={() => { hashHistory.goBack(); } } leftIcon={Icons.Chevron_Left}></Button.Base>;
+        }
         return (
             <div>
             {/** <Placeholder.Statusbar /> */}
                 <div className={CN.czjz} style={styles.root.o}>
-                    <div className={CN.czjz} style={styles.left.o}> <Button.Base lable='返回' onTap={() => { hashHistory.goBack(); } } leftIcon={Icons.Chevron_Left}></Button.Base></div>
+                    <div className={CN.czjz} style={styles.left.o}> {back}</div>
                     <h1 className={CN.spczjz} style={styles.h1} >{this.props.title}</h1>
                 </div>
             </div>
         );
     }
 
+}
+NavBar.defaultProps = {
+    back:true
 }

@@ -67,7 +67,6 @@ const styles={
         * @param t top值
         */
         (t, r, b, l) => {
-
             //console.log(t !== null);
             let ret = Common.prepareStyles({ position: 'absolute' });
             if (t !== null) { ret.merge({ top: t }) };
@@ -76,6 +75,7 @@ const styles={
             if (l !== null) { ret.merge({ left: l }) };
             return ret.o;
         },
+        
         create: Common.prepareStyles
     }
     const className={

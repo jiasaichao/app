@@ -1,4 +1,4 @@
-import {NavBar,List,Container,Form} from "../components/index";
+import {NavBar,List,Container,Form,Button} from "../components/index";
 import * as React from 'react';
 import * as icons from "../utils/icons";
 let FormPage = React.createClass({
@@ -9,6 +9,8 @@ let FormPage = React.createClass({
 <Form.Input leftIcon={icons.User} placeholder="用户名"  />
 <Form.Input leftIcon={icons.Email} placeholder="邮箱"  />
 <Form.Input leftIcon={icons.Printer} placeholder="传真"  />
+<Form.Switch leftIcon={icons.Refresh} lable="刷新"  />
+<Button.Submit lable="确认" style={{marginTop:'.2rem'}}   />
             </Container.Page>
             )
     }

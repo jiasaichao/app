@@ -61,6 +61,7 @@ export class Base extends React.Component {
      * lable:按钮名称
      * href:链接地址
      * onTap:点击函数
+     * style
      */
     export class Submit extends React.Component {
         constructor(props) {
