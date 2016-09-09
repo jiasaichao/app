@@ -1,5 +1,6 @@
 # 说明
 ## [demo地址](http://m.aizhengli.com)
+使用的是rem等比的布局，所以pc端打开最后调试成手机模式。
 ## 文件
 * components：组件文件，放置基本组件，也就是[redux](https://leecade.gitbooks.io/redux-in-chinese/content/docs/basics/UsageWithReact.html)中说的“笨拙组件”。   
  * 包括：button按钮、common公共、container容器、dialog弹窗、form表单、gesture手势、icon图标、list列表、navbar导航头、ninegrid九宫格、placeholder占位符、slider轮播、fullpage全屏滚动（未完成）。
