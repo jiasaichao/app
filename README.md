@@ -1,4 +1,7 @@
 # 说明
+## [demo地址](http://m.aizhengli.com)
+使用的是rem等比的布局，所以pc端打开最后调试成手机模式。
+TypeScript这个版本暂时不更新，请到es6版本[https://github.com/jiasaichao/app/tree/es6](https://github.com/jiasaichao/app/tree/es6)
 ## Typescript的使用
 1.没有使用typings直接去 https://github.com/DefinitelyTyped/DefinitelyTyped/find/master 下载。   
 2.引用 `/// <reference path="../typings/browser.d.ts" />`。
