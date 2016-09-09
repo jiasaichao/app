@@ -1,10 +1,9 @@
 /**对话框Dialog*/
 import {Common, Global} from "../utils/common";
-import Tappable from 'react-tappable';
 import {hashHistory, browserHistory} from 'react-router';
 import * as React from 'react';
 import * as Icon from "./icon";
-import {Common as CON} from "./index";
+import {Common as CON ,Gesture} from "./index";
 let SL = Global.styles;
 let CN = Global.className;
 /**模态窗口
@@ -76,8 +75,8 @@ export class Modal extends React.Component {
                         <span className={CN.spjz} style={styles.text}>{this.props.content}</span>
                     </div>
                     <div style={styles.bottom}>
-                        <Tappable style={styles.left} onTap={this.props.onCancel}>取消</Tappable>
-                        <Tappable style={styles.right} onTap={this.props.onOk}>确定</Tappable>
+                        <Gesture.Touchable style={styles.left} onTap={this.props.onCancel}>取消</Gesture.Touchable>
+                        <Gesture.Touchable style={styles.right} onTap={this.props.onOk}>确定</Gesture.Touchable>
                     </div>
                 </div>
             </div>

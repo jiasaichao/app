@@ -1,9 +1,8 @@
 /**按钮*/
 import {Common, Global} from "../utils/common";
-import Tappable from 'react-tappable';
 import {hashHistory, browserHistory} from 'react-router';
 import * as React from 'react';
-import * as Icon from "./icon"
+import {Icon,Gesture} from "./index";
 let SL = Global.styles;
 let CN = Global.className;
 /**遮罩 z-index为1000,
@@ -22,7 +21,7 @@ export class Mask extends React.Component {
             styles.root.merge({ display: 'none' });
         }
         return (
-            <Tappable style={styles.root.o} onTap={this._handleOnTap}></Tappable>
+            <Gesture.Touchable style={styles.root.o} onTap={this._handleOnTap}></Gesture.Touchable>
         );
     }
     _handleOnTap = () => {

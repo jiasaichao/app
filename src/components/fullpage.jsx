@@ -2,7 +2,6 @@
 /**FullPage,全屏滚动*/
 import {Common, Global} from "../utils/common";
 import {Icon, Placeholder, Button} from "./index";
-import Tappable from 'react-tappable';
 import {hashHistory, browserHistory} from 'react-router';
 import React from 'react';
 import * as icons from "../utils/icons";

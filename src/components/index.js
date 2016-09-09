@@ -9,7 +9,8 @@ import  * as Dialog from "./dialog";
 import  * as Slider from "./slider";
 import  * as NineGrid from "./ninegrid";
 import * as Container from "./container";
+import * as Gesture from "./gesture";
 
 export {
-NavBar,Placeholder,Icon,List,Container,Button,Form,Common,Dialog,Slider,NineGrid
+NavBar,Placeholder,Icon,List,Container,Button,Form,Common,Dialog,Slider,NineGrid,Gesture
 }

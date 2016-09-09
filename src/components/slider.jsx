@@ -1,8 +1,9 @@
 
-/**滑块，轮播*/
+/**滑块，轮播
+ * bug,最后一张不暂停移动会出现空白。
+*/
 import {Common, Global} from "../utils/common";
 import {Icon, Placeholder, Button} from "./index";
-import Tappable from 'react-tappable';
 import {hashHistory, browserHistory} from 'react-router';
 import React from 'react';
 import * as icons from "../utils/icons";

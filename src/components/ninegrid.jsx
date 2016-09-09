@@ -1,9 +1,8 @@
 /**NinegGrid对话框九宫格*/
 import {Common, Global} from "../utils/common";
-import Tappable from 'react-tappable';
 import {hashHistory, browserHistory} from 'react-router';
 import * as React from 'react';
-import {Common as CON, Icon} from "./index";
+import {Common as CON, Icon,Gesture} from "./index";
 let SL = Global.styles;
 let CN = Global.className;
 /**九宫格
@@ -112,10 +111,10 @@ export class Item extends React.Component {
         styles.iconStyle.merge(this.props.iconStyle);
         return (
             <div style={styles.root.o}>
-                <Tappable component='div' classBase='Tappable-bg'  style={styles.content.o}>
+                <Gesture.Touchable classBase='Tappable-bg'  style={styles.content.o}>
                     <Icon.Normal style={styles.iconStyle.o} iconName={this.props.iconName}/>
                     <span style={{ fontSize: '.32rem' }}>{this.props.lable}</span>
-                </Tappable>
+                </Gesture.Touchable>
 
             </div>
         );

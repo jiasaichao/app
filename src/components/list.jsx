@@ -1,8 +1,7 @@
 
 /**列表List*/
 import {Common, Global} from "../utils/common";
-import {Icon, Placeholder} from "./index";
-import Tappable from 'react-tappable';
+import {Icon, Placeholder,Gesture} from "./index";
 import {hashHistory, browserHistory} from 'react-router';
 import React from 'react';
 import * as icons from "../utils/icons";
@@ -21,13 +20,13 @@ export class Link extends React.Component {
             right: { marginRight: '.2rem' }
         }
         return (
-            <Tappable style={styles.root.o} component='div' classBase='Tappable-bg'  onTap={this.handleClick.bind(this) }>
+            <Gesture.Touchable style={styles.root.o} classBase='Tappable-bg'  onTap={this.handleClick.bind(this) }>
                 <div className={CN.czjz} style={styles.container}>
                     <div>{this.props.lable}</div>
                     <Placeholder.Full/>
                     <div style={styles.right}><span>{this.props.rightLable}</span> <Icon.Normal iconName={icons.Chevron_Right} style={{ fill: '#675e5e', height: '.3rem', width: '.3rem' }}></Icon.Normal></div>
                 </div>
-            </Tappable>
+            </Gesture.Touchable>
         );
     }
     handleClick() {

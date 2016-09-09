@@ -1,6 +1,5 @@
 import {Common, Global} from "../utils/common";
 import {Icon, Placeholder, Button} from "./index";
-import * as Tappable from 'react-tappable';
 import * as ReactCSSTransitionGroup  from "react-addons-css-transition-group";
 import {hashHistory, browserHistory} from 'react-router';
 import * as React from 'react';

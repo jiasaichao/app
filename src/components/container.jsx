@@ -1,7 +1,6 @@
 
 import {Common, Global} from "../utils/common";
 import {Icon, Placeholder} from "./index";
-import Tappable from 'react-tappable';
 import {hashHistory, browserHistory} from 'react-router';
 import * as React from 'react';
 let SL = Global.styles;

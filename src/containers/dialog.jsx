@@ -1,7 +1,6 @@
-import {NavBar, List, Container, Dialog, Button} from "../components/index";
+import {NavBar, List, Container, Dialog, Button,Gesture} from "../components/index";
 import * as React from 'react';
 import { connect} from 'react-redux';
-import Tappable from 'react-tappable';
 import {Common, Global} from "../utils/common";
 let SL = Global.styles;
 let CN = Global.className;
@@ -50,19 +49,19 @@ export class DialogPage extends React.Component {
                 </Dialog.Overlay>
                  <Dialog.PopupDown show={this.state.popupDown} onMask={()=>{this.setState({ popupDown: false })}}>
                     <div style={{fontSize:'.32rem'}}>
-                       <Tappable  classBase='Tappable-bg' className={CN.spczjz} style={{height:'.8rem',borderBottom:'1px solid #e9e9e9'}} component='div' onTap={()=>{this.setState({ popupDown: false })}}>
+                       <Gesture.Touchable  classBase='Tappable-bg' className={CN.spczjz} style={{height:'.8rem',borderBottom:'1px solid #e9e9e9'}} onTap={()=>{this.setState({ popupDown: false })}}>
                        第二
-                       </Tappable>
-                        <Tappable  classBase='Tappable-bg' className={CN.spczjz} style={{height:'.8rem',borderBottom:'1px solid #e9e9e9'}} component='div' onTap={()=>{this.setState({ popupDown: false })}}>
+                       </Gesture.Touchable>
+                        <Gesture.Touchable  classBase='Tappable-bg' className={CN.spczjz} style={{height:'.8rem',borderBottom:'1px solid #e9e9e9'}} onTap={()=>{this.setState({ popupDown: false })}}>
                        第二
-                       </Tappable>
-                        <Tappable  classBase='Tappable-bg' className={CN.spczjz} style={{height:'.8rem',borderBottom:'1px solid #e9e9e9'}} component='div' onTap={()=>{this.setState({ popupDown: false })}}>
+                       </Gesture.Touchable>
+                        <Gesture.Touchable  classBase='Tappable-bg' className={CN.spczjz} style={{height:'.8rem',borderBottom:'1px solid #e9e9e9'}} onTap={()=>{this.setState({ popupDown: false })}}>
                        第三
-                       </Tappable>
+                       </Gesture.Touchable>
                        <div style={{height:'.1rem',background:'#e9e9e9'}}></div>
-                        <Tappable  classBase='Tappable-bg' className={CN.spczjz} style={{height:'.8rem',borderBottom:'1px solid #e9e9e9'}} component='div' onTap={()=>{this.setState({ popupDown: false })}}>
+                        <Gesture.Touchable  classBase='Tappable-bg' className={CN.spczjz} style={{height:'.8rem',borderBottom:'1px solid #e9e9e9'}} onTap={()=>{this.setState({ popupDown: false })}}>
                        取消
-                       </Tappable>
+                       </Gesture.Touchable>
                     </div>
                 </Dialog.PopupDown>
                 <NavBar title="列表" />

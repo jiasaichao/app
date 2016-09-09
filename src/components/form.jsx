@@ -1,8 +1,7 @@
 
 /**表单*/
 import {Common, Global} from "../utils/common";
-import {Icon, Placeholder} from "./index";
-import Tappable from 'react-tappable';
+import {Icon, Placeholder,Gesture} from "./index";
 import {hashHistory, browserHistory} from 'react-router';
 import * as React from 'react';
 import * as icons from "../utils/icons";
@@ -101,9 +100,9 @@ export class Switch extends React.Component {
                 <div className={CN.czjz} style={styles.container}>
                 <span>{this.props.lable}</span>
                 <Placeholder.Full />
-                    <Tappable component="div" classBase='' onTap={() => { this.setState({ open: !this.state.open }) } } style={styles.switch.o}>
+                    <Gesture.Touchable classBase='' onTap={() => { this.setState({ open: !this.state.open }) } } style={styles.switch.o}>
                         <div style={styles.switchButton.o}></div>
-                    </Tappable>
+                    </Gesture.Touchable>
                     <div style={{width:'.2rem'}}></div>
                 </div>
             </div>
