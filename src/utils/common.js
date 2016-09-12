@@ -87,6 +87,20 @@ const styles = {
         msUserSelect: 'none',
         userSelect: 'none',
         cursor: 'pointer'
+    },
+    /**平移方式居中*/
+    spjz1: {
+        marginLeft: '50%',
+        WebkitTransform: 'translate(-50%,0)',
+        MsTransform: 'translate(-50%,0)',
+        transform: 'translate(-50%,0)'
+    },
+    /**平移方式居中*/
+    czjz1: {
+        marginTop: '50%',
+        WebkitTransform: 'translate(0,-50%)',
+        MsTransform: 'translate(0,-50%)',
+        transform: 'translate(0,-50%)'
     }
 }
 const className = {

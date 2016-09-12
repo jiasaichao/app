@@ -11,6 +11,8 @@ import ListSwipePage from "./containers/listswipe";
 import SliderPage from "./containers/slider";
 import NineGridPage from "./containers/ninegrid";
 import NotFound from "./containers/notFound";
+import FullPagePage from "./containers/fullpage";
+import TestPage from "./containers/test";
 
 
 //import Modeules from './controller/index';
@@ -31,6 +33,8 @@ let appRootComponent = (
            <Route path='/listswipe'  component={ListSwipePage}></Route>
            <Route path='/slider'  component={SliderPage}></Route>
            <Route path='/ninegrid'  component={NineGridPage}></Route>
+           <Route path='/fullpage'  component={FullPagePage}></Route>
+           <Route path='/test'  component={TestPage}></Route>
             </Route>
             {/*404, <NotFoundRoute handler={CourseRouteNotFound} /> NotFoundRoute这个好像也行*/}
             <Route path="*" component={NotFound}></Route>
