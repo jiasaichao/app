@@ -12,7 +12,8 @@ import * as Container from "./container";
 import * as Gesture from "./gesture";
 import * as Animate from "./animate";
 import * as FullPage from "./fullpage";
+import * as Scroll from "./scroll";
 
 export {
-NavBar,Placeholder,Icon,List,Container,Button,Form,Common,Dialog,Slider,NineGrid,Gesture,Animate,FullPage
+NavBar,Placeholder,Icon,List,Container,Button,Form,Common,Dialog,Slider,NineGrid,Gesture,Animate,FullPage,Scroll
 }

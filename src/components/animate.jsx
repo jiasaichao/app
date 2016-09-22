@@ -7,6 +7,7 @@ import {Icon, Placeholder, Gesture} from "./index";
 import {hashHistory, browserHistory} from 'react-router';
 import React from 'react';
 import {Motion, spring} from 'react-motion';
+import {Tween} from '../utils/tween';
 let SL = Global.styles;
 let CN = Global.className;
 /**循环动画
@@ -56,4 +57,81 @@ export class Loop extends React.Component {
         }, 0);
     }
 
+}
+
+/**
+ * defaultTween:QuadeaseOut
+ * defaultStyle:{x:2}
+ * style:{x:30}
+ * 持续时间
+ * duration:1000 ms
+ * stop:false
+ */
+export class Bezier extends React.Component {
+    constructor(props) {
+        super(props);
+        //console.log(this.props.defaultStyle);
+        this.state = {
+            currentStyle: this.props.defaultStyle
+        }
+    }
+    componentDidMount() {
+        this._motion(this.props.defaultStyle,this.props.style);
+    }
+    componentWillReceiveProps(nextProps) {
+        //console.log(nextProps);
+        if (nextProps.stop) {
+            //console.log(nextProps.style);
+            this.setState({ currentStyle: nextProps.style });
+        }
+        else {
+            //console.log(nextProps);
+            console.log(nextProps.style);
+            this._motion(this.state.currentStyle,nextProps.style);
+        }
+
+        //
+    }
+    _motion = (startStyle,endStyle) => {
+        
+        let startt = new Date().getTime();
+        let _run = () => {
+            //  * t: current time（当前时间）
+            //  * b: beginning value（初始值）
+            //  * c: change in value（变化量）
+            //  * d: duration（持续时间）
+            let t = new Date().getTime() - startt;
+            let d = this.props.duration;
+
+            let currentStyle = {};
+            for (let a in endStyle) {
+                let b = startStyle[a];
+                let c = endStyle[a];
+                if (b !== c) {
+                    currentStyle[a] = Tween.Quad.easeOut(t, b, c, d);
+                }
+                else {
+                    currentStyle[a] = b;
+                }
+            }
+            this.setState({
+                currentStyle: currentStyle
+            });
+           
+            if (t < d && !this.props.stop) {
+                window.requestAnimationFrame(_run);
+            }
+        }
+        _run();
+    }
+    render() {
+
+        const renderedChildren = this.props.children(this.state.currentStyle);
+        return renderedChildren;
+    }
+
+}
+
+Bezier.defaultProps = {
+    stop: false
 }

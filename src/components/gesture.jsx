@@ -20,6 +20,8 @@ let CN = Global.className;
  * classBase:'Tappable'
  * tapLength:20
  * swiperLength:40
+ * preventDefault
+ * stopPropagation
  * */
 export class Touchable extends React.Component {
     constructor(props) {
@@ -28,19 +30,20 @@ export class Touchable extends React.Component {
         this.startY = null;
         this.clientX = null;
         this.clientY = null;
-        this.events=new Set();
+        this.events = new Set();
         this.state = {
-            tapActive:false
+            tapActive: false
         }
     }
     _offsetX = () => {
         return this.clientX - this.startX;
     }
     _offsetY = () => {
+
         return this.clientY - this.startY;
     }
     render() {
-         let styles = {
+        let styles = {
             root: SL.create(SL.noSelect)
         }
         styles.root.merge(this.props.style);
@@ -71,39 +74,43 @@ export class Touchable extends React.Component {
         this.startX = e.touches[0].clientX;
         this.startY = e.touches[0].clientY;
         this.events.add('onTap');
-        this.setState({ tapActive:true });
+        this.setState({ tapActive: true });
     }
     _touchMove = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+        // if(this.props.preventDefault) e.preventDefault();
+        // if(this.props.stopPropagation) e.stopPropagation();
         this.clientX = e.touches[0].clientX;
         this.clientY = e.touches[0].clientY;
-        if (Math.abs(this._offsetX()) > this.props.tapLength || Math.abs(this._offsetY() > this.props.tapLength)) {
+        if (Math.abs(this._offsetX()) > this.props.tapLength || Math.abs(this._offsetY()) > this.props.tapLength) {
             this.events.delete('onTap');
             this.setState({ tapActive: false });
         }
+        // if (this.events.has('onTap')) {
+        //     e.preventDefault();
+        //      e.stopPropagation();
+        // }
         if (this._offsetX() > this.props.swiperLength) {
             this.events.add('onSwipeRight');
         }
-        else{
+        else {
             this.events.delete('onSwipeRight');
         }
         if (this._offsetX() < -this.props.swiperLength) {
             this.events.add('onSwipeLeft');
         }
-        else{
+        else {
             this.events.delete('onSwipeLeft');
         }
-        if (this._offsetY() <- this.props.swiperLength) {
+        if (this._offsetY() < - this.props.swiperLength) {
             this.events.add('onSwipeUp');
         }
-        else{
+        else {
             this.events.delete('onSwipeUp');
         }
-        if (this._offsetY() >this.props.swiperLength) {
+        if (this._offsetY() > this.props.swiperLength) {
             this.events.add('onSwipeDown');
         }
-        else{
+        else {
             this.events.delete('onSwipeDown');
         }
     }
@@ -117,6 +124,6 @@ export class Touchable extends React.Component {
 }
 Touchable.defaultProps = {
     classBase: 'Tappable',
-    tapLength:20,
-    swiperLength:40
+    tapLength: 20,
+    swiperLength: 40
 }
