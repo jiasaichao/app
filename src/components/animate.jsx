@@ -71,8 +71,9 @@ export class Bezier extends React.Component {
     constructor(props) {
         super(props);
         //console.log(this.props.defaultStyle);
+        this.stop=false
         this.state = {
-            currentStyle: this.props.defaultStyle
+            currentStyle: this.props.defaultStyle,
         }
     }
     componentDidMount() {
@@ -82,32 +83,35 @@ export class Bezier extends React.Component {
         //console.log(nextProps);
         if (nextProps.stop) {
             //console.log(nextProps.style);
+            this.stop=true;
             this.setState({ currentStyle: nextProps.style });
         }
         else {
             //console.log(nextProps);
-            console.log(nextProps.style);
+            //console.log(nextProps.style);
+            this.stop=false;
             this._motion(this.state.currentStyle,nextProps.style);
         }
 
         //
     }
     _motion = (startStyle,endStyle) => {
-        
-        let startt = new Date().getTime();
+        //console.log('开始style',startStyle)
+        //console.log('结束style',endStyle)
+        let start = new Date().getTime();
         let _run = () => {
             //  * t: current time（当前时间）
             //  * b: beginning value（初始值）
             //  * c: change in value（变化量）
             //  * d: duration（持续时间）
-            let t = new Date().getTime() - startt;
+            let t = new Date().getTime() - start;
             let d = this.props.duration;
 
             let currentStyle = {};
             for (let a in endStyle) {
                 let b = startStyle[a];
-                let c = endStyle[a];
-                if (b !== c) {
+                let c = endStyle[a]-b;
+                if (b !== endStyle[a]) {
                     currentStyle[a] = Tween.Quad.easeOut(t, b, c, d);
                 }
                 else {
@@ -118,14 +122,13 @@ export class Bezier extends React.Component {
                 currentStyle: currentStyle
             });
            
-            if (t < d && !this.props.stop) {
+            if (t < d && !this.stop) {
                 window.requestAnimationFrame(_run);
             }
         }
         _run();
     }
     render() {
-
         const renderedChildren = this.props.children(this.state.currentStyle);
         return renderedChildren;
     }
@@ -133,5 +136,4 @@ export class Bezier extends React.Component {
 }
 
 Bezier.defaultProps = {
-    stop: false
 }

@@ -14,6 +14,7 @@ let SL = Global.styles;
 let CN = Global.className;
 /**
  * 滚动
+ * 
  */
 export class Root extends React.Component {
     constructor(props) {
@@ -23,14 +24,16 @@ export class Root extends React.Component {
         //this.isOnStart = false;
         this.endOffsetY = 0;
 
-
-        this.speedStart = 0;
         this.speed = 0;
-        this.speedTime = 0;
+        this.speedId = -1;
 
         this.state = {
+            /**本次移动的偏移量 */
             offsetY: 0,
-            move: false
+            /**是否在动画中 */
+            isAnimate: false,
+            /**目标偏移量，惯性移动的到位置 */
+            targetOffsetY:0
         }
     }
     render() {
@@ -38,22 +41,29 @@ export class Root extends React.Component {
             root: SL.create({ overflow: 'hidden' }).merge(this.props.style),
             // container: { transform: `translateY(${this._getOffsetY()}px)` }
         }
-        //console.log(this._getOffsetY());
-console.log(this._getOffsetY());
+        let offsetY=0;
+        if(this.state.isAnimate){
+            offsetY=this.state.targetOffsetY;
+            console.log('要移动到'+offsetY);
+        }
+        else{
+offsetY=this._getOffsetY();
+        }
+        
         let c;
         c = <Animate.Bezier
             duration={1000}
             defaultStyle={{ x2: this._getOffsetY() }}
-            style={{ x2: this._getOffsetY() }}
-            stop={!this.state.move}
+            style={{ x2: offsetY }}
+            stop={!this.state.isAnimate}
             >
             {
                 v => (
                     <div style={{ transform: `translateY(${v.x2}px)` }} >
                         {(() => {
-                            //console.log(v.x2);
-                            if (this.state.move) {
-                                //this.endOffsetY=v.x
+                            if (this.state.isAnimate) {
+                                //console.log(v.x2);
+                                this.endOffsetY = v.x2
                             }
 
                         })() }
@@ -80,11 +90,9 @@ console.log(this._getOffsetY());
 
 
         this.startY = e.touches[0].clientY;
-        this.isOnStart = false;
-        this.speed = 0;
-        this.speedTime = new Date().getTime();
-        this.speedStart = 0;
-        this.setState({move:false});
+        this._calculationSpeed();
+        this.setState({ isAnimate: false,offsetY:0,targetOffsetY:0 });
+        //console.log(this._getOffsetY())
     }
     _onMove = (e) => {
         //console.log(1);
@@ -99,18 +107,37 @@ console.log(this._getOffsetY());
         // }
         let offsetY = e.touches[0].clientY - this.startY;
         //console.log(offsetY,this._getOffsetY());
-        if (new Date().getTime() - this.speedTime > 100) {
-            this.speed = offsetY - this.speedStart;
-            this.speedTime = new Date().getTime();
-            this.speedStart = offsetY;
-        }
+        // if (new Date().getTime() - this.speedTime > 100) {
+        //     this.speed = offsetY - this.speedStart;
+        //     this.speedTime = new Date().getTime();
+        //     this.speedStart = offsetY;
+        // }
 
         this.setState({ offsetY: offsetY });
     }
     _onEnd = () => {
         this.endOffsetY = this._getOffsetY();
-        console.info(this._getOffsetY());
-        this.setState({ move: true, offsetY:500 });
+        //console.info('结束为止', this._getOffsetY());
+        console.log('速度',this.speed);
+        console.log('移动的距离',this.endOffsetY);
+        this.setState({ isAnimate: true, targetOffsetY: this.endOffsetY +(this.speed * 3) });
+        this._clearCalculationSpeed();
+        
+    }
+    /**
+     * 计算速度
+     */
+    _calculationSpeed = () => {
+        let speedStart = this.state.offsetY;
+        this.speedId = window.setInterval(() => {
+            this.speed = this.state.offsetY - speedStart;
+            
+            speedStart = this.state.offsetY;
+        }, 100);
+    }
+    _clearCalculationSpeed = () => {
+        window.clearInterval(this.speedId);
+        this.speed=0;
     }
 }
 Root.defaultProps = {
