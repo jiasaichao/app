@@ -77,8 +77,11 @@ export class Touchable extends React.Component {
         this.setState({ tapActive: true });
     }
     _touchMove = (e) => {
-        // if(this.props.preventDefault) e.preventDefault();
-        // if(this.props.stopPropagation) e.stopPropagation();
+        if (this.props.preventDefault) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
         this.clientX = e.touches[0].clientX;
         this.clientY = e.touches[0].clientY;
         if (Math.abs(this._offsetX()) > this.props.tapLength || Math.abs(this._offsetY()) > this.props.tapLength) {

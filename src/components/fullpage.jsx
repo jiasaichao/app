@@ -66,7 +66,7 @@ switch (this.state.direction) {
         break;
 }
 return (
-    <Gesture.Touchable classBase='' onSwipeDown={this._down} onSwipeUp={this._up} style={{ overflow: 'hidden', width: '100%', height: '100%', position: 'relative' }}>
+    <Gesture.Touchable preventDefault={true} classBase='' onSwipeDown={this._down} onSwipeUp={this._up} style={{ overflow: 'hidden', width: '100%', height: '100%', position: 'relative' }}>
         <Motion
             defaultStyle={{ x: start }}
             style={{ x: spring(offsetX, {precision:3 }) }}

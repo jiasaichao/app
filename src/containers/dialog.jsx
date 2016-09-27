@@ -64,6 +64,33 @@ export class DialogPage extends React.Component {
                        </Gesture.Touchable>
                     </div>
                 </Dialog.PopupDown>
+                 <Dialog.PopupDown show={false} >
+                    <div style={{fontSize:'.32rem'}}>
+                    <div></div>
+                    <div></div>
+                       <div className={CN.spczjz} style={{height:'.8rem',borderBottom:'1px solid #e9e9e9'}} onTap={()=>{this.setState({ popupDown: false })}}>
+                       第一
+                       </div>
+                        <div className={CN.spczjz} style={{height:'.8rem',borderBottom:'1px solid #e9e9e9'}} onTap={()=>{this.setState({ popupDown: false })}}>
+                       第二
+                       </div>
+                        <div className={CN.spczjz} style={{height:'.8rem',borderBottom:'1px solid #e9e9e9'}} onTap={()=>{this.setState({ popupDown: false })}}>
+                       第三
+                       </div>
+                        <div className={CN.spczjz} style={{height:'.8rem',borderBottom:'1px solid #e9e9e9'}} onTap={()=>{this.setState({ popupDown: false })}}>
+                       第四
+                       </div>
+                        <div className={CN.spczjz} style={{height:'.8rem',borderBottom:'1px solid #e9e9e9'}} onTap={()=>{this.setState({ popupDown: false })}}>
+                       第五
+                       </div>
+                        <div className={CN.spczjz} style={{height:'.8rem',borderBottom:'1px solid #e9e9e9'}} onTap={()=>{this.setState({ popupDown: false })}}>
+                       第六
+                       </div>
+                        <div className={CN.spczjz} style={{height:'.8rem',borderBottom:'1px solid #e9e9e9'}} onTap={()=>{this.setState({ popupDown: false })}}>
+                       第7
+                       </div>
+                    </div>
+                </Dialog.PopupDown>
                 <NavBar title="列表" />
                 <Button.Submit style={{marginTop:'.1rem'}} lable='确认Confirm' onTap={this._handleModal}/>
                 <Button.Submit style={{marginTop:'.1rem'}} lable='整页弹出Overlay' onTap={() => { this.setState({ overlay: true }) } }/>

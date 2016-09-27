@@ -66,36 +66,38 @@ export class Loop extends React.Component {
  * 持续时间
  * duration:1000 ms
  * stop:false
+ * 动画结束后执行
+ * onEnd:()=>{}
  */
 export class Bezier extends React.Component {
     constructor(props) {
         super(props);
         //console.log(this.props.defaultStyle);
-        this.stop=false
+        this.stop = false
         this.state = {
             currentStyle: this.props.defaultStyle,
         }
     }
     componentDidMount() {
-        this._motion(this.props.defaultStyle,this.props.style);
+        this._motion(this.props.defaultStyle, this.props.style);
     }
     componentWillReceiveProps(nextProps) {
         //console.log(nextProps);
         if (nextProps.stop) {
             //console.log(nextProps.style);
-            this.stop=true;
+            this.stop = true;
             this.setState({ currentStyle: nextProps.style });
         }
         else {
             //console.log(nextProps);
             //console.log(nextProps.style);
-            this.stop=false;
-            this._motion(this.state.currentStyle,nextProps.style);
+            this.stop = false;
+            this._motion(this.state.currentStyle, nextProps.style);
         }
 
         //
     }
-    _motion = (startStyle,endStyle) => {
+    _motion = (startStyle, endStyle) => {
         //console.log('开始style',startStyle)
         //console.log('结束style',endStyle)
         let start = new Date().getTime();
@@ -110,7 +112,7 @@ export class Bezier extends React.Component {
             let currentStyle = {};
             for (let a in endStyle) {
                 let b = startStyle[a];
-                let c = endStyle[a]-b;
+                let c = endStyle[a] - b;
                 if (b !== endStyle[a]) {
                     currentStyle[a] = Tween.Quad.easeOut(t, b, c, d);
                 }
@@ -121,9 +123,19 @@ export class Bezier extends React.Component {
             this.setState({
                 currentStyle: currentStyle
             });
-           
+
             if (t < d && !this.stop) {
                 window.requestAnimationFrame(_run);
+            } else {
+                if(!this.stop){
+                    this.setState({
+                        currentStyle: endStyle
+                    });
+                }
+                
+                if (this.props.onEnd && !this.stop) {
+                    this.props.onEnd();
+                }
             }
         }
         _run();
