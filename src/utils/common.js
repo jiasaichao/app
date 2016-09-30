@@ -25,8 +25,19 @@ class Styles {
     }
     /**不合并，直接返回this和加入的对象，不改变this */
     notmerge(...s) {
-        let tmp = {};
-        s.push(this.o);
+        // let tmp = {};
+        // s.push(this.o);
+        // for (var i = 0; i < s.length; i++) {
+        //     let properties = s[i];
+        //     for (var p in properties) {
+        //         if (typeof (properties[p]) != "function") {
+        //             tmp[p] = properties[p];
+        //         }
+        //     }
+        // }
+        // return tmp;
+
+        let tmp={}
         for (var i = 0; i < s.length; i++) {
             let properties = s[i];
             for (var p in properties) {
@@ -35,7 +46,7 @@ class Styles {
                 }
             }
         }
-        return tmp;
+        return {...this.o,...tmp}
     }
 }
 /**处理class样式 */

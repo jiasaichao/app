@@ -14,6 +14,10 @@ let SL = Global.styles;
 let CN = Global.className;
 /**
  * 滚动
+ * 遮罩元素
+ * maskElement
+ * 每项高度
+ * itemHeight
  * 
  * 一、手指滚动
  * 1.跟随手指滚动。
@@ -50,8 +54,9 @@ export class Root extends React.Component {
             /**目标偏移量，惯性移动的到位置 */
             targetOffsetY: 0,
             /**动画时间 */
-            duration:1000,
-
+            duration: 1000,
+            /**是否添加动画结束后执行函数 */
+            isAnimateEnd: true
         }
     }
     render() {
@@ -67,7 +72,10 @@ export class Root extends React.Component {
         else {
             offsetY = this._getOffsetY();
         }
-
+        let onAnimateEnd = () => { };
+        if (this.state.isAnimateEnd) {
+            onAnimateEnd = this._onAnimateEnd;
+        }
         let c;
         c = <Animate.Bezier
             duration={this.state.duration}
@@ -75,7 +83,7 @@ export class Root extends React.Component {
             style={{ x2: offsetY }}
             stop={!this.state.isAnimate}
             ref='body32'
-            onEnd={this._onAnimateEnd}
+            onEnd={onAnimateEnd}
             >
             {
                 v => (
@@ -96,6 +104,7 @@ export class Root extends React.Component {
 
         return (
             <div ref='container' style={styles.root.o} onTouchStart={this._onStart} onTouchMove={this._onMove} onTouchEnd={this._onEnd}>
+                {this.props.maskElement}
                 {c}
             </div>
         );
@@ -142,12 +151,12 @@ export class Root extends React.Component {
         // }
         //超出边界
         if (this._getOffsetY() > 0) {
-this.setState({ offsetY: offsetY-this._getOffsetY()/1.2 });
+            this.setState({ offsetY: offsetY - this._getOffsetY() / 1.2 });
 
         } else
             //超出边界
             if (this._getOffsetY() < -this.height + this.containerHeight) {
-                this.setState({ offsetY: offsetY+((-this.height + this.containerHeight)-this._getOffsetY())/1.2 });
+                this.setState({ offsetY: offsetY + ((-this.height + this.containerHeight) - this._getOffsetY()) / 1.2 });
             }
             else {
                 this.setState({ offsetY: offsetY });
@@ -166,12 +175,12 @@ this.setState({ offsetY: offsetY-this._getOffsetY()/1.2 });
 
         //超出边界
         if (this.endOffsetY > 0) {
-            this.setState({ isAnimate: true, targetOffsetY: 0,duration:300 });
+            this.setState({ isAnimate: true, targetOffsetY: 0, duration: 300,isAnimateEnd:true });
 
         } else
             //超出边界
             if (this.endOffsetY < -this.height + this.containerHeight) {
-                this.setState({ isAnimate: true, targetOffsetY: -this.height + this.containerHeight ,duration:300});
+                this.setState({ isAnimate: true, targetOffsetY: -this.height + this.containerHeight, duration: 300,isAnimateEnd:true });
             }
             else {
                 let targetOffsetY = this.endOffsetY + (this.speed * 3);
@@ -181,21 +190,34 @@ this.setState({ offsetY: offsetY-this._getOffsetY()/1.2 });
                 if (targetOffsetY < -this.height + this.containerHeight - 50) {
                     targetOffsetY = -this.height + this.containerHeight - 50;
                 }
-                this.setState({ isAnimate: true, targetOffsetY: targetOffsetY ,duration:1000});
+                this.setState({ isAnimate: true, targetOffsetY: targetOffsetY, duration: 1000,isAnimateEnd:true });
             }
-
-
         this._clearCalculationSpeed();
     }
     _onAnimateEnd = () => {
         let targetOffsetY = 0;
         if (this.endOffsetY > 0) {
-            this.setState({ isAnimate: true, targetOffsetY: targetOffsetY,duration:300 });
-        }
-        if (this.endOffsetY < -this.height + this.containerHeight) {
-            targetOffsetY = -this.height + this.containerHeight;
-            this.setState({ isAnimate: true, targetOffsetY: targetOffsetY,duration:300 });
-        }
+            this.setState({ isAnimate: true, targetOffsetY: targetOffsetY, duration: 300,isAnimateEnd:false });
+        } else
+            if (this.endOffsetY < -this.height + this.containerHeight) {
+                targetOffsetY = -this.height + this.containerHeight;
+                this.setState({ isAnimate: true, targetOffsetY: targetOffsetY, duration: 300,isAnimateEnd:false });
+            }
+            else {
+                /**存在 */
+                if (this.props.itemHeight) {
+                    let i1 = this.endOffsetY % this.props.itemHeight;
+
+                    //大于每项的一半，则往前移动
+                    if (i1 <= -this.props.itemHeight / 2) {
+                        targetOffsetY = this.endOffsetY - this.props.itemHeight - i1
+                    }
+                    else {
+                        targetOffsetY = this.endOffsetY - i1
+                    }
+                    this.setState({ isAnimate: true, targetOffsetY: targetOffsetY, duration: 300,isAnimateEnd:false });
+                }
+            }
     }
     /**
      * 计算速度
