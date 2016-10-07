@@ -15,6 +15,7 @@ let Index = React.createClass({
 <List.Link lable='全屏滚动' href='/fullpage'></List.Link>
 <List.Link lable='可移动操作列表' href='/listswipe'></List.Link>
 <List.Link lable='滚动' href='/scroll'></List.Link>
+<List.Link lable='滑动选择' href='/select'></List.Link>
 <List.Link lable='测试' href='/test'></List.Link>
             </Container.Page>
             )

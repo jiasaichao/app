@@ -4,7 +4,7 @@ import { connect} from 'react-redux';
 import {Common, Global} from "../utils/common";
 let SL = Global.styles;
 let CN = Global.className;
-export class DialogPage extends React.Component {
+export class SelectPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -74,6 +74,51 @@ export class DialogPage extends React.Component {
                         </Gesture.Touchable>
                     </div>
                 </Dialog.PopupDown>
+                <Dialog.PopupDown show={true} >
+                    <div className={CN.czjz} style={{
+                        background: '#e0dede',
+                        fontSize: '.32rem',
+                        height: '.8rem',
+                        padding: '0 .2rem',
+                        boxSizing: 'border-box',
+                        borderBottom: '1px solid #bdbdbd'
+                    }}><span>取消</span><Placeholder.Full/><span>确认</span></div>
+                    <Scroll.Root itemHeight={(document.body.clientWidth / 7.5) * .8} maskElement={[
+                        <div key='s1' style={styles.select.notmerge({ top: 0, zIndex: 1 }) }></div>,
+                        <div key='s3' style={styles.select.notmerge({
+                            top: '1.6rem', height: '.8rem', opacity: 1,
+                            borderBottom: '1px solid #bdbdbd',
+                            borderTop: '1px solid #bdbdbd', background: '#e9e9e9'
+                        }) }></div>,
+                        <div key='s2' style={styles.select.notmerge({ bottom: 0, zIndex: 1 }) }></div>
+                    ]} style={{ height: '4rem', position: 'relative' }}>
+                        <div style={{ fontSize: '.32rem', paddingTop: '1.6rem', paddingBottom: '1.6rem' }}>
+
+                            <div className={CN.spczjz} style={{ height: '.8rem' }} onTap={() => { this.setState({ popupDown: false }) } }>
+                                第一
+                            </div>
+                            <div className={CN.spczjz} style={{ height: '.8rem' }} onTap={() => { this.setState({ popupDown: false }) } }>
+                                第二
+                            </div>
+                            <div className={CN.spczjz} style={{ height: '.8rem' }} onTap={() => { this.setState({ popupDown: false }) } }>
+                                第三
+                            </div>
+                            <div className={CN.spczjz} style={{ height: '.8rem' }} onTap={() => { this.setState({ popupDown: false }) } }>
+                                第四
+                            </div>
+                            <div className={CN.spczjz} style={{ height: '.8rem' }} onTap={() => { this.setState({ popupDown: false }) } }>
+                                第五
+                            </div>
+                            <div className={CN.spczjz} style={{ height: '.8rem' }} onTap={() => { this.setState({ popupDown: false }) } }>
+                                第六
+                            </div>
+                            <div className={CN.spczjz} style={{ height: '.8rem' }} onTap={() => { this.setState({ popupDown: false }) } }>
+                                第7
+                            </div>
+                        </div>
+                    </Scroll.Root>
+
+                </Dialog.PopupDown>
                 <NavBar title="列表" />
                 <Button.Submit style={{ marginTop: '.1rem' }} lable='确认Confirm' onTap={this._handleModal}/>
                 <Button.Submit style={{ marginTop: '.1rem' }} lable='整页弹出Overlay' onTap={() => { this.setState({ overlay: true }) } }/>
@@ -91,4 +136,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(DialogPage);
+export default connect(mapStateToProps)(SelectPage);

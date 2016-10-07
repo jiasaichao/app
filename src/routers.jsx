@@ -12,6 +12,7 @@ import SliderPage from "./containers/slider";
 import NineGridPage from "./containers/ninegrid";
 import NotFound from "./containers/notFound";
 import FullPagePage from "./containers/fullpage";
+import SelectPage from "./containers/select";
 import TestPage from "./containers/test";
 import ScrollPage from "./containers/scroll";
 
@@ -36,6 +37,7 @@ let appRootComponent = (
            <Route path='/ninegrid'  component={NineGridPage}></Route>
            <Route path='/fullpage'  component={FullPagePage}></Route>
            <Route path='/scroll'  component={ScrollPage}></Route>
+           <Route path='/select'  component={SelectPage}></Route>
            <Route path='/test'  component={TestPage}></Route>
             </Route>
             {/*404, <NotFoundRoute handler={CourseRouteNotFound} /> NotFoundRoute这个好像也行*/}
