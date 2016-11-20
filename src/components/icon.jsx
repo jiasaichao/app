@@ -19,4 +19,3 @@ import * as icons from '../utils/icons';
             );
         }
     }
-export {Normal}

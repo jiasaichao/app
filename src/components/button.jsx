@@ -99,5 +99,3 @@ export class Submit extends React.Component {
     }
 
 }
-export {Base}
-export {Submit}
