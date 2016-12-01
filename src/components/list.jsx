@@ -8,7 +8,11 @@ import * as icons from "../utils/icons";
 
 let SL = Global.styles;
 let CN = Global.className;
-/**链接 */
+/**
+ * 链接
+ * href
+ * onTap
+ */
 export class Link extends React.Component {
     constructor(props) {
         super(props)

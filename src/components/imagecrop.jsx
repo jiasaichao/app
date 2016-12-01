@@ -1,13 +1,18 @@
-import { NavBar, List, Container, Button, Icon, Animate, Gesture } from "../components/index";
-import React from 'react';
-import { Motion, spring } from 'react-motion';
-class TestPage extends React.Component {
+import { Common, Global } from '../utils/common';
+import { Icon, Placeholder, Gesture } from './index';
+import * as React from 'react';
+let SL = Global.styles;
+let CN = Global.className;
+/**
+ * 页面容器
+ * show
+ * onCancel
+ * src
+ * onOk(blob)可以用URL.createObjectURL(blob)生成地址
+ */
+export class ImageCrop extends React.Component {
     constructor(props) {
         super(props)
-
-        this.width = 1920;
-        this.height = 1080;
-
         this.startX = null;
         this.startY = null;
         this.clientX = null;
@@ -15,19 +20,32 @@ class TestPage extends React.Component {
         this.targetX = null;
         this.targetY = null;
         this.state = {
+            isLoad: true
+        };
+    }
+    load = () => {
+        let img = new Image()
+        img.onload = () => {
+            this.setState({ isLoad: false });
+            this.width = img.width;
+            this.height = img.height;
+
+            let state = {};
+            //w<h宽小于高,以宽为基准
+            if (this.width < this.height) {
+                state.width = document.body.clientWidth;
+                state.height = this.height * (document.body.clientWidth / this.width);
+                state.top = document.body.clientHeight / 2 - state.height / 2
+                state.left = 0;
+            } else {
+                state.height = document.body.clientWidth;
+                state.width = this.width * (document.body.clientWidth / this.height);
+                state.top = (document.body.clientHeight - document.body.clientWidth) / 2;
+                state.left = -(state.width - document.body.clientWidth) / 2;
+            }
+            this.setState(state);
         }
-        //w<h宽小于高,以宽为基准
-        if (this.width < this.height) {
-            this.state.width = document.body.clientWidth;
-            this.state.height = this.height * (document.body.clientWidth / this.width);
-            this.state.top = document.body.clientHeight / 2 - this.state.height / 2
-            this.state.left = 0;
-        } else {
-            this.state.height = document.body.clientWidth;
-            this.state.width = this.width * (document.body.clientWidth / this.height);
-            this.state.top = (document.body.clientHeight - document.body.clientWidth) / 2;
-            this.state.left = -(this.state.width - document.body.clientWidth) / 2;
-        }
+        img.src = this.props.src;
     }
     _minLeft = (nextWidth = this.state.width) => {
         return -(nextWidth - document.body.clientWidth);
@@ -109,17 +127,58 @@ class TestPage extends React.Component {
         let crop_canvas;
 
         crop_canvas = document.createElement('canvas');
-        let scale=this.width/this.state.width;
-        console.log(scale);
-        crop_canvas.width = document.body.clientWidth*scale;
-        crop_canvas.height = document.body.clientWidth*scale;
+        let scale = this.width / this.state.width;
+        crop_canvas.width = document.body.clientWidth * scale;
+        crop_canvas.height = document.body.clientWidth * scale;
+        //alert('1:'+(-this.state.left * scale)+',2:'+ ((-this.state.top + (document.body.clientHeight - document.body.clientWidth) / 2) * scale)+',3:'+ document.body.clientWidth * scale, document.body.clientWidth * scale+',4:'+  0+',5:'+ 0+',6:'+  document.body.clientWidth * scale, document.body.clientWidth * scale)
         //console.log('left:', -this.state.left, 'top:', this.state.top-(document.body.clientHeight - document.body.clientWidth) / 2, '3', document.body.clientWidth, '5', this.state.width, '6', this.state.height);
-        console.log(img, -this.state.left*scale, (this.state.top-(document.body.clientHeight - document.body.clientWidth) / 2)*scale, document.body.clientWidth*scale, document.body.clientWidth*scale, 0, 0, document.body.clientWidth*scale, document.body.clientWidth*scale);
-        crop_canvas.getContext('2d').drawImage(img, -this.state.left*scale, (this.state.top-(document.body.clientHeight - document.body.clientWidth) / 2)*scale, document.body.clientWidth*scale, document.body.clientWidth*scale, 0, 0, document.body.clientWidth*scale, document.body.clientWidth*scale);
-     
-        window.open(crop_canvas.toDataURL("image/png"));
+        //console.log(img, -this.state.left * scale, (this.state.top - (document.body.clientHeight - document.body.clientWidth) / 2) * scale, document.body.clientWidth * scale, document.body.clientWidth * scale, 0, 0, document.body.clientWidth * scale, document.body.clientWidth * scale);
+        crop_canvas.getContext('2d').drawImage(img, -this.state.left * scale, (-this.state.top + (document.body.clientHeight - document.body.clientWidth) / 2) * scale, document.body.clientWidth * scale, document.body.clientWidth * scale, 0, 0, document.body.clientWidth * scale, document.body.clientWidth * scale);
+        //手机端不支持
+        // crop_canvas.toBlob((blob) => {
+        //     this.props.onOk(blob);
+        // });
+        //alert(crop_canvas.toDataURL("image/png"));
+        this.props.onOk(crop_canvas.toDataURL("image/png"));
+        //window.open(crop_canvas.toDataURL("image/png"));
     }
     render() {
+        if (this.state.isLoad) {
+            return null;
+        }
+        let styles = {
+            root: SL.create({ background: '#000', top: 0, bottom: 0, width: '100%', position: 'absolute', zIndex: 9999 }).merge(this.props.style),
+            container: {},
+            mask: {
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                flexDirection: 'column',
+                display: 'flex',
+                zIndex: '5'
+            },
+            maskTop: {
+                flex: '1',
+                background: '#000',
+                opacity: 0.4
+            },
+            maskCenter: {
+                height: '7.5rem',
+                background: '#000',
+                opacity: 0
+            },
+            imgContainer: {
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                display: 'flex',
+                alignItems: 'center'
+            }
+        }
         let pinch = {};
         if (this.width < this.height) {
             pinch.minScale = document.body.clientWidth / this.width;
@@ -129,7 +188,7 @@ class TestPage extends React.Component {
             pinch.maxScale = this.height / document.body.clientWidth;
         }
         return (
-            <div style={{ background: '#000', height: '100%', width: '100%', position: 'absolute',zIndex:9999 }}>
+            <div style={styles.root.o}>
                 <div style={styles.mask} >
                     <div style={styles.maskTop}></div>
                     <div style={{ height: 1, background: '#fff', opacity: .5 }}></div>
@@ -138,69 +197,17 @@ class TestPage extends React.Component {
                     <div style={styles.maskTop}></div>
                 </div>
                 <div style={styles.imgContainer}>
-                    <img id='img' style={{ width: this.state.width, position: 'absolute', top: this.state.top, left: this.state.left, transform: `scale(${this.state.scale})` }} src='/image/portrait.jpg' />
+                    <img id='img' style={{ width: this.state.width, position: 'absolute', top: this.state.top, left: this.state.left, transform: `scale(${this.state.scale})` }} src={this.props.src} />
                 </div>
                 <div style={{ position: 'absolute', display: 'flex', bottom: '0', zIndex: 1000, color: '#fff' }}>
-                    <Gesture.Touchable>取消</Gesture.Touchable>
+                    <Gesture.Touchable onTap={this.props.onCancel}>取消</Gesture.Touchable>
                     <Gesture.Touchable onTap={this.ddd}>完成1</Gesture.Touchable>
                 </div>
             </div>)
     }
-
+    componentWillMount() {
+    }
     componentDidMount() {
-        function drawBeauty(beauty) {
-            var canvas = document.getElementById('myCanvas');
-            canvas.width = document.body.clientWidth;
-            //canvas.height = 400;
-            var ctx = canvas.getContext('2d');
-            ctx.drawImage(beauty, 0, 0, 600, 400);
-        }
-
-        function load() {
-            var beauty = new Image();
-            beauty.src = "http://pic.4j4j.cn/upload/pic/20130815/31e652fe2d.jpg";
-            if (beauty.complete) {
-                drawBeauty(beauty);
-            } else {
-                beauty.onload = function () {
-                    drawBeauty(beauty);
-                };
-                beauty.onerror = function () {
-                    window.alert('美女加载失败，请重试');
-                };
-            }
-        }
+        this.load()
     }
 }
-const styles = {
-    mask: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        flexDirection: 'column',
-        display: 'flex',
-        zIndex: '5'
-    },
-    maskTop: {
-        flex: '1',
-        background: '#000',
-        opacity: 0.4
-    },
-    maskCenter: {
-        height: '7.5rem',
-        background: '#000',
-        opacity: 0
-    },
-    imgContainer: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        display: 'flex',
-        alignItems: 'center'
-    }
-}
-export default TestPage;

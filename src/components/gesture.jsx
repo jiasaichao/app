@@ -24,6 +24,9 @@ let CN = Global.className;
  * 
  * onPinch:({scale[缩放比例],distance[距离]})=>{}
  * onPinchEnd
+ * pinch:{
+ * maxScale:[number],minScale:[number]
+ * }
  * 
  * preventDefault
  * stopPropagation
@@ -36,8 +39,8 @@ export class Touchable extends React.Component {
         this.clientX = null;
         this.clientY = null;
 
-        this.previousPinchScale=0;
-        
+        this.previousPinchScale = 1;
+
         this.events = new Set();
         this.state = {
             tapActive: false
@@ -82,13 +85,14 @@ export class Touchable extends React.Component {
         eventHandler(e);
     }
     _touchStart = (e) => {
-        this._emitEvent("onTouchStart",e);
+        this._emitEvent("onTouchStart", e);
         if (e.touches.length > 1) {
             let point1 = e.touches[0];
             let point2 = e.touches[1];
             let xLen = Math.abs(point2.pageX - point1.pageX);
             let yLen = Math.abs(point2.pageY - point1.pageY);
             this.touchDistance = this._getDistance(xLen, yLen);
+
 
             this.events.clear();
             this.setState({ tapActive: false });
@@ -103,7 +107,7 @@ export class Touchable extends React.Component {
         }
     }
     _touchMove = (e) => {
-        this._emitEvent("onTouchMove",e);
+        this._emitEvent("onTouchMove", e);
         if (this.props.preventDefault) {
             e.preventDefault();
             e.stopPropagation();
@@ -114,8 +118,19 @@ export class Touchable extends React.Component {
             let touchDistance = this._getDistance(xLen, yLen);
             if (this.touchDistance) {
                 let pinchScale = touchDistance / this.touchDistance;
-                this._emitEvent('onPinch', { scale: pinchScale+this.previousPinchScale, distance: touchDistance } /**{ scale: pinchScale - this.previousPinchScale } */);
-                this.previousPinchScale = pinchScale;
+                //this.scale = pinchScale + this.previousPinchScale - 1;
+                this.scale = pinchScale * this.previousPinchScale;
+                if(this.props.pinch.maxScale < this.scale){
+                    this._emitEvent('onPinch', { scale:this.props.pinch.maxScale, distance: touchDistance });
+                }
+                if(this.props.pinch.minScale > this.scale){
+                    this._emitEvent('onPinch', { scale:this.props.pinch.minScale, distance: touchDistance });
+                }
+                if (this.props.pinch.maxScale > this.scale && this.scale > this.props.pinch.minScale) {
+                    this._emitEvent('onPinch', { scale: this.scale, distance: touchDistance });
+                }
+
+                //this.previousPinchScale = pinchScale;
             }
         } else {
             this.clientX = e.touches[0].clientX;
@@ -156,16 +171,28 @@ export class Touchable extends React.Component {
 
     }
     _touchEnd = (e) => {
-        this._emitEvent("onTouchEnd",e);
+        this._emitEvent("onTouchEnd", e);
         this.events.forEach((v) => {
             this._emitEvent(v, e)
         });
         this.events.clear();
+
+        if (this.scale) {
+            if (this.props.pinch.maxScale > this.scale && this.scale > this.props.pinch.minScale) {
+                this.previousPinchScale = this.scale;
+            }
+        }
+
+
         this.setState({ tapActive: false });
     }
 }
 Touchable.defaultProps = {
     classBase: 'Tappable',
     tapLength: 20,
-    swiperLength: 40
+    swiperLength: 40,
+    pinch: {
+        maxScale: 10000,
+        minScale: 0.001
+    }
 }

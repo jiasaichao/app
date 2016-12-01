@@ -15,6 +15,7 @@ import FullPagePage from "./containers/fullpage";
 import SelectPage from "./containers/select";
 import TestPage from "./containers/test";
 import ScrollPage from "./containers/scroll";
+import ImageCropPage from "./containers/imagecrop";
 
 
 //import Modeules from './controller/index';
@@ -38,6 +39,7 @@ let appRootComponent = (
            <Route path='/fullpage'  component={FullPagePage}></Route>
            <Route path='/scroll'  component={ScrollPage}></Route>
            <Route path='/select'  component={SelectPage}></Route>
+           <Route path='/imagecrop'  component={ImageCropPage}></Route>
            <Route path='/test'  component={TestPage}></Route>
             </Route>
             {/*404, <NotFoundRoute handler={CourseRouteNotFound} /> NotFoundRoute这个好像也行*/}
