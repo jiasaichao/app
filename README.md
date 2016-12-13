@@ -1,6 +1,11 @@
 # 说明
 ## [demo地址](http://m.aizhengli.com)
 使用的是rem等比的布局，所以pc端打开最后调试成手机模式。
+
+## 运行
+* 开发环境执行 `npm run start`
+* 生产编译 `npm run build`
+
 ## 文件
 * components：组件文件，放置基本组件，也就是[redux](https://leecade.gitbooks.io/redux-in-chinese/content/docs/basics/UsageWithReact.html)中说的“笨拙组件”。   
  * 包括：button按钮、common公共、container容器、dialog弹窗、form表单、gesture手势、icon图标、list列表、navbar导航头、ninegrid九宫格、placeholder占位符、slider轮播、fullpage全屏滚动（未完成）。
@@ -82,9 +87,12 @@ Redux 提供了 combineReducers() 工具类
 ### 历史记录及其他看说明
 ## 参考网站
 [Redux 官方文档中文翻译](https://leecade.gitbooks.io/redux-in-chinese/content/)     
-[React Router 中文文档](http://react-guide.github.io/react-router-cn/index.html)    
+[redux-saga 文档](http://leonshi.com/redux-saga-in-chinese/)  
+[React Router 文档](http://react-guide.github.io/react-router-cn/index.html)  
+[React + Redux 最佳实践](https://github.com/sorrycc/blog/issues/1?utm_source=tuicool&utm_medium=referral)
 [阮一峰React Router 使用教程](http://www.ruanyifeng.com/blog/2016/05/react_router.html)    
 [谈谈 react-router](http://qiutc.me/post/%E8%B0%88%E8%B0%88-react-router.html)    
 [react-router api文档](https://github.com/reactjs/react-router/blob/master/docs/API.md)
 [使用Typescript编写Redux+Reactjs应用程序](https://github.com/xuanye/typescript-redux-sample)    
 [React with TypeScript](http://blog.csdn.net/kinfey/article/details/50387534)   
+[ES6 标准入门](http://es6.ruanyifeng.com/)

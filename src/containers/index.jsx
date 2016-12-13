@@ -17,7 +17,7 @@ let Index = React.createClass({
 <List.Link lable='滚动' href='/scroll'></List.Link>
 <List.Link lable='滑动选择' href='/select'></List.Link>
 <List.Link lable='头像上传' href='/imagecrop'></List.Link>
-<List.Link lable='测试' href='/test'></List.Link>
+<List.Link lable='测试244' href='/test'></List.Link>
             </Container.Page>
             )
     }

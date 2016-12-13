@@ -1,0 +1,177 @@
+﻿html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%}legend{color:#000}
+html,body{height:100%}
+a, input, select, textarea {
+    outline: 0;
+}
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+}
+textarea:focus, keygen:focus, select:focus {
+    outline-offset: -2px;
+}
+#app{
+  /*height: 100vh;*/
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+/*清除长按选项*/
+.user-select-none{
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.Tappable-active {
+  opacity: 0.3;
+}
+.Tappable-bg-active {
+  background: #d9d9d9!important ;
+}
+
+.display-flex{
+   display: -webkit-box; /* 老版本语法: Safari, iOS, Android browser, older WebKit browsers. */
+    display: -moz-box; /* 老版本语法: Firefox (buggy) */
+    display: -ms-flexbox; /* 混合版本语法: IE 10 */
+    display: -webkit-flex; /* 新版本语法: Chrome 21+ */
+    display: flex; /* 新版本语法: Opera 12.1, Firefox 22+ */
+}
+.justify-content{
+  -webkit-box-pack: center;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.align-items{
+  -webkit-box-align: center;
+    -moz-align-items: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.flex-direction{
+  -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+.flex-direction-column{
+  -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+.flex-grow{
+   -webkit-box-flex: 1.0;
+    -moz-flex-grow: 1;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+}
+
+
+.page {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.page-enter {
+  opacity: 0.01;
+  -webkit-transition: opacity 0.2s ease-out;
+  transition: opacity 0.2s ease-out;
+}
+.page-enter.page-enter-active {
+  opacity: 1;
+}
+.page-leave {
+  opacity: 1;
+  -webkit-transition: opacity 0.2s ease-out;
+  transition: opacity 0.2s ease-out;
+}
+.page-leave.page-leave-active {
+  opacity: 0;
+}
+
+.page-r2l-enter {
+  z-index: 2;
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+  -webkit-transition:  -webkit-transform 0.2s ease-out;
+  transition:  -webkit-transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+  transition:transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+}
+.page-r2l-enter.page-r2l-enter-active {
+ 
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.page-r2l-leave {
+  z-index: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  transition:  -webkit-transform 0.2s ease-out;
+  transition:  transform 0.2s ease-out;
+  transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+}
+.page-r2l-leave.page-r2l-leave-active {
+ 
+  -webkit-transform: translate3d(-20%, 0, 0);
+          transform: translate3d(-20%, 0, 0);
+}
+.page-l2r-enter {
+ 
+  z-index: 2;
+  -webkit-transform: translate3d(-20%, 0, 0);
+          transform: translate3d(-20%, 0, 0);
+  -webkit-transition:  -webkit-transform 0.2s ease-out;
+  transition:  -webkit-transform 0.2s ease-out;
+  transition:  transform 0.2s ease-out;
+  transition:  transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+}
+.page-l2r-enter.page-l2r-enter-active {
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.page-l2r-leave {
+  opacity: 1;
+  z-index: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  -webkit-transition:  -webkit-transform 0.2s ease-out;
+  transition:  -webkit-transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+}
+.page-l2r-leave.page-l2r-leave-active {
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+}
+
+.overlay
+{
+  transition:transform .4s;
+  -webkit-transition:transform .4s;
+}
+.overlay-show
+{
+ -webkit-transform: translate3d(0,0,0);
+transform: translate3d(0,0,0);
+}
+.overlay-hide
+{
+ -webkit-transform: translate3d(0,100%,0);
+transform: translate3d(0,100%,0);
+}

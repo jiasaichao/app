@@ -6,7 +6,7 @@ module.exports = {
         //vendor: ['react', 'react-dom', 'react-router']
     },
     output: {
-        path: path.resolve(__dirname, './dev/js'),
+        path: path.resolve(__dirname, './wwwroot/js'),
         filename: "[name].bundle.js"
     },
     // output: {
@@ -59,6 +59,17 @@ module.exports = {
             { test: /\.js$/, loader: "source-map-loader" }
         ]
     },
+
+    plugins: [
+        /**DefinePlugin 允许您创建可以在编译时配置的全局常量。这可以让开发版本和发布版本之间的不同行为非常有用。
+         * 例如，你可能使用全局常量可以确定是否记录所需的地方;也许你执行日志记录在开发版本中但不是在发布版本中。这是这种场面 DefinePlugin 方便。
+         * http://webpack.github.io/docs/list-of-plugins.html#defineplugin
+        */
+        new webpack.DefinePlugin({
+            PRODUCTION: true,
+        })
+    ],
+
     // When importing a module whose path matches one of the following, just assume a corresponding global variable exists and use that instead.
     // This is important because it allows us to avoid bundling all of our dependencies, which allows browsers to cache those libraries between builds.
     // 当导入的模块的路径与匹配下列内容之一，只是承担相应的全局变量存在并改用该。这是重要的因为它可以使我们避免捆绑所有我们依赖项，允许浏览器缓存这些库生成之间。

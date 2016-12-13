@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "webpack --config webpack.config.prod.js",
+    "start": "webpack-dev-server --inline --hot --port 8094 --content-base dev/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -13,7 +15,9 @@
     "babel-loader": "^6.2.4",
     "source-map-loader": "^0.1.5",
     "svg-sprite-loader": "^0.0.26",
-    "ts-loader": "^0.8.2"
+    "ts-loader": "^0.8.2",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
     "babel-loader": "^6.2.4",
@@ -31,7 +35,6 @@
     "react-tappable": "^0.8.3",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
-    "terminal": "^0.1.4",
-    "webpack": "^1.13.1"
+    "terminal": "^0.1.4"
   }
 }
