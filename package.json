@@ -6,7 +6,9 @@
   "scripts": {
     "build": "webpack --config webpack.config.prod.js",
     "start": "webpack-dev-server --inline --hot --port 8094 --content-base dev/ --host 0.0.0.0",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -s ./public -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +19,8 @@
     "svg-sprite-loader": "^0.0.26",
     "ts-loader": "^0.8.2",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-server": "^1.16.2",
+    "@kadira/storybook": "^2.21.0"
   },
   "dependencies": {
     "babel-loader": "^6.2.4",
