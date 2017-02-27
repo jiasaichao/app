@@ -1,20 +1,25 @@
 import { NavBar, List, Container, Button, Icon, Animate, Gesture } from "../components/index";
 import React from 'react';
-
-class DragSource extends React.Component{
+import { Motion, spring } from 'react-motion';
+class Sort extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            list: ['aaaaa1', 'aaaaa2', 'aaaaa3', 'aaaaa4', 'aaaaa5', 'aaaaa6', 'aaaaa7']
-        }
     }
     render() {
+
         return (
-            <div draggable='true' onDragStartCapture={this.dragstart}>
-                {this.props.children}
-            </div>)
+            <div>
+                {this.props.items.map((value, index) => {
+                    return React.cloneElement(this.props.children(value, index), {
+                        'data-sortid': index, key: index, onDropCapture: this.drop, onDragLeaveCapture: this.dragleave,
+                        onDragOverCapture: this.dragover, onDragEnterCapture: this.dragenter,
+                        onDragCapture: this.drag, onDragStartCapture: this.dragstart, draggable: 'true'
+                    });
+                })}
+            </div>
+        )
     }
-     dragstart = (e) => {
+    dragstart = (e) => {
         //debugger;
         //dataTransfer.setData()方法设置数据类型和拖动的数据
         e.dataTransfer.setData("number", e.target.dataset.sortid);
@@ -74,9 +79,6 @@ class DragSource extends React.Component{
 
     }
 }
-function Aa(props){
-    return <div {...props}>fffff</div>
-}
 class TestPage extends React.Component {
     constructor(props) {
         super(props)
@@ -85,9 +87,12 @@ class TestPage extends React.Component {
         }
     }
     render() {
+
         return (
             <div style={{ height: '100%', width: '100%', position: 'absolute', zIndex: 9999, display: 'flex' }}>
-                <DragSource><Aa/></DragSource>
+                <Sort updateState={(list) => {
+                    this.setState({ list });
+                } } items={this.state.list} >{(value, index) => { return <div draggable='false'>{value}</div> } }</Sort>
             </div>)
     }
     componentDidMount() {
