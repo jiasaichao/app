@@ -13,14 +13,16 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@kadira/react-storybook-addon-info": "^3.3.0",
+    "@kadira/storybook": "^2.21.0",
+    "@kadira/storybook-addon-notes": "^1.0.1",
     "babel-core": "^6.13.2",
     "babel-loader": "^6.2.4",
     "source-map-loader": "^0.1.5",
     "svg-sprite-loader": "^0.0.26",
     "ts-loader": "^0.8.2",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.16.2",
-    "@kadira/storybook": "^2.21.0"
+    "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
     "babel-loader": "^6.2.4",
