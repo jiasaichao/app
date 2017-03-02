@@ -28,6 +28,8 @@
 * propTypes、defaultProps 作为properties定义。
 * 不支持mixins，如果需要minxins,可以使用React.createClass
  
+## 组件书写 
+
 
 ## 架构概要（主要围绕Redux）
 ### 要点

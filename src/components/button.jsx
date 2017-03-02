@@ -99,3 +99,13 @@ export class Submit extends React.Component {
     }
 
 }
+
+Submit.displayName = 'Button.Submit';
+Submit.propTypes = {
+  lable: React.PropTypes.string.isRequired,
+  href: React.PropTypes.string,
+  onTap: React.PropTypes.func,
+  style: React.PropTypes.object,
+};
+Submit.defaultProps = {
+}

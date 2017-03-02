@@ -1,8 +1,7 @@
 import React from 'react';
 import { storiesOf, action, linkTo } from '@kadira/storybook';
-import Button from './Button';
 import Welcome from './Welcome';
-import { List } from '../src/components';
+import { List, Button } from '../src/components';
 import { WithNotes } from '@kadira/storybook-addon-notes';
 
 storiesOf('Welcome', module)
@@ -11,28 +10,31 @@ storiesOf('Welcome', module)
   ));
 
 storiesOf('Button', module)
-  .add('with text', () => (
-    <Button onClick={action('clicked')}>Hello Button</Button>
+  .addWithInfo('提交按钮', '如果存在href则不回执行onTap', () => (
+    <div id='root-container'>
+      <Button.Submit lable='按钮222' />
+      <Button.Submit lable='按钮232' />
+    </div>
   ))
   .add('with some emoji', () => (
     <WithNotes notes={'试试Here we use some emoji as the Button text. Isn\'t it look nice?'}>
-      <Button onClick={action('clicked')}>1111😀 😎 👍 💯</Button>
+      <div>22</div>
     </WithNotes>
   )).addWithInfo(
-    'simple usage',
-    `
+  'simple usage',
+  `
       This is the basic usage with the button with providing a label to show the text.
     `,
-    () => (
-      <div>
-        <Button label="The Button" onClick={action('onClick')}/>
-        <br />
-        <p>
-          Click the "?" mark at top-right to view the info.
+  () => (
+    <div>
+
+      <br />
+      <p>
+        Click the "?" mark at top-right to view the info.
         </p>
-      </div>
-    ),
-  );
+    </div>
+  ),
+);
 
 storiesOf('List', module).add('link', () => (
   <List.Link lable='列表3'></List.Link>
