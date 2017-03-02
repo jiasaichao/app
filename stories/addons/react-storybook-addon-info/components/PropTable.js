@@ -22,7 +22,6 @@ const stylesheet = {
 export default class PropTable extends React.Component {
   render() {
     const type = this.props.type;
-
     if (!type) {
       return null;
     }
@@ -57,6 +56,25 @@ export default class PropTable extends React.Component {
       }
     }
 
+    //==================================start
+    //自己定义的备注信息
+    if (type.propInfo) {
+      for (const property in type.propInfo) {
+        if (!type.propInfo.hasOwnProperty(property)) {
+          continue;
+        }
+        const value = type.propInfo[property];
+        if (value === undefined) {
+          continue;
+        }
+        if (!props[property]) {
+          props[property] = { property };
+        }
+        props[property].info = value;
+      }
+    }
+    //=================end
+
     const array = Object.values(props);
     if (!array.length) {
       return <small>No propTypes defined!</small>;
@@ -73,6 +91,7 @@ export default class PropTable extends React.Component {
             <th>propType</th>
             <th>required</th>
             <th>default</th>
+            <th>info</th>
           </tr>
         </thead>
         <tbody>
@@ -82,6 +101,7 @@ export default class PropTable extends React.Component {
               <td>{row.propType}</td>
               <td>{row.required}</td>
               <td>{row.defaultValue === undefined ? '-' : <PropVal val={row.defaultValue} />}</td>
+              <td>{row.info === undefined ? '-' : row.info}</td>
             </tr>
           ))}
         </tbody>

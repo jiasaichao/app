@@ -1,7 +1,7 @@
 /**按钮*/
-import {Common, Global} from "../utils/common";
-import {Icon, Placeholder, Gesture} from "./index";
-import {hashHistory, browserHistory} from 'react-router';
+import { Common, Global } from "../utils/common";
+import { Icon, Placeholder, Gesture } from "./index";
+import { hashHistory, browserHistory } from 'react-router';
 import * as React from 'react';
 let SL = Global.styles;
 let CN = Global.className;
@@ -36,7 +36,7 @@ export class Base extends React.Component {
             rightIcon = <Icon.Normal iconName={this.props.rightIcon} style={styles.rightStyle.o} /> //<span style={{ fontSize: ".32rem", color: "#fff" }} className={'icon-' + this.props.rightIcon}></span>;
         }
         return (
-            <Gesture.Touchable style={styles.root.o} onTap={this.handleClick.bind(this) }>
+            <Gesture.Touchable style={styles.root.o} onTap={this.handleClick.bind(this)}>
                 {leftIcon}
                 <span style={{ fontSize: '.28rem' }}>{this.props.lable}</span>
                 {rightIcon}
@@ -102,10 +102,16 @@ export class Submit extends React.Component {
 
 Submit.displayName = 'Button.Submit';
 Submit.propTypes = {
-  lable: React.PropTypes.string.isRequired,
-  href: React.PropTypes.string,
-  onTap: React.PropTypes.func,
-  style: React.PropTypes.object,
+    lable: React.PropTypes.string.isRequired,
+    href: React.PropTypes.string,
+    onTap: React.PropTypes.func,
+    style: React.PropTypes.object,
 };
+Submit.propInfo = {
+    lable: '显示文字',
+    href: '链接地址',
+    onTap: '触摸时间',
+    style: '样式',
+}
 Submit.defaultProps = {
 }

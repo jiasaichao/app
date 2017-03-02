@@ -122,6 +122,7 @@ export default class Story extends React.Component {
   _renderOverlay() {
     const linkStyle = {
       ...stylesheet.link.base,
+      //=======================
       //...stylesheet.link.topRight,
       ...stylesheet.link.bottomRight,
     };
@@ -133,8 +134,14 @@ export default class Story extends React.Component {
 
     const openOverlay = () => {
       this.setState({ open: true });
+      //====================start
       parent.document.querySelector('iframe').parentNode.style.width = '100%';
       parent.document.querySelector('iframe').parentNode.style.height = '100%';
+      //window.__htmlStyle = document.querySelector("html").style.fontSize;
+      window.setTimeout(()=>{
+        document.querySelector("html").style.fontSize = '16px';
+      },10);      
+      //=====================end
       return false;
     };
 
@@ -142,6 +149,7 @@ export default class Story extends React.Component {
       this.setState({ open: false });
       parent.document.querySelector('iframe').parentNode.style.width = parent.document.getElementById('mobile-width').value;
       parent.document.querySelector('iframe').parentNode.style.height = parent.document.getElementById('mobile-height').value;
+      //document.querySelector("html").style.fontSize = window.__htmlStyle;
       return false;
     };
 

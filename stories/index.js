@@ -11,7 +11,7 @@ storiesOf('Welcome', module)
 
 storiesOf('Button', module)
   .addWithInfo('提交按钮', '如果存在href则不回执行onTap', () => (
-    <div id='root-container'>
+    <div>
       <Button.Submit lable='按钮222' />
       <Button.Submit lable='按钮232' />
     </div>
