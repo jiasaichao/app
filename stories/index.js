@@ -9,6 +9,26 @@ storiesOf('Welcome', module)
     <Welcome showApp={linkTo('Button')} />
   ));
 
+storiesOf('Container', module)
+  .addWithInfo('页面容器', '', () => (
+    <Container.Page>
+      <Button.Submit lable='按钮222' />
+      <Button.Submit lable='按钮232' />
+    </Container.Page>
+  ))
+  .addWithInfo('内容容器', '', () => (
+    <Container.Content>
+      <Button.Submit lable='按钮222' />
+      <Button.Submit lable='按钮232' />
+    </Container.Content>
+  ))
+  .addWithInfo('内容分组容器', '', () => (
+    <Container.ContentGroup>
+      <Button.Submit lable='按钮222' />
+      <Button.Submit lable='按钮232' />
+    </Container.ContentGroup>
+  ));
+
 storiesOf('Button', module)
   .addWithInfo('提交按钮', '如果存在href则不回执行onTap', () => (
     <div>
@@ -20,47 +40,8 @@ storiesOf('Button', module)
     <WithNotes notes={'试试Here we use some emoji as the Button text. Isn\'t it look nice?'}>
       <div>22</div>
     </WithNotes>
-  )).addWithInfo(
-  'simple usage',
-  `
-      This is the basic usage with the button with providing a label to show the text.
-    `,
-  () => (
-    <div>
+  ));
 
-      <br />
-      <p>
-        Click the "?" mark at top-right to view the info.
-        </p>
-    </div>
-  ),
-);
-storiesOf('Container', module)
-  .addWithInfo('内容容器', '', () => (
-    <Container.Content>
-      <Button.Submit lable='按钮222' />
-      <Button.Submit lable='按钮232' />
-    </Container.Content>
-  ))
-  .add('with some emoji', () => (
-    <WithNotes notes={'试试Here we use some emoji as the Button text. Isn\'t it look nice?'}>
-      <div>22</div>
-    </WithNotes>
-  )).addWithInfo(
-  'simple usage',
-  `
-      This is the basic usage with the button with providing a label to show the text.
-    `,
-  () => (
-    <div>
-
-      <br />
-      <p>
-        Click the "?" mark at top-right to view the info.
-        </p>
-    </div>
-  ),
-);
 
 storiesOf('List', module).add('link', () => (
   <List.Link lable='列表3'></List.Link>
