@@ -6,6 +6,7 @@ const styles = {
     maxWidth: 600,
     lineHeight: 1.4,
     fontFamily: '"Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif',
+    fontSize:16
   },
 
   logo: {
@@ -43,7 +44,7 @@ export default class Welcome extends React.Component {
   render() {
     return (
       <div style={styles.main}>
-        <h1>Welcome to STORYBOOK1</h1>
+        <h1>欢迎使用 UI</h1>
         <p>
           This is a UI component dev environment for your app.
         </p>

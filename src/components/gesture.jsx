@@ -68,7 +68,7 @@ export class Touchable extends React.Component {
             className += ' ' + this.props.classBase + '-inactive';
         }
         return (
-            <div style={styles.root.o} className={className} onTouchStart={this._touchStart} onTouchMove={this._touchMove} onTouchEnd={this._touchEnd}>
+            <div style={styles.root.o} className={className} onTouchStart={this._touchStart} onMouseDown={this._touchStart} onMouseUp={this._touchEnd} onMouseMove={this._touchMove} onTouchMove={this._touchMove} onTouchEnd={this._touchEnd}>
                 {this.props.children}
             </div>
         );
@@ -79,6 +79,10 @@ export class Touchable extends React.Component {
     }
     componentWillUnmount() {
     }
+    /**
+     * 执行系统事件，有的时候需要加入系统的非自定义的事件
+     * 有这个事件则执行没有则忽略
+     */
     _emitEvent(eventType, e) {
         let eventHandler = this.props[eventType];
         if (!eventHandler) return;
@@ -86,7 +90,7 @@ export class Touchable extends React.Component {
     }
     _touchStart = (e) => {
         this._emitEvent("onTouchStart", e);
-        if (e.touches.length > 1) {
+        if (e.touches && e.touches.length > 1) {
             let point1 = e.touches[0];
             let point2 = e.touches[1];
             let xLen = Math.abs(point2.pageX - point1.pageX);
@@ -99,8 +103,15 @@ export class Touchable extends React.Component {
 
             this.events.add('onPinchEnd');
         } else {
-            this.startX = e.touches[0].clientX;
-            this.startY = e.touches[0].clientY;
+            if (e.touches) {
+                this.startX = e.touches[0].clientX;
+                this.startY = e.touches[0].clientY;
+            }
+            else {
+                this.startX = e.clientX;
+                this.startY = e.clientY;
+            }
+
 
             this.events.add('onTap');
             this.setState({ tapActive: true });
@@ -112,7 +123,7 @@ export class Touchable extends React.Component {
             e.preventDefault();
             e.stopPropagation();
         }
-        if (e.touches.length > 1) {
+        if (e.touches && e.touches.length > 1) {
             let xLen = Math.abs(e.touches[0].pageX - e.touches[1].pageX);
             let yLen = Math.abs(e.touches[1].pageY - e.touches[1].pageY);
             let touchDistance = this._getDistance(xLen, yLen);
@@ -120,11 +131,11 @@ export class Touchable extends React.Component {
                 let pinchScale = touchDistance / this.touchDistance;
                 //this.scale = pinchScale + this.previousPinchScale - 1;
                 this.scale = pinchScale * this.previousPinchScale;
-                if(this.props.pinch.maxScale < this.scale){
-                    this._emitEvent('onPinch', { scale:this.props.pinch.maxScale, distance: touchDistance });
+                if (this.props.pinch.maxScale < this.scale) {
+                    this._emitEvent('onPinch', { scale: this.props.pinch.maxScale, distance: touchDistance });
                 }
-                if(this.props.pinch.minScale > this.scale){
-                    this._emitEvent('onPinch', { scale:this.props.pinch.minScale, distance: touchDistance });
+                if (this.props.pinch.minScale > this.scale) {
+                    this._emitEvent('onPinch', { scale: this.props.pinch.minScale, distance: touchDistance });
                 }
                 if (this.props.pinch.maxScale > this.scale && this.scale > this.props.pinch.minScale) {
                     this._emitEvent('onPinch', { scale: this.scale, distance: touchDistance });
@@ -133,8 +144,14 @@ export class Touchable extends React.Component {
                 //this.previousPinchScale = pinchScale;
             }
         } else {
-            this.clientX = e.touches[0].clientX;
-            this.clientY = e.touches[0].clientY;
+            if (e.touches) {
+                this.clientX = e.touches[0].clientX;
+                this.clientY = e.touches[0].clientY;
+            }
+            else {
+                this.clientX = e.clientX;
+                this.clientY = e.clientY;
+            }
             if (Math.abs(this._offsetX()) > this.props.tapLength || Math.abs(this._offsetY()) > this.props.tapLength) {
                 this.events.delete('onTap');
                 this.setState({ tapActive: false });
