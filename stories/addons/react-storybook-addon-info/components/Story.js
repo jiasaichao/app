@@ -40,7 +40,8 @@ const stylesheet = {
     overflow: 'auto',
   },
   children: {
-    position: 'relative',
+    //======================
+    //position: 'relative',
     zIndex: 0,
   },
   infoBody: {
@@ -126,30 +127,37 @@ export default class Story extends React.Component {
       //...stylesheet.link.topRight,
       ...stylesheet.link.bottomRight,
     };
-
+    //======================start
+    function pcMode() {
+      parent.document.querySelector('iframe').parentNode.style.width = '100%';
+      parent.document.querySelector('iframe').parentNode.style.height = '100%';
+      //window.__htmlStyle = document.querySelector("html").style.fontSize;
+      window.setTimeout(() => {
+        document.querySelector("html").style.fontSize = '16px';
+      }, 10);
+    }
+    function mobileMode() {
+      parent.document.querySelector('iframe').parentNode.style.width = parent.document.getElementById('mobile-width').value;
+      parent.document.querySelector('iframe').parentNode.style.height = parent.document.getElementById('mobile-height').value;
+    }
+    //===========================end
     const infoStyle = Object.assign({}, stylesheet.info);
     if (!this.state.open) {
       infoStyle.display = 'none';
+      //==================
+      mobileMode();
+    }else{
+      //==================
+      pcMode();
     }
 
     const openOverlay = () => {
       this.setState({ open: true });
-      //====================start
-      parent.document.querySelector('iframe').parentNode.style.width = '100%';
-      parent.document.querySelector('iframe').parentNode.style.height = '100%';
-      //window.__htmlStyle = document.querySelector("html").style.fontSize;
-      window.setTimeout(()=>{
-        document.querySelector("html").style.fontSize = '16px';
-      },10);      
-      //=====================end
       return false;
     };
 
     const closeOverlay = () => {
       this.setState({ open: false });
-      parent.document.querySelector('iframe').parentNode.style.width = parent.document.getElementById('mobile-width').value;
-      parent.document.querySelector('iframe').parentNode.style.height = parent.document.getElementById('mobile-height').value;
-      //document.querySelector("html").style.fontSize = window.__htmlStyle;
       return false;
     };
 
@@ -275,6 +283,8 @@ export default class Story extends React.Component {
         <div key={idx}>
           <h2 style={stylesheet.propTableHead}>"{type.displayName || type.name}" Component</h2>
           <PropTable type={type} />
+          {/*=================*/}
+          <div>使用场景：{type.scene || null}</div>
         </div>
       );
     });
