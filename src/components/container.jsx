@@ -1,6 +1,6 @@
 
 import { Common, Global } from "../utils/common";
-import { Icon, Placeholder } from "./index";
+import { Icon, Placeholder, NavBar } from "./index";
 import { hashHistory, browserHistory } from 'react-router';
 import React, { Component } from 'react';
 let SL = Global.styles;
@@ -8,6 +8,7 @@ let CN = Global.className;
 /**
  * 页面容器 
  * style
+ * 
  * */
 export class Page extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ export class Page extends Component {
     }
     render() {
         let styles = {
-            root: SL.create(SL.absolute(0, 0, 0, 0)).merge({ background: '#fff' }).merge(this.props.style)
+            root: SL.create(SL.absolute(0, 0, 0, 0)).merge({ background: '#fff', overflowY: 'auto' }).merge(this.props.style)
         }
         return (
             <div style={styles.root.o}>
@@ -79,14 +80,26 @@ export class ContentGroup extends Component {
     }
     render() {
         let styles = {
-            root: SL.create({marginTop:'30'}).merge(this.props.style)
+            root: SL.create({ marginTop: '.3rem',position:'relative' }).merge(this.props.style).merge({background:this.props.background})
         }
         return (
             <div style={styles.root.o}>
                 {this.props.children}
+                <div style={{position:'absolute',width:'100%',height:1,bottom:0,background:this.props.background}}></div>
             </div>
         );
     }
 }
 ContentGroup.displayName = 'Container.ContentGroup';
-ContentGroup.scene = '此组件marginTop值30'
+ContentGroup.propTypes = {
+    style:React.PropTypes.object,
+    background:React.PropTypes.string,
+};
+ContentGroup.propInfo = {
+    style: '样式',
+    background:'背景色'
+}
+ContentGroup.defaultProps = {
+    background:'#fff',
+}
+ContentGroup.scene = '此组件marginTop值.3rem,父级元素必须为或者overfollY:auto,或者overfollY:hidden,否则第一个会有bug，解决marginTop问题，设置了底部一个线覆盖掉list的最后一条线颜色和背景色相同'

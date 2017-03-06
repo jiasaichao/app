@@ -5,6 +5,7 @@
 ## 运行
 * 开发环境执行 `npm run start`
 * 生产编译 `npm run build`
+* 开发环境storybook `npm run storybook`
 
 ## 文件
 * components：组件文件，放置基本组件，也就是[redux](https://leecade.gitbooks.io/redux-in-chinese/content/docs/basics/UsageWithReact.html)中说的“笨拙组件”。   

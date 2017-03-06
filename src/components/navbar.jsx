@@ -8,8 +8,10 @@ let SL = Global.styles;
 let CN = Global.className;
 /**
  * 导航条组件。
- * title
+ * label
  * back:bool,default:true
+ * backName:default'返回'
+ * 
  */
 export class NavBar extends React.Component {
     constructor(props) {
@@ -18,7 +20,7 @@ export class NavBar extends React.Component {
 
     render() {
         let styles = {
-            root: SL.create({ height: '0.9rem', background: '#0cbaa0', color: '#fff', fontSize: '.34rem', boxSizing: 'border-box', position: 'relative' }),
+            root: SL.create({ height: '0.9rem', background: '#0cbaa0', color: '#fff', fontSize: '.34rem', boxSizing: 'border-box', position: 'relative' }).merge(this.props.style),
             h1: { width: '100%' },
             left: SL.create({ height: '100%', position: 'absolute' })
         }
@@ -28,20 +30,32 @@ export class NavBar extends React.Component {
         let back
         if(this.props.back)
         {
-            back=<Button.Base lable='返回' onTap={() => { hashHistory.goBack(); } } leftIcon={Icons.Chevron_Left}></Button.Base>;
+            back=<Button.Base lable={this.props.backName} onTap={() => { hashHistory.goBack(); } } leftIcon={Icons.Chevron_Left}></Button.Base>;
         }
         return (
             <div>
             {/** <Placeholder.Statusbar /> */}
                 <div className={CN.czjz} style={styles.root.o}>
                     <div className={CN.czjz} style={styles.left.o}> {back}</div>
-                    <h1 className={CN.spczjz} style={styles.h1} >{this.props.title}</h1>
+                    <h1 className={CN.spczjz} style={styles.h1} >{this.props.label}</h1>
                 </div>
             </div>
         );
     }
-
+}
+NavBar.propTypes = {
+    label: React.PropTypes.string,
+    backName:React.PropTypes.string,
+    back:React.PropTypes.bool,
+    style:React.PropTypes.object
+};
+NavBar.propInfo = {
+    label: '显示文字',
+    backName: '返回按钮名称',
+    back: '是否显示返回按钮',
+    style: '样式',
 }
 NavBar.defaultProps = {
-    back:true
+    back:true,
+    backName:'返回'
 }
