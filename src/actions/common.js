@@ -1,14 +1,20 @@
+import { store } from '../../src/store';
 export const COMMON = 'COMMON'
-export const CommonAction = (index) => {
+export const CommonAction = (data) => {
     return {
         type: COMMON,
-        index,
+        data,
     }
 }
-/**设置遮罩层是否显示 */
-export const SetMask = (isMask) => {
-    return (dispatch) => {
-        let data = { MaskShow: isMask };
-        dispatch(CommonAction(data))
-    }
+/**基础提示框 */
+export const BaseAlert = (BaseAlertTitle, BaseAlertContent) => {
+    let data = { BaseAlert: true, BaseAlertTitle, BaseAlertContent };
+    store.dispatch(CommonAction(data))
+}
+/**
+ * 取消
+ */
+export const Cancel = () => {
+    let data = { BaseAlert: false };
+    store.dispatch(CommonAction(data))
 }

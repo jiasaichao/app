@@ -1,12 +1,16 @@
 import React from 'react';
 import { storiesOf, action, linkTo } from '@kadira/storybook';
 import Welcome from './Welcome';
+import { Root } from '../src/components/root';
 import { List, Button, Container, NavBar } from '../src/components';
 import { WithNotes } from '@kadira/storybook-addon-notes';
+import { BaseAlert } from '../src/actions/common';
 
 storiesOf('Welcome', module)
   .add('to Storybook', () => (
-    <Welcome showApp={linkTo('Button')} />
+    <Root>
+      <Welcome showApp={linkTo('Button')} />
+    </Root>
   ));
 
 storiesOf('Container', module)
@@ -67,4 +71,13 @@ storiesOf('List', module).addWithInfo('link', '', () => (
     <List.Link lable='列表3'></List.Link>
     <List.Link lable='列表4'></List.Link>
   </Container.Page>
+));
+storiesOf('Alert', module).addWithInfo('BaseAlert', '', () => (
+  <Root>
+    <NavBar />
+    <Button.Submit onTap={()=>{
+BaseAlert('标题','内容');
+      }} lable='按钮222' />
+    <Button.Submit lable='按钮232' />
+  </Root>
 ));

@@ -1,9 +1,11 @@
 /**对话框Dialog*/
-import {Common, Global} from "../utils/common";
-import {hashHistory, browserHistory} from 'react-router';
+import { Common, Global } from "../utils/common";
+import { hashHistory, browserHistory } from 'react-router';
 import * as React from 'react';
 import * as Icon from "./icon";
-import {Common as CON ,Gesture} from "./index";
+import { Common as CON, Gesture } from "./index";
+import { connect } from "react-redux";
+import { Cancel } from '../actions/common';
 let SL = Global.styles;
 let CN = Global.className;
 /**模态窗口
@@ -13,11 +15,12 @@ let CN = Global.className;
  * onCancel：取消事件
  * onOk：确定事件
  */
-export class Modal extends React.Component {
+class Modal1 extends React.Component {
     constructor(props) {
         super(props);
     }
     render() {
+        let {BaseAlert,BaseAlertTitle,BaseAlertContent} = this.props.Common
         let styles = {
             root: SL.create({
                 width: '5.19rem',
@@ -63,19 +66,19 @@ export class Modal extends React.Component {
                 color: '#559bec'
             }
         }
-        if (this.props.show === false) {
+        if (!BaseAlert) {
             styles.root.merge({ display: 'none' });
         }
         return (
             <div>
-                <CON.Mask show={this.props.show} />
+                <CON.Mask show={BaseAlert} />
                 <div style={styles.root.o}>
                     <div style={styles.top}>
-                        <h1 style={styles.h1}>{this.props.title}</h1>
-                        <span className={CN.spjz} style={styles.text}>{this.props.content}</span>
+                        <h1 style={styles.h1}>{BaseAlertTitle}</h1>
+                        <span className={CN.spjz} style={styles.text}>{BaseAlertContent}</span>
                     </div>
                     <div style={styles.bottom}>
-                        <Gesture.Touchable style={styles.left} onTap={this.props.onCancel}>取消</Gesture.Touchable>
+                        <Gesture.Touchable style={styles.left} onTap={Cancel}>取消</Gesture.Touchable>
                         <Gesture.Touchable style={styles.right} onTap={this.props.onOk}>确定</Gesture.Touchable>
                     </div>
                 </div>
@@ -84,6 +87,14 @@ export class Modal extends React.Component {
     }
 
 }
+function modalMapDispatchToProps(dispatch) {
+    return {
+    }
+}
+function modalMapStateToProps(state) {
+    return { Common: state.common };
+}
+export const Modal = connect(modalMapStateToProps, modalMapDispatchToProps)(Modal1);
 /**覆盖整个窗口，从下往上弹出 
  * show是否显示
  * style:根元素的样式，如background等
@@ -138,14 +149,14 @@ export class PopupDown extends React.Component {
         }
         return (
             <div>
-                <CON.Mask show={this.props.show} onTap={this._handleMask}/>
+                <CON.Mask show={this.props.show} onTap={this._handleMask} />
                 <div className={"overlay" + className} style={styles.root.o}>
                     {this.props.children}
                 </div>
             </div>
         );
     }
-    
+
     _handleMask = () => {
         if (this.props.onMask) {
             this.props.onMask();
