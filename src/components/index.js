@@ -13,8 +13,10 @@ import * as Gesture from "./gesture";
 import * as Animate from "./animate";
 import * as FullPage from "./fullpage";
 import * as Scroll from "./scroll";
+import TabBar from "./tabbar";
 import { ImageCrop } from "./imagecrop";
+import { ImagePlaceholder } from "./image";
 
 export {
-    NavBar, Placeholder, Icon, List, Container, Button, Form, Common, Dialog, Slider, NineGrid, Gesture, Animate, FullPage, Scroll, ImageCrop
+    NavBar, Placeholder, Icon, List, Container, Button, Form, Common, Dialog, Slider, NineGrid, Gesture, Animate, FullPage, Scroll, ImageCrop, ImagePlaceholder, TabBar
 }

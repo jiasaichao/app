@@ -15,8 +15,8 @@ class Alert1 extends React.Component {
     render() {
         return (
             <div>
-                <Button.Submit onTap={this.props.onTap} lable='按钮222' />
-                <Button.Submit lable='按钮232' />
+                <Button.Submit onTap={this.props.onTap} label='按钮222' />
+                <Button.Submit label='按钮232' />
             </div>
         );
     }

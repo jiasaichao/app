@@ -273,7 +273,7 @@ export class Item extends React.Component {
         //     container: SL.create({ marginLeft: '.2rem', fontSize: '.26rem', background: '#fff', zIndex: 10, position: 'absolute', width: '100%', height: '100%', transform: `translate3d(${offsetX}px,0,0)` }),
         //     right: { marginRight: '.2rem' },
         //     option: { height: '100%', fontSize: '.32rem', overflow: 'hidden' },
-        //     optionLable: SL.create({ height: '100%', padding: '0 .3rem' })
+        //     optionLabel: SL.create({ height: '100%', padding: '0 .3rem' })
         // }
         return (
             <div>

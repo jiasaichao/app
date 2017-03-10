@@ -6,7 +6,7 @@ import * as React from 'react';
 let SL = Global.styles;
 let CN = Global.className;
 /**基本按钮
- * lable:按钮名称
+ * label:按钮名称
  * leftIcon:左icon
  * rightIcon：右icon
  * style最外层style
@@ -38,7 +38,7 @@ export class Base extends React.Component {
         return (
             <Gesture.Touchable style={styles.root.o} onTap={this.handleClick.bind(this)}>
                 {leftIcon}
-                <span style={{ fontSize: '.28rem' }}>{this.props.lable}</span>
+                <span style={{ fontSize: '.28rem' }}>{this.props.label}</span>
                 {rightIcon}
             </Gesture.Touchable>
         );
@@ -56,7 +56,7 @@ export class Base extends React.Component {
 }
 
 /**提交按钮
- * lable:按钮名称
+ * label:按钮名称
  * href:链接地址
  * onTap:点击函数
  * style
@@ -82,7 +82,7 @@ export class Submit extends React.Component {
         return (
             <div className={CN.spjz}>
                 <Gesture.Touchable style={styles.root.o} classBase='Tappable-bg' onTap={this._handleClick}>
-                    {this.props.lable}
+                    {this.props.label}
                 </Gesture.Touchable>
             </div>
 
@@ -102,13 +102,13 @@ export class Submit extends React.Component {
 
 Submit.displayName = 'Button.Submit';
 Submit.propTypes = {
-    lable: React.PropTypes.string.isRequired,
+    label: React.PropTypes.string.isRequired,
     href: React.PropTypes.string,
     onTap: React.PropTypes.func,
     style: React.PropTypes.object,
 };
 Submit.propInfo = {
-    lable: '显示文字',
+    label: '显示文字',
     href: '链接地址',
     onTap: '触摸时间',
     style: '样式',

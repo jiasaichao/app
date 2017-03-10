@@ -22,7 +22,7 @@ export class ListPage extends React.Component {
                 <NavBar title='头像'></NavBar>
                 <List.Link onTap={() => {
                     this.refs['file'].click();
-                } } lable='上传头像'></List.Link>
+                } } label='上传头像'></List.Link>
                 {
                     this.state.show ? <ImageCrop show={true} src={this.state.src} onCancel={() => {
                         this.setState({ show: false });

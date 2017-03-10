@@ -26,9 +26,9 @@ export class Link extends React.Component {
         return (
             <Gesture.Touchable style={styles.root.o} classBase='Tappable-bg'  onTap={this.handleClick.bind(this) }>
                 <div className={CN.czjz} style={styles.container}>
-                    <div>{this.props.lable}</div>
+                    <div>{this.props.label}</div>
                     <Placeholder.Full/>
-                    <div style={styles.right}><span>{this.props.rightLable}</span> <Icon.Normal iconName={icons.Chevron_Right} style={{ fill: '#675e5e', height: '.3rem', width: '.3rem' }}></Icon.Normal></div>
+                    <div style={styles.right}><span>{this.props.rightLabel}</span> <Icon.Normal iconName={icons.Chevron_Right} style={{ fill: '#675e5e', height: '.3rem', width: '.3rem' }}></Icon.Normal></div>
                 </div>
             </Gesture.Touchable>
         );
@@ -67,7 +67,7 @@ export class Swipe extends React.Component {
             container: SL.create({ marginLeft: '.2rem', fontSize: '.26rem', background: '#fff', zIndex: 10, position: 'absolute', width: '100%', height: '100%', transform: `translate3d(${offsetX}px,0,0)` }),
             right: { marginRight: '.2rem' },
             option: { height: '100%', fontSize: '.32rem', overflow: 'hidden' },
-            optionLable: SL.create({ height: '100%', padding: '0 .3rem' })
+            optionLabel: SL.create({ height: '100%', padding: '0 .3rem' })
         }
         if (this.state.transition) {
             styles.container.merge({ transition: '0.3s ease-out' });
@@ -101,14 +101,14 @@ export class Swipe extends React.Component {
                         }, 100)
                     } }
                     >
-                    <div>{this.props.lable}</div>
+                    <div>{this.props.label}</div>
                     <Placeholder.Full/>
-                    <div style={styles.right}><span>{this.props.rightLable}</span></div>
+                    <div style={styles.right}><span>{this.props.rightLabel}</span></div>
                 </div>
                 <Placeholder.Full/>
                 <div className={CN.czjz} ref='option' style={styles.option}>
-                    <span className={CN.czjz} style={{...styles.optionLable.o, background: '#8a8282'}}>标为一读</span>
-                <span className={CN.czjz} style={{...styles.optionLable.o, background: 'red'}}>删除</span>
+                    <span className={CN.czjz} style={{...styles.optionLabel.o, background: '#8a8282'}}>标为一读</span>
+                <span className={CN.czjz} style={{...styles.optionLabel.o, background: 'red'}}>删除</span>
                 </div >
             </div >
         );
@@ -132,7 +132,7 @@ export class Swipe extends React.Component {
 /**
  * 小标题
  * 一般做一个页面两个模块之间的分割
- * lable
+ * label
  * style
  * background:
  * color
@@ -158,7 +158,7 @@ export class SmallTitle extends React.Component {
         }
         return (
             <div className={CN.czjz} style={styles.root.o}>
-                {this.props.lable}
+                {this.props.label}
             </div>
         );
     }

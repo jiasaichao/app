@@ -2,10 +2,10 @@ import React from 'react';
 import { storiesOf, action, linkTo } from '@kadira/storybook';
 import Welcome from './Welcome';
 import { Root } from '../src/components/root';
-import { List, Button, Container, NavBar } from '../src/components';
+import { List, Button, Container, NavBar,TabBar,Icon } from '../src/components';
 import { WithNotes } from '@kadira/storybook-addon-notes';
 import { BaseAlert } from '../src/actions/common';
-
+import * as icons from "../src/utils/icons";
 storiesOf('Welcome', module)
   .add('to Storybook', () => (
     <Root>
@@ -16,28 +16,28 @@ storiesOf('Welcome', module)
 storiesOf('Container', module)
   .addWithInfo('页面容器', '', () => (
     <Container.Page>
-      <Button.Submit lable='按钮222' />
-      <Button.Submit lable='按钮232' />
+      <Button.Submit label='按钮222' />
+      <Button.Submit label='按钮232' />
     </Container.Page>
   ))
   .addWithInfo('内容容器', '', () => (
     <Container.Content>
-      <Button.Submit lable='按钮222' />
-      <Button.Submit lable='按钮232' />
+      <Button.Submit label='按钮222' />
+      <Button.Submit label='按钮232' />
     </Container.Content>
   ))
   .addWithInfo('内容分组容器', '', () => (
     <Container.Page style={{ background: '#F2F2F2' }}>
       <NavBar />
       <Container.ContentGroup>
-        <List.Link lable='列表1'></List.Link>
-        <List.Link lable='列表2'></List.Link>
-        <List.Link lable='列表3'></List.Link>
+        <List.Link label='列表1'></List.Link>
+        <List.Link label='列表2'></List.Link>
+        <List.Link label='列表3'></List.Link>
       </Container.ContentGroup>
       <Container.ContentGroup>
-        <List.Link lable='列表4'></List.Link>
-        <List.Link lable='列表5'></List.Link>
-        <List.Link lable='列表6'></List.Link>
+        <List.Link label='列表4'></List.Link>
+        <List.Link label='列表5'></List.Link>
+        <List.Link label='列表6'></List.Link>
       </Container.ContentGroup>
     </Container.Page>
   ));
@@ -52,8 +52,8 @@ storiesOf('NavBar', module)
 storiesOf('Button', module)
   .addWithInfo('提交按钮', '如果存在href则不回执行onTap', () => (
     <div>
-      <Button.Submit lable='按钮222' />
-      <Button.Submit lable='按钮232' />
+      <Button.Submit label='按钮222' />
+      <Button.Submit label='按钮232' />
     </div>
   ))
   .add('with some emoji', () => (
@@ -62,22 +62,37 @@ storiesOf('Button', module)
     </WithNotes>
   ));
 
+storiesOf('Icon', module)
+  .addWithInfo('图标', '', () => (
+    <div>
+      <Icon.Normal iconName={icons.Email}/>
+    </div>
+  ));
 
 storiesOf('List', module).addWithInfo('link', '', () => (
   <Container.Page>
     <NavBar />
-    <List.Link lable='列表1'></List.Link>
-    <List.Link lable='列表2'></List.Link>
-    <List.Link lable='列表3'></List.Link>
-    <List.Link lable='列表4'></List.Link>
+    <List.Link label='列表1'></List.Link>
+    <List.Link label='列表2'></List.Link>
+    <List.Link label='列表3'></List.Link>
+    <List.Link label='列表4'></List.Link>
   </Container.Page>
 ));
 storiesOf('Alert', module).addWithInfo('BaseAlert', '', () => (
   <Root>
     <NavBar />
-    <Button.Submit onTap={()=>{
-BaseAlert('标题','内容');
-      }} lable='按钮222' />
-    <Button.Submit lable='按钮232' />
+    <Button.Submit onTap={() => {
+      BaseAlert('标题', '内容');
+    }} label='按钮222' />
+    <Button.Submit label='按钮232' />
+  </Root>
+));
+storiesOf('TabBar', module).addWithInfo('TabBar', '', () => (
+  <Root>
+    <NavBar />
+    <TabBar>
+      <TabBar.Item label='aaaaa' />
+      <TabBar.Item label='bbbbb' />
+    </TabBar>
   </Root>
 ));

@@ -7,44 +7,44 @@ let ListPage = React.createClass({
             <Container.Page>
                 <NavBar title="九宫格"></NavBar>
                 <Container.Content style={{top:'.9rem'}}>
-                    <List.SmallTitle lable="column默认3" />
+                    <List.SmallTitle label="column默认3" />
                     <NineGrid.Root iconStyle={{fill:'#d80e40'}}>
-                        <NineGrid.Item iconName={icons.Email} lable='标题1'/>
-                        <NineGrid.Item iconName={icons.Printer} lable='标题2'/>
-                        <NineGrid.Item iconName={icons.User} lable='标题3'/>
-                        <NineGrid.Item iconName={icons.Chat} lable='标题1'/>
-                        <NineGrid.Item iconName={icons.Refresh} lable='标题2'/>
-                        <NineGrid.Item iconName={icons.Shopping} lable='标题3'/>
-                        <NineGrid.Item iconName={icons.Chevron_Right} lable='标题1'/>
-                        <NineGrid.Item iconName={icons.Chevron_Up} lable='标题2'/>
-                        <NineGrid.Item iconName={icons.Chevron_Down} lable='标题3'/>
-                        <NineGrid.Item iconName={icons.Chevron_Down} lable='标题3'/>
+                        <NineGrid.Item iconName={icons.Email} label='标题1'/>
+                        <NineGrid.Item iconName={icons.Printer} label='标题2'/>
+                        <NineGrid.Item iconName={icons.User} label='标题3'/>
+                        <NineGrid.Item iconName={icons.Chat} label='标题1'/>
+                        <NineGrid.Item iconName={icons.Refresh} label='标题2'/>
+                        <NineGrid.Item iconName={icons.Shopping} label='标题3'/>
+                        <NineGrid.Item iconName={icons.Chevron_Right} label='标题1'/>
+                        <NineGrid.Item iconName={icons.Chevron_Up} label='标题2'/>
+                        <NineGrid.Item iconName={icons.Chevron_Down} label='标题3'/>
+                        <NineGrid.Item iconName={icons.Chevron_Down} label='标题3'/>
                     </NineGrid.Root>
-                    <List.SmallTitle lable="每行4个" />
+                    <List.SmallTitle label="每行4个" />
                     <NineGrid.Root column='4' style={{borderBottom: '1px solid #ccc'}}>
-                        <NineGrid.Item iconName={icons.Email} lable='标题1'/>
-                        <NineGrid.Item iconName={icons.Printer} lable='标题2'/>
-                        <NineGrid.Item iconName={icons.User} lable='标题3'/>
-                        <NineGrid.Item iconName={icons.Chat} lable='标题1'/>
-                        <NineGrid.Item iconName={icons.Refresh} lable='标题2'/>
-                        <NineGrid.Item iconName={icons.Shopping} lable='标题3'/>
-                        <NineGrid.Item iconName={icons.Chevron_Right} lable='标题1'/>
-                        <NineGrid.Item iconName={icons.Chevron_Up} lable='标题2'/>
-                        <NineGrid.Item iconName={icons.Chevron_Down} lable='标题3'/>
-                        <NineGrid.Item iconName={icons.Chevron_Down} lable='标题3'/>
+                        <NineGrid.Item iconName={icons.Email} label='标题1'/>
+                        <NineGrid.Item iconName={icons.Printer} label='标题2'/>
+                        <NineGrid.Item iconName={icons.User} label='标题3'/>
+                        <NineGrid.Item iconName={icons.Chat} label='标题1'/>
+                        <NineGrid.Item iconName={icons.Refresh} label='标题2'/>
+                        <NineGrid.Item iconName={icons.Shopping} label='标题3'/>
+                        <NineGrid.Item iconName={icons.Chevron_Right} label='标题1'/>
+                        <NineGrid.Item iconName={icons.Chevron_Up} label='标题2'/>
+                        <NineGrid.Item iconName={icons.Chevron_Down} label='标题3'/>
+                        <NineGrid.Item iconName={icons.Chevron_Down} label='标题3'/>
                     </NineGrid.Root>
-                    <List.SmallTitle lable="每行5个" />
+                    <List.SmallTitle label="每行5个" />
                     <NineGrid.Root column='5' iconStyle={{fill:'#81d40b'}} style={{borderBottom: '1px solid #ccc'}}>
-                        <NineGrid.Item iconName={icons.Email} lable='标题1'/>
-                        <NineGrid.Item iconName={icons.Printer} lable='标题2'/>
-                        <NineGrid.Item iconName={icons.User} lable='标题3'/>
-                        <NineGrid.Item iconName={icons.Chat} lable='标题1'/>
-                        <NineGrid.Item iconName={icons.Refresh} lable='标题2'/>
-                        <NineGrid.Item iconName={icons.Shopping} lable='标题3'/>
-                        <NineGrid.Item iconName={icons.Chevron_Right} lable='标题1'/>
-                        <NineGrid.Item iconName={icons.Chevron_Up} lable='标题2'/>
-                        <NineGrid.Item iconName={icons.Chevron_Down} lable='标题3'/>
-                        <NineGrid.Item iconName={icons.Chevron_Down} lable='标题3'/>
+                        <NineGrid.Item iconName={icons.Email} label='标题1'/>
+                        <NineGrid.Item iconName={icons.Printer} label='标题2'/>
+                        <NineGrid.Item iconName={icons.User} label='标题3'/>
+                        <NineGrid.Item iconName={icons.Chat} label='标题1'/>
+                        <NineGrid.Item iconName={icons.Refresh} label='标题2'/>
+                        <NineGrid.Item iconName={icons.Shopping} label='标题3'/>
+                        <NineGrid.Item iconName={icons.Chevron_Right} label='标题1'/>
+                        <NineGrid.Item iconName={icons.Chevron_Up} label='标题2'/>
+                        <NineGrid.Item iconName={icons.Chevron_Down} label='标题3'/>
+                        <NineGrid.Item iconName={icons.Chevron_Down} label='标题3'/>
                     </NineGrid.Root>
                 </Container.Content>
             </Container.Page>

@@ -41,7 +41,7 @@ export class Input extends React.Component {
 }
 /**
  * 开关
- * lable
+ * label
  * open:bool
  */
 export class Switch extends React.Component {
@@ -98,7 +98,7 @@ export class Switch extends React.Component {
             <div className={CN.czjz} style={styles.root.o}>
                 <div className={CN.spjz} style={styles.left}>{left}</div>
                 <div className={CN.czjz} style={styles.container}>
-                <span>{this.props.lable}</span>
+                <span>{this.props.label}</span>
                 <Placeholder.Full />
                     <Gesture.Touchable classBase='' swiperLength='20' onSwipeRight={() => { this.setState({ open: true }) } } onSwipeLeft={() => { this.setState({ open: false }) } } onTap={() => { this.setState({ open: !this.state.open }) } } style={styles.switch.o}>
                         <div style={styles.switchButton.o}></div>

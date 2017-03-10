@@ -5,9 +5,9 @@ let ListPage = React.createClass({
         return (
             <Container.Page>
                 <NavBar title="列表"></NavBar>
-                <List.Link lable='列表3'></List.Link>
-                <List.Link lable='列表4' rightLable='rightLable'></List.Link>
-                <List.Link lable='列表6' rightLable='状态展示'></List.Link>
+                <List.Link label='列表3'></List.Link>
+                <List.Link label='列表4' rightLabel='rightLabel'></List.Link>
+                <List.Link label='列表6' rightLabel='状态展示'></List.Link>
             </Container.Page>
         )
     }

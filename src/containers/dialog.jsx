@@ -33,14 +33,14 @@ export class DialogPage extends React.Component {
                 <Dialog.Overlay show={this.state.overlay}>
                     <div>
                         <div style={{ display: 'flex', height: '.6rem', fontSize: '.32rem' }}>
-                            <Button.Base lable="取消" onTap={() => { document.activeElement.blur(); this.setState({ overlay: false }) } }/>
+                            <Button.Base label="取消" onTap={() => { document.activeElement.blur(); this.setState({ overlay: false }) } }/>
                             <span style={{
                                 'flex': 1,
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center'
                             }}>评论</span>
-                            <Button.Base lable="发送" onTap={() => { this.setState({ overlay: false }) } }/>
+                            <Button.Base label="发送" onTap={() => { this.setState({ overlay: false }) } }/>
                         </div>
                         <div style={{ width: '100%', borderTop: '1px solid #e9e9e9', borderBottom: '1px solid #e9e9e9' }}>
                             <textarea
@@ -75,9 +75,9 @@ export class DialogPage extends React.Component {
                     </div>
                 </Dialog.PopupDown>
                 <NavBar title="列表" />
-                <Button.Submit style={{ marginTop: '.1rem' }} lable='确认Confirm' onTap={this._handleModal}/>
-                <Button.Submit style={{ marginTop: '.1rem' }} lable='整页弹出Overlay' onTap={() => { this.setState({ overlay: true }) } }/>
-                <Button.Submit style={{ marginTop: '.1rem' }} lable='下弹出PopupDown' onTap={() => { this.setState({ popupDown: true }) } }/>
+                <Button.Submit style={{ marginTop: '.1rem' }} label='确认Confirm' onTap={this._handleModal}/>
+                <Button.Submit style={{ marginTop: '.1rem' }} label='整页弹出Overlay' onTap={() => { this.setState({ overlay: true }) } }/>
+                <Button.Submit style={{ marginTop: '.1rem' }} label='下弹出PopupDown' onTap={() => { this.setState({ popupDown: true }) } }/>
             </Container.Page>
         )
     }

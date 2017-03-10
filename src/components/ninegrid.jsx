@@ -73,7 +73,7 @@ Root.defaultProps = {
 /**
  * iconName
  * iconStyle
- * lable
+ * label
  * style:fill: 'blue',width,height
  * 
  */
@@ -113,7 +113,7 @@ export class Item extends React.Component {
             <div style={styles.root.o}>
                 <Gesture.Touchable classBase='Tappable-bg'  style={styles.content.o}>
                     <Icon.Normal style={styles.iconStyle.o} iconName={this.props.iconName}/>
-                    <span style={{ fontSize: '.32rem' }}>{this.props.lable}</span>
+                    <span style={{ fontSize: '.32rem' }}>{this.props.label}</span>
                 </Gesture.Touchable>
 
             </div>
