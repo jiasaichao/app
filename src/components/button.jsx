@@ -30,10 +30,10 @@ export class Base extends React.Component {
             styles.root.merge(this.props.style);
         }
         if (this.props.leftIcon) {
-            leftIcon = <Icon.Normal iconName={this.props.leftIcon} style={styles.leftStyle.o} /> //<span style={{ fontSize: ".32rem", color: "#fff" }} className={'icon-' + this.props.leftIcon}></span>;
+            leftIcon = <Icon iconName={this.props.leftIcon} style={styles.leftStyle.o} /> //<span style={{ fontSize: ".32rem", color: "#fff" }} className={'icon-' + this.props.leftIcon}></span>;
         }
         if (this.props.rightIcon) {
-            rightIcon = <Icon.Normal iconName={this.props.rightIcon} style={styles.rightStyle.o} /> //<span style={{ fontSize: ".32rem", color: "#fff" }} className={'icon-' + this.props.rightIcon}></span>;
+            rightIcon = <Icon iconName={this.props.rightIcon} style={styles.rightStyle.o} /> //<span style={{ fontSize: ".32rem", color: "#fff" }} className={'icon-' + this.props.rightIcon}></span>;
         }
         return (
             <Gesture.Touchable style={styles.root.o} onTap={this.handleClick.bind(this)}>

@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf, action, linkTo } from '@kadira/storybook';
 import Welcome from './Welcome';
 import { Root } from '../src/components/root';
-import { List, Button, Container, NavBar,TabBar,Icon } from '../src/components';
+import { List, Button, Container, NavBar, TabBar, Icon } from '../src/components';
 import { WithNotes } from '@kadira/storybook-addon-notes';
 import { BaseAlert } from '../src/actions/common';
 import * as icons from "../src/utils/icons";
@@ -64,9 +64,9 @@ storiesOf('Button', module)
 
 storiesOf('Icon', module)
   .addWithInfo('图标', '', () => (
-    <div>
-      <Icon.Normal iconName={icons.Email}/>
-    </div>
+    <Container.Page>
+      <Icon iconName={icons.Email} color='#f66' />
+    </Container.Page>
   ));
 
 storiesOf('List', module).addWithInfo('link', '', () => (
@@ -91,8 +91,15 @@ storiesOf('TabBar', module).addWithInfo('TabBar', '', () => (
   <Root>
     <NavBar />
     <TabBar>
-      <TabBar.Item label='aaaaa' />
-      <TabBar.Item label='bbbbb' />
+      <TabBar.Item label='aaaaa' iconName={icons.Email}>
+        <div>111</div>
+      </TabBar.Item>
+      <TabBar.Item iconName={icons.Printer}>
+        <div>2222</div>
+      </TabBar.Item>
+      <TabBar.Item label='bbbbb'  iconName={icons.User} selected={true}>
+        <div>33333</div>
+      </TabBar.Item>
     </TabBar>
   </Root>
 ));

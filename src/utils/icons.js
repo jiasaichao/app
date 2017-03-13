@@ -9,15 +9,15 @@ import User from '../assets/svg/user.svg';
 import Chat from '../assets/svg/chat.svg';
 import Shopping from '../assets/svg/shopping.svg';
 import Refresh from '../assets/svg/refresh.svg';
-  export {
-    Chevron_Down,
-    Chevron_Up,
-    Chevron_Left,
-    Chevron_Right,
-    Email,
-    Printer,
-    User,
-    Chat,
-    Shopping,
-    Refresh
-  }
+export {
+  Chevron_Down,
+  Chevron_Up,
+  Chevron_Left,
+  Chevron_Right,
+  Email,
+  Printer,
+  User,
+  Chat,
+  Shopping,
+  Refresh
+}

@@ -30,7 +30,7 @@ export class NavBar extends React.Component {
         let back
         if(this.props.back)
         {
-            back=<Button.Base label={this.props.backName} onTap={() => { hashHistory.goBack(); } } leftIcon={Icons.Chevron_Left}></Button.Base>;
+            back=<Button.Base label={this.props.backName} onTap={() => { hashHistory.goBack(); } } leftIcon={Icons.Chevron_Left} />;
         }
         return (
             <div>
