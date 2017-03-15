@@ -117,8 +117,8 @@ export class Root extends React.Component {
         }
         let leftRightButton = [];
         if (this.props.isLeftRight) {
-            leftRightButton = [<Button.Base key='left' leftIcon={icons.Chevron_Left} onTap={() => { this._goIndex(this.state.idx - 1); this._resetAutoPlay() } } style={styles.leftIcon}/>,
-                <Button.Base key='right' leftIcon={icons.Chevron_Right} onTap={() => { this._goIndex(this.state.idx + 1); this._resetAutoPlay() } } style={styles.rightIcon} />];
+            leftRightButton = [<Button key='left' leftIcon={icons.Chevron_Left} onTap={() => { this._goIndex(this.state.idx - 1); this._resetAutoPlay() } } style={styles.leftIcon}/>,
+                <Button key='right' leftIcon={icons.Chevron_Right} onTap={() => { this._goIndex(this.state.idx + 1); this._resetAutoPlay() } } style={styles.rightIcon} />];
         }
         //console.log('render:' + offsetX);
 

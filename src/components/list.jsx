@@ -28,7 +28,7 @@ export class Link extends React.Component {
                 <div className={CN.czjz} style={styles.container}>
                     <div>{this.props.label}</div>
                     <Placeholder.Full/>
-                    <div style={styles.right}><span>{this.props.rightLabel}</span> <Icon.Normal iconName={icons.Chevron_Right} style={{ fill: '#675e5e', height: '.3rem', width: '.3rem' }}></Icon.Normal></div>
+                    <div style={styles.right}><span>{this.props.rightLabel}</span> <Icon iconName={icons.Chevron_Right} style={{ fill: '#675e5e', height: '.3rem', width: '.3rem' }}></Icon></div>
                 </div>
             </Gesture.Touchable>
         );

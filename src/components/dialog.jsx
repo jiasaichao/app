@@ -2,7 +2,7 @@
 import { Common, Global } from "../utils/common";
 import { hashHistory, browserHistory } from 'react-router';
 import * as React from 'react';
-import * as Icon from "./icon";
+import {Icon} from "./icon";
 import { Common as CON, Gesture } from "./index";
 import { connect } from "react-redux";
 import { Cancel } from '../actions/common';

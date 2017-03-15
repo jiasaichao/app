@@ -2,7 +2,7 @@
 import * as List from "./list";
 import * as Placeholder from "./placeholder";
 import {Icon} from "./icon";
-import * as Button from "./button";
+import Button from "./button";
 import * as Form from "./form";
 import * as Common from "./common";
 import * as Dialog from "./dialog";

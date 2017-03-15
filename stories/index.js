@@ -45,7 +45,7 @@ storiesOf('Container', module)
 storiesOf('NavBar', module)
   .addWithInfo('头部导航', '', () => (
     <Container.Page>
-      <NavBar />
+      <NavBar label='头部标题' right={<Button label='筛选' onTap={() => { } } />} />
     </Container.Page>
   ))
 
@@ -71,7 +71,7 @@ storiesOf('Icon', module)
 
 storiesOf('List', module).addWithInfo('link', '', () => (
   <Container.Page>
-    <NavBar />
+    <NavBar label='头部标题' />
     <List.Link label='列表1'></List.Link>
     <List.Link label='列表2'></List.Link>
     <List.Link label='列表3'></List.Link>
@@ -89,7 +89,7 @@ storiesOf('Alert', module).addWithInfo('BaseAlert', '', () => (
 ));
 storiesOf('TabBar', module).addWithInfo('TabBar', '', () => (
   <Root>
-    <NavBar />
+    <NavBar label='头部标题' />
     <TabBar>
       <TabBar.Item label='aaaaa' iconName={icons.Email}>
         <div>111</div>

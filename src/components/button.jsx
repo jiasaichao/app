@@ -5,6 +5,7 @@ import { hashHistory, browserHistory } from 'react-router';
 import * as React from 'react';
 let SL = Global.styles;
 let CN = Global.className;
+
 /**基本按钮
  * label:按钮名称
  * leftIcon:左icon
@@ -15,10 +16,11 @@ let CN = Global.className;
  * href:链接地址
  * onTap:点击函数
  */
-export class Base extends React.Component {
+export default class Button extends React.Component {
     constructor(props) {
         super(props);
     }
+    static Submit = Submit;
     render() {
         let leftIcon, rightIcon;
         let styles = {
@@ -55,51 +57,39 @@ export class Base extends React.Component {
 
 }
 
-/**提交按钮
+/**
+ * 提交按钮
  * label:按钮名称
  * href:链接地址
  * onTap:点击函数
  * style
  */
-export class Submit extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        let leftIcon, rightIcon;
-        let styles = {
-            root: SL.create({ width: '6.9rem', height: '.8rem', fontSize: '.32rem', background: '#39b54a', borderRadius: '.1rem', color: '#fff' }).merge(SL.czspjz)
-        }
-        if (this.props.style) {
-            styles.root.merge(this.props.style);
-        }
-        // if (this.props.leftIcon) {
-        //     leftIcon =<Icon.Normal iconName={this.props.leftIcon} style={{width:'.25rem',height:'.3rem'}} /> //<span style={{ fontSize: ".32rem", color: "#fff" }} className={'icon-' + this.props.leftIcon}></span>;
-        // }
-        // if (this.props.rightIcon) {
-        //     rightIcon = <Icon.Normal iconName={this.props.rightIcon} style={{width:'.25rem',height:'.3rem'}} /> //<span style={{ fontSize: ".32rem", color: "#fff" }} className={'icon-' + this.props.rightIcon}></span>;
-        // }
-        return (
-            <div className={CN.spjz}>
-                <Gesture.Touchable style={styles.root.o} classBase='Tappable-bg' onTap={this._handleClick}>
-                    {this.props.label}
-                </Gesture.Touchable>
-            </div>
-
-        );
-    }
-    _handleClick = () => {
-        if (this.props.href) {
-            hashHistory.push(this.props.href);
+export function Submit({style,href,onTap,label}) {
+    let handleClick = () => {
+        if (href) {
+            hashHistory.push(href);
         }
         else
-            if (this.props.onTap) {
-                this.props.onTap();
+            if (onTap) {
+                onTap();
             }
     }
+    let leftIcon, rightIcon;
+    let styles = {
+        root: SL.create({ width: '6.9rem', height: '.8rem', fontSize: '.32rem', background: '#39b54a', borderRadius: '.1rem', color: '#fff' }).merge(SL.czspjz)
+    }
+    if (style) {
+        styles.root.merge(style);
+    }
+    return (
+        <div className={CN.spjz}>
+            <Gesture.Touchable style={styles.root.o} classBase='Tappable-bg' onTap={handleClick}>
+                {label}
+            </Gesture.Touchable>
+        </div>
 
+    );
 }
-
 Submit.displayName = 'Button.Submit';
 Submit.propTypes = {
     label: React.PropTypes.string.isRequired,
