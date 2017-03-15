@@ -6,6 +6,8 @@ import { List, Button, Container, NavBar, TabBar, Icon } from '../src/components
 import { WithNotes } from '@kadira/storybook-addon-notes';
 import { BaseAlert } from '../src/actions/common';
 import * as icons from "../src/utils/icons";
+import { withKnobs, text, boolean, number } from '@kadira/storybook-addon-knobs';
+
 storiesOf('Welcome', module)
   .add('to Storybook', () => (
     <Root>
@@ -43,9 +45,10 @@ storiesOf('Container', module)
   ));
 
 storiesOf('NavBar', module)
+  .addDecorator(withKnobs)
   .addWithInfo('头部导航', '', () => (
     <Container.Page>
-      <NavBar label='头部标题' right={<Button label='筛选' onTap={() => { } } />} />
+      <NavBar label={text('label', '头部标题')} right={<Button label='筛选' onTap={() => { }} />} />
     </Container.Page>
   ))
 
@@ -97,7 +100,7 @@ storiesOf('TabBar', module).addWithInfo('TabBar', '', () => (
       <TabBar.Item iconName={icons.Printer}>
         <div>2222</div>
       </TabBar.Item>
-      <TabBar.Item label='bbbbb'  iconName={icons.User} selected={true}>
+      <TabBar.Item label='bbbbb' iconName={icons.User} selected={true}>
         <div>33333</div>
       </TabBar.Item>
     </TabBar>
