@@ -6,7 +6,7 @@ import { List, Button, Container, NavBar, TabBar, Icon } from '../src/components
 import { WithNotes } from '@kadira/storybook-addon-notes';
 import { BaseAlert } from '../src/actions/common';
 import * as icons from "../src/utils/icons";
-import { withKnobs, text, boolean, number } from '@kadira/storybook-addon-knobs';
+import { withKnobs, text, boolean, number, select } from '@kadira/storybook-addon-knobs';
 
 storiesOf('Welcome', module)
   .add('to Storybook', () => (
@@ -90,19 +90,30 @@ storiesOf('Alert', module).addWithInfo('BaseAlert', '', () => (
     <Button.Submit label='按钮232' />
   </Root>
 ));
-storiesOf('TabBar', module).addWithInfo('TabBar', '', () => (
-  <Root>
-    <NavBar label='头部标题' />
-    <TabBar>
-      <TabBar.Item label='aaaaa' iconName={icons.Email}>
-        <div>111</div>
-      </TabBar.Item>
-      <TabBar.Item iconName={icons.Printer}>
-        <div>2222</div>
-      </TabBar.Item>
-      <TabBar.Item label='bbbbb' iconName={icons.User} selected={true}>
-        <div>33333</div>
-      </TabBar.Item>
-    </TabBar>
-  </Root>
-));
+
+const tabbarLabel = '选中项';
+const tabbaroptions = {
+  111: '左',
+  222: '中',
+  333: '右'
+}
+const tabdefaultValue = '222'
+
+storiesOf('TabBar', module)
+  .addDecorator(withKnobs)
+  .addWithInfo('TabBar', '', () => (
+    <Root>
+      <NavBar label='头部标题' />
+      <TabBar>
+        <TabBar.Item label='aaaaa' iconName={icons.Email} selected={111 == select(tabbarLabel, tabbaroptions, tabdefaultValue)}>
+          <div>111</div>
+        </TabBar.Item>
+        <TabBar.Item iconName={icons.Printer} selected={222 == select(tabbarLabel, tabbaroptions, tabdefaultValue)}>
+          <div>2222</div>
+        </TabBar.Item>
+        <TabBar.Item label='bbbbb' iconName={icons.User} selected={333 == select(tabbarLabel, tabbaroptions, tabdefaultValue)}>
+          <div>33333</div>
+        </TabBar.Item>
+      </TabBar>
+    </Root>
+  ));
