@@ -7,6 +7,7 @@ import { WithNotes } from '@kadira/storybook-addon-notes';
 import { BaseAlert } from '../src/actions/common';
 import * as icons from "../src/utils/icons";
 import { withKnobs, text, boolean, number, select } from '@kadira/storybook-addon-knobs';
+import Spring from '../src/components/spring';
 
 storiesOf('Welcome', module)
   .add('to Storybook', () => (
@@ -116,4 +117,10 @@ storiesOf('TabBar', module)
         </TabBar.Item>
       </TabBar>
     </Root>
+  ));
+storiesOf('惯性运动', module)
+  .addWithInfo('惯性运动', '', () => (
+    <div>
+      <Spring />
+    </div>
   ));
