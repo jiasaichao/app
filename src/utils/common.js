@@ -37,7 +37,7 @@ class Styles {
         // }
         // return tmp;
 
-        let tmp={}
+        let tmp = {}
         for (var i = 0; i < s.length; i++) {
             let properties = s[i];
             for (var p in properties) {
@@ -46,7 +46,7 @@ class Styles {
                 }
             }
         }
-        return {...this.o,...tmp}
+        return { ...this.o, ...tmp }
     }
 }
 /**处理class样式 */
@@ -126,8 +126,34 @@ const className = {
     spczjz: ' display-flex justify-content align-items ',
     czjz: ' display-flex align-items ',
 }
-const Global = { styles, className };
+/**
+ * 设备信息
+ */
+const Device = {
+    /**系统名称:Android,IOS,Other*/
+    OS: function () {
+        var u = navigator.userAgent;
+        if (u.indexOf('Android') > -1 || u.indexOf('Adr') > -1) {
+            return 'Android';
+        }
+        else if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
+            return 'IOS';
+        }
+        else {
+            return 'Other';
+        }
+    }(),
+    IsMobile: function () {
+        if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }()
+};
+const Global = { styles, className,Device };
 
 
-export {Common};
-export {Global};
+export { Common };
+export { Global };
