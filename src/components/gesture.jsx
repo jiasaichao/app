@@ -68,7 +68,7 @@ export class Touchable extends React.Component {
             className += ' ' + this.props.classBase + '-inactive';
         }
         return (
-            <div style={styles.root.o} className={className} onTouchStart={this._touchStart} onMouseDown={this._touchStart} onMouseUp={this._touchEnd} onMouseMove={this._touchMove} onTouchMove={this._touchMove} onTouchEnd={this._touchEnd}>
+            <div style={styles.root.o} className={className} onTouchStart={this.touchStart} onMouseDown={this.mouseDown} onMouseUp={this.mouseUp} onMouseMove={this.mouseMove} onTouchMove={this.touchMove} onTouchEnd={this.touchEnd}>
                 {this.props.children}
             </div>
         );
@@ -88,7 +88,31 @@ export class Touchable extends React.Component {
         if (!eventHandler) return;
         eventHandler(e);
     }
-    _touchStart = (e) => {
+    mouseDown=(e)=>{
+        if(Global.Device.IsMobile)return;
+        this.start(e);
+    }
+    mouseMove=(e)=>{
+        if(Global.Device.IsMobile)return;
+        this.move(e);
+    }
+    mouseUp=(e)=>{
+        if(Global.Device.IsMobile)return;
+        this.end(e);
+    }
+    touchStart=(e)=>{
+        if(!Global.Device.IsMobile)return;
+        this.start(e);
+    }
+    touchMove=(e)=>{
+        if(!Global.Device.IsMobile)return;
+        this.move(e);
+    }
+    touchEnd=(e)=>{
+        if(!Global.Device.IsMobile)return;
+        this.end(e);
+    }
+    start = (e) => {
         this._emitEvent("onTouchStart", e);
         if (e.touches && e.touches.length > 1) {
             let point1 = e.touches[0];
@@ -117,7 +141,7 @@ export class Touchable extends React.Component {
             this.setState({ tapActive: true });
         }
     }
-    _touchMove = (e) => {
+    move = (e) => {
         this._emitEvent("onTouchMove", e);
         if (this.props.preventDefault) {
             e.preventDefault();
@@ -187,7 +211,7 @@ export class Touchable extends React.Component {
         }
 
     }
-    _touchEnd = (e) => {
+    end = (e) => {
         this._emitEvent("onTouchEnd", e);
         this.events.forEach((v) => {
             this._emitEvent(v, e)
