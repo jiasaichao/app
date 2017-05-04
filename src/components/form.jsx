@@ -27,7 +27,7 @@ export class Input extends React.Component {
         if (this.props.leftImg) {
 
         } else if (this.props.leftIcon) {
-            left = <Icon.Normal style={{ fill: '#000', width: '.4rem', height: '.4rem' }} iconName={this.props.leftIcon} />
+            left = <Icon style={{ fill: '#000', width: '.4rem', height: '.4rem' }} iconName={this.props.leftIcon} />
         }
         return (
             <div className={CN.czjz} style={styles.root.o}>
@@ -92,7 +92,7 @@ export class Switch extends React.Component {
         if (this.props.leftImg) {
 
         } else if (this.props.leftIcon) {
-            left = <Icon.Normal style={{ fill: '#000', width: '.4rem', height: '.4rem' }} iconName={this.props.leftIcon} />
+            left = <Icon style={{ fill: '#000', width: '.4rem', height: '.4rem' }} iconName={this.props.leftIcon} />
         }
         return (
             <div className={CN.czjz} style={styles.root.o}>
