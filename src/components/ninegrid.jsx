@@ -10,7 +10,8 @@ let CN = Global.className;
  * iconStyle:如果item会覆盖这个style， fill: 'blue',width,height
  * borderColor:边框颜色
  */
-export class Root extends React.Component {
+export default class NinegGrid extends React.Component {
+    static Item = Item;
     constructor(props) {
         super(props);
     }
@@ -19,7 +20,7 @@ export class Root extends React.Component {
         let styles={
             root:SL.create({}).merge(this.props.style)
         }
-        let childrenItem = this.props.children.filter((item) => { return item.type.name === 'Item' });
+        let childrenItem = this.props.children.filter((item) => {return item.type.name === 'Item'});
         /**需要补齐的个数 */
         let completion = this.props.column - (childrenItem.length % this.props.column);
         let content = [];
@@ -36,7 +37,7 @@ export class Root extends React.Component {
                 delete style.borderTop;
             }
             //加入
-            let tItem = React.cloneElement(item, { style: style, key: index, iconStyle: this.props.iconStyle });
+            let tItem = <NinegGridItem label={item.props.label} iconName={item.props.iconName} style={style} key= {index} iconStyle={this.props.iconStyle}/>;
             list.push(tItem);
             //每行最后一列
             if ((index + 1) % this.props.column === 0) {
@@ -65,10 +66,25 @@ export class Root extends React.Component {
     }
 
 }
-Root.defaultProps = {
+NinegGrid.displayName = 'NinegGrid';
+NinegGrid.propTypes = {
+    column: React.PropTypes.number.isRequired,
+    borderColor: React.PropTypes.string,
+    iconStyle: React.PropTypes.object,
+};
+NinegGrid.propInfo = {
+    column: '列数',
+    iconStyle: "如果item会覆盖这个style， fill: 'blue',width,height",
+    borderColor: '边框颜色',
+}
+NinegGrid.defaultProps = {
     /**列数 */
     column: 3,
     borderColor: '#ccc'
+}
+
+function Item({iconName,iconStyle,label,style}){
+
 }
 /**
  * iconName
@@ -77,7 +93,7 @@ Root.defaultProps = {
  * style:fill: 'blue',width,height
  * 
  */
-export class Item extends React.Component {
+export class NinegGridItem extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -112,7 +128,7 @@ export class Item extends React.Component {
         return (
             <div style={styles.root.o}>
                 <Gesture.Touchable classBase='Tappable-bg'  style={styles.content.o}>
-                    <Icon.Normal style={styles.iconStyle.o} iconName={this.props.iconName}/>
+                    <Icon style={styles.iconStyle.o} iconName={this.props.iconName}/>
                     <span style={{ fontSize: '.32rem' }}>{this.props.label}</span>
                 </Gesture.Touchable>
 
@@ -124,4 +140,20 @@ export class Item extends React.Component {
     componentDidMount() {
         //this.setState({ optionWidth: this.refs.option.clientWidth });
     }
+}
+
+Item.displayName = 'NinegGrid.Item';
+Item.propTypes = {
+    label:React.PropTypes.string,
+    iconName: React.PropTypes.string.isRequired,
+    style: React.PropTypes.object,
+    iconStyle: React.PropTypes.object,
+};
+Item.propInfo = {
+    label: '名称',
+    iconName: "iconName",
+    style: "fill: 'blue',width,height",
+    iconStyle:'icon 的样式'
+}
+Item.defaultProps = {
 }

@@ -7,7 +7,7 @@ import * as Form from "./form";
 import * as Common from "./common";
 import * as Dialog from "./dialog";
 import * as Slider from "./slider";
-import * as NineGrid from "./ninegrid";
+import NineGrid from "./ninegrid";
 import * as Container from "./container";
 import * as Gesture from "./gesture";
 import * as Animate from "./animate";

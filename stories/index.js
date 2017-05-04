@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf, action, linkTo } from '@kadira/storybook';
 import Welcome from './Welcome';
 import { Root } from '../src/components/root';
-import { List, Button, Container, NavBar, TabBar, Icon } from '../src/components';
+import { List, Button, Container, NavBar, TabBar, Icon, NineGrid } from '../src/components';
 import { WithNotes } from '@kadira/storybook-addon-notes';
 import { BaseAlert } from '../src/actions/common';
 import * as icons from "../src/utils/icons";
@@ -89,6 +89,35 @@ storiesOf('Alert', module).addWithInfo('BaseAlert', '', () => (
       BaseAlert('标题', '内容');
     }} label='按钮222' />
     <Button.Submit label='按钮232' />
+  </Root>
+));
+storiesOf('NineGrid', module).addWithInfo('NineGrid', '', () => (
+  <Root>
+    <NavBar />
+    <NineGrid iconStyle={{ fill: '#d80e40' }}>
+      <NineGrid.Item iconName={icons.Email} label='标题1' />
+      <NineGrid.Item iconName={icons.Printer} label='标题2' />
+      <NineGrid.Item iconName={icons.User} label='标题3' />
+      <NineGrid.Item iconName={icons.Chat} label='标题1' />
+      <NineGrid.Item iconName={icons.Refresh} label='标题2' />
+      <NineGrid.Item iconName={icons.Shopping} label='标题3' />
+      <NineGrid.Item iconName={icons.Chevron_Right} label='标题1' />
+      <NineGrid.Item iconName={icons.Chevron_Up} label='标题2' />
+      <NineGrid.Item iconName={icons.Chevron_Down} label='标题3' />
+      <NineGrid.Item iconName={icons.Chevron_Down} label='标题3' />
+    </NineGrid>
+    <NineGrid column={5} iconStyle={{ fill: '#d80e40' }}>
+      <NineGrid.Item iconName={icons.Email} label='标题1' />
+      <NineGrid.Item iconName={icons.Printer} label='标题2' />
+      <NineGrid.Item iconName={icons.User} label='标题3' />
+      <NineGrid.Item iconName={icons.Chat} label='标题1' />
+      <NineGrid.Item iconName={icons.Refresh} label='标题2' />
+      <NineGrid.Item iconName={icons.Shopping} label='标题3' />
+      <NineGrid.Item iconName={icons.Chevron_Right} label='标题1' />
+      <NineGrid.Item iconName={icons.Chevron_Up} label='标题2' />
+      <NineGrid.Item iconName={icons.Chevron_Down} label='标题3' />
+      <NineGrid.Item iconName={icons.Chevron_Down} label='标题3' />
+    </NineGrid>
   </Root>
 ));
 

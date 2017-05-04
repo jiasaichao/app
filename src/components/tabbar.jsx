@@ -24,7 +24,19 @@ function TabItem({onTap, label, iconName, color}) {
 export function Item({label,selected,onTap,iconName}){
 
 }
-
+Item.displayName = 'TabBar.Item';
+Item.propTypes = {
+    label: React.PropTypes.string,
+    selected: React.PropTypes.bool,
+    onTap: React.PropTypes.func,
+    iconName: React.PropTypes.string,
+};
+Item.propInfo = {
+    label: '名称',
+    selected: '是否选中',
+    onTap: 'onTap',
+    iconName: 'icon名称',
+};
 /**
  * style
  * background
