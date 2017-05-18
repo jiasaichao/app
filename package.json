@@ -1,47 +1,34 @@
 {
-  "name": "jscreact",
+  "name": "jscapp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server",
     "build": "webpack --config webpack.config.prod.js",
-    "start": "webpack-dev-server --inline --hot --port 8094 --content-base dev/ --host 0.0.0.0",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook -s ./public -p 6006",
-    "build-storybook": "build-storybook"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiasaichao/app.git"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@kadira/react-storybook-addon-info": "^3.3.0",
-    "@kadira/storybook": "^2.21.0",
-    "@kadira/storybook-addon-knobs": "^1.7.1",
-    "@kadira/storybook-addon-notes": "^1.0.1",
-    "babel-core": "^6.13.2",
-    "babel-loader": "^6.2.4",
-    "source-map-loader": "^0.1.5",
-    "svg-sprite-loader": "^0.0.26",
-    "ts-loader": "^0.8.2",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.16.2"
+  "bugs": {
+    "url": "https://github.com/jiasaichao/app/issues"
   },
+  "homepage": "https://github.com/jiasaichao/app#readme",
   "dependencies": {
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.13.2",
-    "babel-preset-react": "^6.11.1",
-    "babel-preset-stage-0": "^6.5.0",
-    "lodash": "^4.13.1",
-    "react": "^15.4.2",
-    "react-addons-create-fragment": "^15.4.2",
-    "react-addons-css-transition-group": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-motion": "^0.4.7",
-    "react-redux": "^4.4.5",
-    "react-router": "^2.4.1",
-    "react-router-redux": "^4.0.5",
-    "react-tappable": "^0.8.3",
-    "redux": "^3.5.2",
-    "redux-thunk": "^2.1.0",
-    "terminal": "^0.1.4"
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^2.5.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }
