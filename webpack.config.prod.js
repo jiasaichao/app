@@ -1,14 +1,15 @@
 var webpack = require('webpack');
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: {
         index: "./src/index.jsx",
-        //vendor: ['react', 'react-dom', 'react-router']
+        vendor: ['react', 'react-dom']
     },
     output: {
-        path: path.resolve(__dirname, './build/prod/js'),
+        path: path.resolve(__dirname, './build/prod'),
         publicPath: '/',
-        filename: '[name].bundle.js'
+        filename: 'js/[name].bundle.js'
     },
     // output: {
     //     path: path.resolve(__dirname, './wwwroot/js'),
@@ -25,6 +26,9 @@ module.exports = {
     // Enable sourcemaps for debugging webpack's output.
     //devtool: "source-map",
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['vendor'/*,'manifest'*/],
+        }),
         // js 压缩
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,    // 不美化输出
@@ -39,6 +43,10 @@ module.exports = {
             space_colon: false,
             comments: false     // 不保留注释
         }),
+        new HtmlWebpackPlugin({
+            template:path.resolve(__dirname, './src/template/index.html'),
+            inject:'body'
+        })
     ],
     resolve: {
         // 用于查找模块的目录
