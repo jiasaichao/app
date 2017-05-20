@@ -1,8 +1,18 @@
 //babel配置文件，不需要做修改，因为都配置好了
 {
   "presets": [
-    "latest",
+    [
+      //配置为latest的时候热更新不起作用
+      "es2015",
+      {
+        "modules": false
+      }
+    ],
     "react"
+  ],
+  "plugins": [
+    "react-hot-loader/babel"
+    // 开启 React 代码的模块热替换(HMR)
   ],
   // "plugins": [
   //   "transform-decorators-legacy",
@@ -15,7 +25,9 @@
       //"presets": ["react-hmre"]
     },
     "test": {
-      "plugins": ["transform-es2015-modules-commonjs"]
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ]
     }
   }
 }

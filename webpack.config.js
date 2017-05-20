@@ -5,7 +5,22 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 const ip = require('ip').address();
 module.exports = {
     entry: {
-        index: "./src/index.jsx",
+        index: [
+            'react-hot-loader/patch',
+            // 开启 React 代码的模块热替换(HMR)
+
+            'webpack-dev-server/client?http://' + ip + ':8090',
+            // 为 webpack-dev-server 的环境打包代码
+            // 然后连接到指定服务器域名与端口，可以换成本机ip
+
+            'webpack/hot/only-dev-server',
+            // 为热替换(HMR)打包好代码
+            // only- 意味着只有成功更新运行代码才会执行热替换(HMR)
+
+
+            './src/dev.jsx'
+            // 我们 app 的入口文件
+        ],
         vendor: ['react', 'react-dom']
     },
     output: {
@@ -83,6 +98,11 @@ module.exports = {
                 include: path.resolve(__dirname, './src'),
                 loader: 'babel-loader'
             },
+            // {
+            //     test: /\.(js|jsx)$/,
+            //     use: ["source-map-loader"],
+            //     enforce: "pre"
+            // }
             // {   // 向应用特定文件中注入变量，应用中可以直接使用 baseUrl
             //     test: require.resolve(defPath.REQUEST_PATH),
             //     loader: 'imports-loader?baseUrl=>' + JSON.stringify(API[process.env.NODE_ENV || 'development'])
