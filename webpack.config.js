@@ -1,12 +1,15 @@
 var webpack = require('webpack');
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+// `npm install ip` 获取本机 ip 用于配置服务器
+const ip = require('ip').address();
 module.exports = {
     entry: {
         index: "./src/index.jsx",
-        //vendor: ['react', 'react-dom', 'react-router']
+        vendor: ['react', 'react-dom']
     },
     output: {
-        path: path.resolve(__dirname, './build/dev/js'),
+        path: path.resolve(__dirname, './build/dev'),
         publicPath: '/',
         filename: '[name].bundle.js'
     },
@@ -23,13 +26,26 @@ module.exports = {
     //     }),
     // ],
     // Enable sourcemaps for debugging webpack's output.
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['vendor'/*,'manifest'*/],
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, './src/template/index.html'),
+            inject: 'body'
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        // 开启全局的模块热替换(HMR)
+        new webpack.NamedModulesPlugin(),
+        // 当模块热替换(HMR)时在浏览器控制台输出对用户更友好的模块名字信息
+    ],
     devtool: "source-map",
     devServer: {    // 开启服务器
         contentBase: path.resolve(__dirname, './build/dev'),
         publicPath: '/',
         historyApiFallback: true,
         clientLogLevel: 'none',
-        host: '0.0.0.0',
+        host: ip,
         port: 8090,
         open: true,
         hot: true,
@@ -43,7 +59,7 @@ module.exports = {
             chunks: false
         }
     },
-    resolve: {   
+    resolve: {
         // 用于查找模块的目录
         extensions: [
             '.js', '.json', '.jsx'
