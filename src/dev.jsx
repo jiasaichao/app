@@ -27,7 +27,6 @@ if (module.hot && process.env.NODE_ENV !== 'production') {
         if (err) {
             console.log(err);
         }
-        console.log('重新渲染2');
         // 从DOM 中移除已经挂载的 React 组件 然后重装
         ReactDOM.unmountComponentAtNode(document.getElementById('app'));
         render(Index);
