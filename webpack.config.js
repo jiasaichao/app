@@ -21,7 +21,7 @@ module.exports = {
             './src/dev.jsx'
             // 我们 app 的入口文件
         ],
-        vendor: ['react', 'react-dom']
+        vendor: ['react', 'react-dom', 'react-router-dom', 'react-hot-loader']
     },
     output: {
         path: path.resolve(__dirname, './build/dev'),
@@ -98,6 +98,14 @@ module.exports = {
                 include: path.resolve(__dirname, './src'),
                 loader: 'babel-loader'
             },
+            {
+                test: /\.svg$/,
+                loader: 'svg-sprite-loader',
+                include: path.resolve(__dirname, './src/assets/svg'),
+                // options: {
+                //     runtimeCompat: true
+                // }
+            }
             // {
             //     test: /\.(js|jsx)$/,
             //     use: ["source-map-loader"],
