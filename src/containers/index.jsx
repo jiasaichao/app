@@ -1,5 +1,6 @@
 import React from 'react';
 import * as icons from '../utils/icons';
+import { Icon } from '../components'
 import {
     BrowserRouter as Router,
     Route,
