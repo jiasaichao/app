@@ -11,6 +11,9 @@ module.exports = {
     rules: [{
       test: /\.md$/,
       loader: "raw-loader"
+    },{
+      test: /\.css$/,
+      loader: "css-loader"
     }]
   }
 };

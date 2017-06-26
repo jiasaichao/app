@@ -26,3 +26,7 @@
 │   └── template             # 模板文件生成build用
 └── tests                    # 单元测试
 ```
+## 启动程序
+* 组件开发`npm run storybook`
+* 项目调试`npm run start`
+* 项目发布`npm run build`
