@@ -1,4 +1,4 @@
-﻿
+﻿import React from 'react';
 import { Provider } from 'react-redux';
 import { IndexRoute, Router, Route, hashHistory, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer} from 'react-router-redux'
@@ -25,7 +25,8 @@ import ImageCropPage from "./containers/imagecrop";
 import {store} from './store';
 //const history = syncHistoryWithStore(hashHistory, store);
 //store.subscribe(()=>{console.log('改变了')})
-let appRootComponent = (
+function appRootComponent(){
+    return (
     <Provider store = {store}>
          <Router history={hashHistory}>
         <Route path="/" component={App}>
@@ -45,6 +46,6 @@ let appRootComponent = (
             {/*404, <NotFoundRoute handler={CourseRouteNotFound} /> NotFoundRoute这个好像也行*/}
             <Route path="*" component={NotFound}></Route>
              </Router>
-        </Provider>
-)
+        </Provider>)
+}
 export default appRootComponent;

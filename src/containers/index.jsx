@@ -7,7 +7,7 @@ let Index = React.createClass({
         return (
             <Container.Page>
                 <NavBar label="首页" back={false}></NavBar>
-                <List.Link label='列表' href='/list'></List.Link>
+                <List.Link label='列表2' href='/list'></List.Link>
                 <List.Link label='表单' href='/form'></List.Link>
                 <List.Link label='对话框' href='/dialog'></List.Link>
                 <List.Link label='轮播' href='/slider'></List.Link>

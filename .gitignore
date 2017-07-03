@@ -6,5 +6,7 @@
 node_modules/
 /wwwroot/js/index.bundle.js
 /wwwroot/js/index.bundle.js.map
+/wwwroot/js/vendor.bundle.js
+/wwwroot/js/vendor.bundle.js.map
 /dev/js/index.bundle.js
 /dev/js/index.bundle.js.map
