@@ -1,6 +1,9 @@
 
 /**手势gesture*/
-import React from 'react';
+import React, { Component } from 'react';
+import { Common, Global } from "../utils/common";
+let SL = Global.styles;
+let CN = Global.className;
 /**
  * 触摸高亮有onTap事件
  * style
@@ -24,7 +27,7 @@ import React from 'react';
  * preventDefault
  * stopPropagation
  * */
-export class Touchable extends React.Component {
+export default class Touchable extends Component {
     constructor(props) {
         super(props)
         this.startX = null;
@@ -81,28 +84,28 @@ export class Touchable extends React.Component {
         if (!eventHandler) return;
         eventHandler(e);
     }
-    mouseDown=(e)=>{
-        if(Global.Device.IsMobile)return;
+    mouseDown = (e) => {
+        if (Global.Device.IsMobile) return;
         this.start(e);
     }
-    mouseMove=(e)=>{
-        if(Global.Device.IsMobile)return;
+    mouseMove = (e) => {
+        if (Global.Device.IsMobile) return;
         this.move(e);
     }
-    mouseUp=(e)=>{
-        if(Global.Device.IsMobile)return;
+    mouseUp = (e) => {
+        if (Global.Device.IsMobile) return;
         this.end(e);
     }
-    touchStart=(e)=>{
-        if(!Global.Device.IsMobile)return;
+    touchStart = (e) => {
+        if (!Global.Device.IsMobile) return;
         this.start(e);
     }
-    touchMove=(e)=>{
-        if(!Global.Device.IsMobile)return;
+    touchMove = (e) => {
+        if (!Global.Device.IsMobile) return;
         this.move(e);
     }
-    touchEnd=(e)=>{
-        if(!Global.Device.IsMobile)return;
+    touchEnd = (e) => {
+        if (!Global.Device.IsMobile) return;
         this.end(e);
     }
     start = (e) => {
