@@ -30,3 +30,10 @@
 * 组件开发`npm run storybook`
 * 项目调试`npm run start`
 * 项目发布`npm run build`
+## 环境配置
+### ESLint 代码检查
+1. 安装ESLint 扩展
+2. 安装ESLint    
+`npm install eslint --save-dev`
+3. 配置ESLint(eslintrc.js)    
+[官方文档](http://eslint.cn/docs/user-guide/configuring)

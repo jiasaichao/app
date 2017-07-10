@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import Touchable from './touchable'
+import Touchable from './touchable';
+import { Common, Global } from "../utils/common";
+
 
 export class List extends Component {
     render() {
-        let {width, height, iconName, color} = this.props;
+        let { width, height, iconName, color } = this.props;
         let styles = {
             style: Global.styles.create({ fill: color, width, height }).merge(this.props.style)
         };
@@ -13,7 +15,8 @@ export class List extends Component {
             </Touchable>
         );
     }
-    handleClick=()=>{
+    // @flow
+    handleClick = (aaa: string) => {
         if (this.props.href) {
             //console.log('执行了list点击');
             //hashHistory.push(this.props.href);
@@ -26,7 +29,7 @@ export class List extends Component {
 
 class ListBase extends Component {
     render() {
-        let {width, height, iconName, color} = this.props;
+        let { width, height, iconName, color } = this.props;
         let styles = {
             style: Global.styles.create({ fill: color, width, height }).merge(this.props.style)
         };
@@ -36,7 +39,7 @@ class ListBase extends Component {
             </Touchable>
         );
     }
-    click=()=>{
+    click = () => {
         if (this.props.href) {
             //console.log('执行了list点击');
             //hashHistory.push(this.props.href);

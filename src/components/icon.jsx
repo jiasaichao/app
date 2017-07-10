@@ -1,5 +1,5 @@
 import { Common, Global } from "../utils/common";
-import  React from 'react';
+import React from 'react';
 import * as icons from '../utils/icons';
 /**图标 */
 /**正常图标 
@@ -11,7 +11,7 @@ import * as icons from '../utils/icons';
 */
 export class Icon1 extends React.Component {
     render() {
-        let {width, height, iconName, color} = this.props;
+        let { width, height, iconName, color } = this.props;
         let styles = {
             style: Global.styles.create({ fill: color, width, height }).merge(this.props.style)
         };
@@ -22,7 +22,7 @@ export class Icon1 extends React.Component {
         );
     }
 }
-export function Icon({width, height, iconName, color,style}) {
+export function Icon({ width, height, iconName, color, style }) {
     let styles = {
         style: Global.styles.create({ fill: color, width, height }).merge(style)
     };
@@ -38,10 +38,10 @@ Icon.defaultProps = {
 }
 Icon.propTypes = {
     iconName: React.PropTypes.string.isRequired,
-    width:React.PropTypes.string,
-    height:React.PropTypes.string,
-    color:React.PropTypes.string,
-    style:React.PropTypes.object,
+    width: React.PropTypes.string,
+    height: React.PropTypes.string,
+    color: React.PropTypes.string,
+    style: React.PropTypes.object,
 };
 Icon.propInfo = {
     iconName: 'icon名称，通过import * as icons from "../src/utils/icons"引入',
