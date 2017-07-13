@@ -80,10 +80,10 @@ const styles = {
     (t, r, b, l) => {
         //console.log(t !== null);
         let ret = Common.prepareStyles({ position: 'absolute' });
-        if (t !== null) { ret.merge({ top: t }) };
-        if (r !== null) { ret.merge({ right: r }) };
-        if (b !== null) { ret.merge({ bottom: b }) };
-        if (l !== null) { ret.merge({ left: l }) };
+        if (t !== null) { ret.merge({ top: t }) }
+        if (r !== null) { ret.merge({ right: r }) }
+        if (b !== null) { ret.merge({ bottom: b }) }
+        if (l !== null) { ret.merge({ left: l }) }
         return ret.o;
     },
 
@@ -136,7 +136,7 @@ const Device = {
         if (u.indexOf('Android') > -1 || u.indexOf('Adr') > -1) {
             return 'Android';
         }
-        else if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
+        else if (u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
             return 'IOS';
         }
         else {
@@ -152,7 +152,7 @@ const Device = {
         }
     }()
 };
-const Global = { styles, className,Device };
+const Global = { styles, className, Device };
 
 
 export { Common };
