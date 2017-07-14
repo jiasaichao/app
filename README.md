@@ -31,6 +31,7 @@
 * 项目调试`npm run start`
 * 项目发布`npm run build`
 ## 环境配置
+[React开发，在VS Code中配置ESLint, Prettier, and Flow](http://www.zcfy.cc/article/configure-eslint-prettier-and-flow-in-vs-code-for-react-development-2962.html)
 ### ESLint 代码检查
 1. 安装ESLint 扩展
 2. 安装ESLint    
