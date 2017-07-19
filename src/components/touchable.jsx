@@ -43,7 +43,7 @@ export default class Touchable extends Component {
         }
     }
     /** 勾股定理计算距离*/
-    _getDistance(xLen, yLen) {
+    _getDistance(xLen:number, yLen:number) {
         return Math.sqrt(xLen * xLen + yLen * yLen);
     }
     _offsetX = () => {

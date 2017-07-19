@@ -5,6 +5,23 @@ class Common {
     static prepareStyles(s) {
         return new Styles(s);
     }
+    /**
+     * classname的helper函数，合并classname
+     * @param {*} classname 
+     * @returns 合并后的classname
+     */
+    static classnames(...name) {
+        var refStr = '';
+        //var classNameArray = [];
+        name.forEach(function (value) {
+            value.split(' ').forEach(function (classNameItem) {
+                if (classNameItem !== '') {
+                    refStr+=' '+classNameItem;
+                }
+            });
+        });
+        return refStr;
+    }
 }
 class Styles {
     constructor(style) {
