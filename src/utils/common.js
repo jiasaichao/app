@@ -6,7 +6,7 @@ class Common {
         return new Styles(s);
     }
     /**
-     * classname的helper函数，合并classname
+     * classname的helper函数，合并classname,现在只支持字符串。
      * @param {*} classname 
      * @returns 合并后的classname
      */

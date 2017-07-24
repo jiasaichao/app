@@ -12,6 +12,8 @@ import withReadme from 'storybook-readme/with-readme';
 import Page from '../src/components/page'
 import Touchable from '../src/components/touchable'
 
+import {List} from '../src/components/list'
+
 import Button from './Button';
 import Welcome from './Welcome';
 document.getElementById('')
@@ -37,7 +39,7 @@ storiesOf('欢迎使用', module)
   .add('结构', withReadme(welcomedoc, () => <Page><p>布局在一个100%宽和高，且溢出隐藏的body里，为了方便与统一布局</p></Page>));
 
 storiesOf('List(列表)', module).addDecorator(withKnobs)
-  .add('Base', withReadme(ButtonReadme, () => <Button onClick={action('clicked')}>Hello Button {text('Label', 'Hello Button')}</Button>))
+  .add('Base', withReadme(ButtonReadme, () => <List label='我的信息' />))
   .add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
 
 storiesOf('Button', module).addDecorator(withKnobs)

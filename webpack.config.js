@@ -3,13 +3,14 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 // `npm install ip` 获取本机 ip 用于配置服务器
 const ip = require('ip').address();
+const port = '8099';
 module.exports = {
     entry: {
         index: [
             'react-hot-loader/patch',
             // 开启 React 代码的模块热替换(HMR)
 
-            'webpack-dev-server/client?http://' + ip + ':8090',
+            'webpack-dev-server/client?http://' + ip + ':' + port,
             // 为 webpack-dev-server 的环境打包代码
             // 然后连接到指定服务器域名与端口，可以换成本机ip
 
@@ -61,7 +62,7 @@ module.exports = {
         historyApiFallback: true,
         clientLogLevel: 'none',
         host: ip,
-        port: 8090,
+        port: port,
         open: true,
         hot: true,
         inline: true,

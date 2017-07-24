@@ -14,6 +14,9 @@ module.exports = {
     },{
       test: /\.css$/,
       loader: "css-loader"
+    },{
+      test: /\.svg$/,
+      loader: "svg-sprite-loader"
     }]
   }
 };
