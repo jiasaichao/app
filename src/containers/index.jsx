@@ -1,6 +1,7 @@
 import React from 'react';
 import * as icons from '../utils/icons';
 import { Icon } from '../components'
+import App from './app';
 import {
     BrowserRouter as Router,
     Route,
@@ -20,8 +21,7 @@ export default class Index extends React.Component {
                             <use xlinkHref={`#${icons.Chat.id}`}></use>
                         </svg>
                     </div>
-                    <Route exact path="/" component={Home} />
-                    <Route path="/about" component={About} />
+                    <App />
                 </div>
             </Router>
         );
