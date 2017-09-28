@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Touchable from './touchable';
+import {Touchable} from './touchable';
 import { Icon } from './icon';
 import { Flex, Placeholder } from './layout';
 import { Common, Global } from "../utils/common";

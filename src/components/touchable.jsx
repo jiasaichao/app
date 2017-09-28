@@ -2,6 +2,7 @@
 /**手势gesture*/
 import React, { Component } from 'react';
 import { Common, Global } from "../utils/common";
+import { Flex } from './layout'
 let SL = Global.styles;
 let CN = Global.className;
 /**
@@ -27,7 +28,7 @@ let CN = Global.className;
  * preventDefault
  * stopPropagation
  * */
-export default class Touchable extends Component {
+export class TouchableBase extends Component {
     constructor(props) {
         super(props)
         this.startX = null;
@@ -39,11 +40,12 @@ export default class Touchable extends Component {
 
         this.events = new Set();
         this.state = {
+            //选中状态，如果classBase为"none"则不动
             tapActive: false
         }
     }
     /** 勾股定理计算距离*/
-    _getDistance(xLen:number, yLen:number) {
+    _getDistance(xLen: number, yLen: number) {
         return Math.sqrt(xLen * xLen + yLen * yLen);
     }
     _offsetX = () => {
@@ -63,11 +65,29 @@ export default class Touchable extends Component {
         } else {
             className += ' ' + this.props.classBase + '-inactive';
         }
-        return (
-            <div style={styles.root.o} className={className} onTouchStart={this.touchStart} onMouseDown={this.mouseDown} onMouseUp={this.mouseUp} onMouseMove={this.mouseMove} onTouchMove={this.touchMove} onTouchEnd={this.touchEnd}>
-                {this.props.children}
-            </div>
-        );
+        let props = {
+            onTouchStart: this.touchStart,
+            onMouseDown: this.mouseDown,
+            onMouseUp: this.mouseUp,
+            onMouseMove: this.mouseMove,
+            onTouchMove: this.touchMove,
+            onTouchEnd: this.touchEnd
+        }
+        if (this.props.flex) {
+            return (
+                <Flex className={className} column={this.props.column} flex1={this.props.flex1} horizontal={this.props.horizontal}
+                    HW={this.props.HW} style={this.props.style} vertical={this.props.vertical} other={props}>
+                    {this.props.children}
+                </Flex>
+            )
+        } else {
+            return (
+                <div style={styles.root.o} className={className} {...props}>
+                    {this.props.children}
+                </div>
+            );
+        }
+
     }
     componentWillMount() {
     }
@@ -134,6 +154,11 @@ export default class Touchable extends Component {
 
 
             this.events.add('onTap');
+            this.showTapActive();
+        }
+    }
+    showTapActive = () => {
+        if (this.props.classBase !== 'none') {
             this.setState({ tapActive: true });
         }
     }
@@ -172,7 +197,7 @@ export default class Touchable extends Component {
                 this.clientX = e.clientX;
                 this.clientY = e.clientY;
             }
-            if (Math.abs(this._offsetX()) > this.props.tapLength || Math.abs(this._offsetY()) > this.props.tapLength) {
+            if ((Math.abs(this._offsetX()) > this.props.tapLength || Math.abs(this._offsetY()) > this.props.tapLength) && this.state.tapActive) {
                 this.events.delete('onTap');
                 this.setState({ tapActive: false });
             }
@@ -224,7 +249,7 @@ export default class Touchable extends Component {
         this.setState({ tapActive: false });
     }
 }
-Touchable.defaultProps = {
+TouchableBase.defaultProps = {
     classBase: 'Tappable',
     tapLength: 20,
     swiperLength: 40,
@@ -232,4 +257,78 @@ Touchable.defaultProps = {
         maxScale: 10000,
         minScale: 0.001
     }
+}
+
+export function Touchable({ style, className, classBase, children, push }) {
+    let props = {};
+    if (style) {
+        props.style = style;
+    }
+    if (className) {
+        props.className = className;
+    }
+    if (classBase) {
+        props.classBase = classBase;
+    }
+    if (push) {
+        props.push = push;
+    }
+    return (
+        <TouchableBase {...props} >
+            {children}
+        </TouchableBase>
+    );
+}
+export function TouchableFlex({ children, className = '', style, column, horizontal, vertical, HW, flex1, other, onTap, classBase, push }:
+    {
+/***/className: string,
+/***/style: any,
+/**是否为垂直排列，加上这个属性为垂直排列*/column: boolean,
+/**水平居中对齐*/horizontal: boolean,
+/**垂直居中对齐*/vertical: boolean,
+/**水平和垂直都居中对齐*/HW: boolean,
+/**flex-grow为1，就是放大倍数为1*/flex1: boolean,
+        onTap: () => {},
+        classBase: string,
+        push: string
+    }) {
+    let props = {};
+    if (onTap) {
+        props.onTap = onTap;
+    }
+    if (style) {
+        props.style = style;
+    }
+    if (className) {
+        props.className = className;
+    }
+    if (classBase) {
+        props.classBase = classBase;
+    }
+    if (push) {
+        props.push = push;
+    }
+    if (classBase) {
+        props.classBase = classBase;
+    }
+    if (column) {
+        props.column = column;
+    }
+    if (horizontal) {
+        props.horizontal = horizontal;
+    }
+    if (vertical) {
+        props.vertical = vertical;
+    }
+    if (HW) {
+        props.HW = HW;
+    }
+    if (flex1) {
+        props.flex1 = flex1;
+    }
+    return (
+        <TouchableBase {...props} flex>
+            {children}
+        </TouchableBase>
+    );
 }

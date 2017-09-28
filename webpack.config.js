@@ -43,12 +43,33 @@ module.exports = {
     // ],
     // Enable sourcemaps for debugging webpack's output.
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['vendor'/*,'manifest'*/],
-        }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     names: ['vendor'/*,'manifest'*/],
+        // }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, './src/template/index.html'),
-            inject: 'body'
+            templateContent: '<!DOCTYPE html><html>' +
+            '<head>' +
+            '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>' +
+            '<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">' +
+            '<link href="css/global.css" rel="stylesheet" />' +
+            '<title></title>' +
+            '<meta charset="utf-8" />' +
+            '</head>' +
+            '<body>' +
+            '<div id="app"></div>' +
+            '<script src="js/cdoJS/Utility.js"></script>' +
+            '<script src="js/cdoJS/CDO.js"></script>' +
+            '<script src="js/cdoJS/HttpClient.js"></script>' +
+            '<script src="js/cdoJS/MD5.js"></script>' +
+            '<script src="js/ClientEngine.js"></script>' +
+            //'<script type="text/javascript" src="js/vendor.bundle.js"></script>'+
+            //'<script src="js/index.bundle.js"></script>'+
+            '<script type="text/javascript">' +
+            '</script>' +
+            '</body>' +
+            '</html>'
+            // template: path.resolve(__dirname, './src/template/index.html'),
+            // inject: 'body'
         }),
         new webpack.HotModuleReplacementPlugin(),
         // 开启全局的模块热替换(HMR)

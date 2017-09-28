@@ -1,4 +1,5 @@
-import {Icon} from "./icon";
+import { Icon } from "./icon";
+import { Flex, Abs, Placeholder } from './layout';
 export {
-    Icon
+    Icon, Flex, Abs, Placeholder
 }
