@@ -11,6 +11,7 @@ import flexmd from './md/flex.md';
 import textmd from './md/text.md';
 import iconmd from './md/icon.md';
 import pagemd from './md/page.md';
+import carouselmd from './md/carousel.md';
 import withReadme from 'storybook-readme/with-readme';
 
 import { Flex } from '../src/components';
@@ -25,12 +26,15 @@ import { List } from '../src/components/list';
 import Button from './Button';
 import Welcome from './Welcome';
 import css from '../build/dev/css/global.css';
+import kitchen from '../build/dev/css/kitchen-sink.css';
+
+import { Carousel } from 'antd-mobile';
 
 //引入样式
 //start====================================================================
 var style = document.createElement('style');
 style.type = 'text/css';
-style.innerHTML = css.toString();
+style.innerHTML = css.toString() + kitchen.toString();
 document.getElementsByTagName('HEAD').item(0).appendChild(style);
 //end======================================================================
 document.getElementById('root').style.height = '100%';
@@ -120,8 +124,26 @@ function ListIcon({ name, remarks }) {
 }
 
 storiesOf('下拉刷新', module).addDecorator(withKnobs)
-.add('Base', withReadme(ButtonReadme, () =><div style={{border:'1px solid red'}}> <Scroll /></div>))
-.add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
+  .add('Base', withReadme(ButtonReadme, () => <div style={{ border: '1px solid red' }}> <Scroll /></div>))
+  .add('轮播', withReadme(carouselmd, () => <Page>
+    <Carousel
+      autoplay={true}
+      selectedIndex={0}
+      swipeSpeed={35}
+      beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
+      afterChange={index => console.log('slide to', index)}
+    >
+      <Flex style={{ height: 200, background: '#ff00ff' }}>
+
+      </Flex>
+      <Flex style={{ height: 200, background: '#ff003d' }}>
+
+      </Flex>
+      <Flex style={{ height: 200, background: '#3d3dff' }}>
+
+      </Flex>
+    </Carousel>
+  </Page>));
 
 storiesOf('List(列表)', module).addDecorator(withKnobs)
   .add('Base', withReadme(ButtonReadme, () => <List label='我的信息' />))

@@ -15,8 +15,9 @@
     "stage-3"
   ],
   "plugins": [
-    "react-hot-loader/babel"
+    "react-hot-loader/babel",
     // 开启 React 代码的模块热替换(HMR)
+    ["import", { "style": "css", "libraryName": "antd-mobile" }]
   ],
   // "plugins": [
   //   "transform-decorators-legacy",

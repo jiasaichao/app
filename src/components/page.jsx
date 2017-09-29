@@ -2,7 +2,6 @@ import React from 'react';
 import { Flex, Abs, Text } from './layout';
 import { Icon } from './icon';
 import { TouchableFlex } from './touchable';
-
 export class Page1 extends React.Component {
     render() {
         return (
