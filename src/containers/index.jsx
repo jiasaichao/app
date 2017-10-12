@@ -1,12 +1,13 @@
 import React from 'react';
 import { Touchable, TouchableFlex } from '../components/touchable'
 import { Page } from '../components/page';
-import { Flex, Placeholder } from '../components/layout';
+import { Flex, Placeholder, Image } from '../components/layout';
 import { Root as Slider, Item as SliderItem } from '../components/slider';
-import { queryDfqAdByGprs7 } from '../services/services';
+import { queryDfqAdByGprs7, queryDfqAdByGprs10 } from '../services/services';
+import { Carousel, Toast } from 'antd-mobile';
 function IconItem({ title, img }) {
     return (
-        <Flex flex1 column vertical>
+        <Flex column vertical style={{ width: '20%' }}>
             <img style={{ width: '.84rem', height: '.84rem' }} src={img} alt="" />
             <span style={{ fontSize: '.22rem', color: '#6D6D6D', marginTop: '.12px' }}>{title}</span>
         </Flex>
@@ -16,54 +17,36 @@ export class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            lunbo: []
+            lunbo: [],
+            iconList: []
         }
     }
     render() {
         return (
             <div style={{ height: '100%', width: '100%', overflowX: 'hidden' }}>
                 <Page>
-                    {this.state.lunbo.length > 0 ? <Slider loop={true} isIndicators={true}>
-                        {this.state.lunbo.map((item) => (
-                            <SliderItem key={item.strImgPath}><img src={item.strImgPath} style={{ width: '100%' }} /> </SliderItem>
-                        ))}
-                    </Slider> : null}
+                    {this.state.lunbo.length > 0 ?
+                        <Carousel autoplay infinite selectedIndex={0} swipeSpeed={35} style={{ height: '3.3rem' }}>
+                            {/* <Slider loop={true} isIndicators={true}> */}
+                            {this.state.lunbo.map((item) => (
+                                <Flex style={{ height: '100%' }} key={item.strImgPath}><img src={item.strImgPath} style={{ width: '100%', height: '100%' }} /> </Flex>
+                            ))}
+                            {/* </Slider> */}
+                        </Carousel>
+                        : null}
 
                     <div style={{ marginTop: '.2rem' }}>
-                        <Slider loop={false} autoPlay={false} isIndicators={true}>
-                            <SliderItem>
-                                <Flex>
-                                    <IconItem img='img/quane@2x.png' title='教育培训' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训1' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训1' />
+                        <Carousel infinite
+                            swipeSpeed={35}>
+                            {Math.ceil(this.state.iconList.length / 10).map((item, index) => (
+                                <Flex key={index} style={{ flexWrap: 'wrap' }}>
+                                    {
+                                        this.state.iconList.filter((v, index1) => (index1 < index * 10 + 10) && (index1 >= index * 10)).map((v) => (
+                                            <IconItem key={v.lId} img={v.strImgPath} title={v.strShowTitle} />
+                                        ))}
                                 </Flex>
-                                <Flex style={{ marginTop: ".3rem" }}>
-                                    <IconItem img='img/quane@2x.png' title='教育培训' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训1' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训1' />
-                                </Flex>
-                            </SliderItem>
-                            <SliderItem>
-                                <Flex>
-                                    <IconItem img='img/quane@2x.png' title='教育培训' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训1' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训1' />
-                                </Flex>
-                                <Flex style={{ marginTop: ".3rem" }}>
-                                    <IconItem img='img/quane@2x.png' title='教育培训' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训1' />
-                                    <IconItem img='img/quane@2x.png' title='教育培训1' />
-                                </Flex>
-                            </SliderItem>
-                        </Slider>
+                            ))}
+                        </Carousel>
                     </div>
                     <div>
                         <img src="img/image.png" style={{ width: '100%' }} />
@@ -76,30 +59,30 @@ export class Home extends React.Component {
 
                     <Flex style={{ marginLeft: '.3rem', width: '100%', overflowY: 'hidden', overflowX: 'scroll' }}>
                         <TouchableFlex column style={{ height: '3.16rem', width: '3rem', marginRight: '.3rem', flexShrink: 0 }}>
-                            <img src='http://cn.bing.com/az/hprichbg/rb/SWFC_ZH-CN9558503653_1920x1080.jpg' width="100%" style={{ height: '2rem' }} />
+                            <Image src='http://cn.bing.com/az/hprichbg/rb/SWFC_ZH-CN9558503653_1920x1080.jpg' width="100%" height='2rem' />
                             <span style={{ fontSize: '.30rem', lineHeight: '.3rem', color: '#222', marginTop: '.25rem' }}>爱在齐心</span>
                             <span style={{ fontSize: '.24rem', lineHeight: '.24rem', color: '#8e8e8e', marginTop: '.15rem' }}>士大夫士大夫<span style={{ color: '#FC8833' }}>享8.5折</span></span>
                         </TouchableFlex>
 
                         <Flex column style={{ height: '3.16rem', width: '3rem', marginRight: '.3rem', flexShrink: 0 }}>
-                            <img src='http://cn.bing.com/az/hprichbg/rb/SWFC_ZH-CN9558503653_1920x1080.jpg' width="100%" style={{ height: '2rem' }} />
+                            <Image src='http://cn.bing.com/az/hprichbg/rb/SWFC_ZH-CN9558503653_1920x1080.jpg' width="100%" height='2rem' />
                             <span style={{ fontSize: '.30rem', lineHeight: '.3rem', color: '#222', marginTop: '.25rem' }}>爱在齐心</span>
                             <span style={{ fontSize: '.24rem', lineHeight: '.24rem', color: '#8e8e8e', marginTop: '.15rem' }}>士大夫士大夫<span style={{ color: '#FC8833' }}>享8.5折</span></span>
                         </Flex>
                         <Flex column style={{ height: '3.16rem', width: '3rem', marginRight: '.3rem', flexShrink: 0 }}>
-                            <img src='http://cn.bing.com/az/hprichbg/rb/SWFC_ZH-CN9558503653_1920x1080.jpg' width="100%" style={{ height: '2rem' }} />
+                            <Image src='http://cn.bing.com/az/hprichbg/rb/SWFC_ZH-CN9558503653_1920x1080.jpg' width="100%" height='2rem' />
                             <span style={{ fontSize: '.30rem', lineHeight: '.3rem', color: '#222', marginTop: '.25rem' }}>爱在齐心</span>
                             <span style={{ fontSize: '.24rem', lineHeight: '.24rem', color: '#8e8e8e', marginTop: '.15rem' }}>士大夫士大夫<span style={{ color: '#FC8833' }}>享8.5折</span></span>
                         </Flex>
                     </Flex>
                     <Flex column style={{ padding: "0 .3rem" }}>
                         <Flex column style={{ height: '3.16rem', width: '100%' }}>
-                            <img src='http://cn.bing.com/az/hprichbg/rb/SWFC_ZH-CN9558503653_1920x1080.jpg' width="100%" style={{ height: '2rem' }} />
+                            <Image src='http://cn.bing.com/az/hprichbg/rb/SWFC_ZH-CN9558503653_1920x1080.jpg' width="100%" height='2rem' />
                             <span style={{ fontSize: '.30rem', lineHeight: '.3rem', color: '#222', marginTop: '.23rem' }}>爱在齐心</span>
                             <span style={{ fontSize: '.24rem', lineHeight: '.24rem', color: '#8e8e8e', marginTop: '.13rem' }}>士大夫士大夫</span>
                         </Flex>
                         <Flex column style={{ height: '3.16rem', width: '100%' }}>
-                            <img src='http://cn.bing.com/az/hprichbg/rb/SWFC_ZH-CN9558503653_1920x1080.jpg' width="100%" style={{ height: '2rem' }} />
+                            <Image src='http://cn.bing.com/az/hprichbg/rb/SWFC_ZH-CN9558503653_1920x1080.jpg' width="100%" height='2rem' />
                             <span style={{ fontSize: '.30rem', lineHeight: '.3rem', color: '#222', marginTop: '.23rem' }}>爱在齐心</span>
                             <span style={{ fontSize: '.24rem', lineHeight: '.24rem', color: '#8e8e8e', marginTop: '.13rem' }}>士大夫士大夫</span>
                         </Flex>
@@ -160,6 +143,9 @@ export class Home extends React.Component {
     componentDidMount() {
         queryDfqAdByGprs7((data) => {
             this.setState({ lunbo: data.data.cdosRecord });
+        })
+        queryDfqAdByGprs10((data) => {
+            this.setState({ iconList: data.data.cdosRecord });
         })
     }
 }

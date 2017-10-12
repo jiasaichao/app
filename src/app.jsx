@@ -6,6 +6,14 @@ import {
     withRouter,
     Switch
 } from 'react-router-dom';
+
+Number.prototype.map = function (fn) {
+    let arr1 = [];
+    for (let i = 0; i < this; i++) {
+        arr1.push(i)
+    }
+    return arr1.map(fn);
+}
 import { Home } from './containers/index';
 export default class Index extends React.Component {
     render() {

@@ -2,7 +2,7 @@ import React, { Component, PureComponent } from 'react';
 import { Common } from '../utils/common';
 
 export function Flex(
-    { children, className = '', style, column, horizontal, vertical, HW, flex1, other }:
+    { children, className = '', style, dom, column, horizontal, vertical, HW, flex1, other }:
         {
         /***/className: string,
         /***/style: React.CSSProperties,
@@ -11,6 +11,7 @@ export function Flex(
         /**垂直居中对齐*/vertical: boolean,
         /**水平和垂直都居中对齐*/HW: boolean,
         /**flex1为1，就是放大倍数为1*/flex1: boolean,
+        /**ref*/dom: ()=>{},
             other: Object
         }) {
     let classnames = '';
@@ -20,7 +21,7 @@ export function Flex(
     if (HW) classnames += ' justify-content align-items';
     if (flex1) classnames += ' flex1';
     return (
-        <div className={Common.classnames('display-flex', className, classnames)} style={style} {...other}>
+        <div ref={dom} className={Common.classnames('display-flex', className, classnames)} style={style} {...other}>
             {children}
         </div>
     );
@@ -44,13 +45,25 @@ export function Flex(
 //         );
 //     }
 // }
+export function Image({ className = '', style, src, other, height, width }) {
+    let styles = {};
+    if (height) {
+        styles.height = height
+    }
+    if (width) {
+        styles.width = width
+    }
+    return (
+        <img className={className} style={{ ...styles, ...style }} src={src} {...other} />
+    );
+}
 export function Placeholder() {
     return (
         <div className='flex1'>
         </div>
     );
 }
-//加入inline-block 是为了解决高度和fontSize不一致问题
+//加入inline-block 是为了解决高度和fontSize不一致问题，style会覆盖其他
 export function Text({ label, color, fontSize, style, bold, className }) {
     let addStyle = {};
     if (fontSize) {
@@ -59,7 +72,7 @@ export function Text({ label, color, fontSize, style, bold, className }) {
     if (bold) {
         addStyle.fontWeight = '600';
     }
-    let styles = Common.prepareStyles().merge({ color, fontSize, display: 'inline-block' }, style, addStyle).o;
+    let styles = Common.prepareStyles().merge({ color, fontSize, display: 'inline-block' }, addStyle, style).o;
     return (
         <span className={className} style={styles}>{label}</span>
     );

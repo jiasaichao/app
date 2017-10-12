@@ -44,8 +44,8 @@ module.exports = {
             comments: false     // 不保留注释
         }),
         new HtmlWebpackPlugin({
-            template:path.resolve(__dirname, './src/template/index.html'),
-            inject:'body'
+            template: path.resolve(__dirname, './src/template/index.html'),
+            inject: 'body'
         })
     ],
     resolve: {
@@ -71,7 +71,10 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 include: path.resolve(__dirname, './src'),
                 loader: 'babel-loader'
-            },
+            }, {
+                test: /\.css$/,
+                loader: "css-loader"
+            }
             // {   // 向应用特定文件中注入变量，应用中可以直接使用 baseUrl
             //     test: require.resolve(defPath.REQUEST_PATH),
             //     loader: 'imports-loader?baseUrl=>' + JSON.stringify(API[process.env.NODE_ENV || 'development'])

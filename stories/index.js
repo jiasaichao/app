@@ -124,12 +124,19 @@ function ListIcon({ name, remarks }) {
 }
 
 storiesOf('下拉刷新', module).addDecorator(withKnobs)
-  .add('Base', withReadme(ButtonReadme, () => <div style={{ border: '1px solid red' }}> <Scroll /></div>))
+  .add('Base', withReadme(ButtonReadme, () => <div style={{ border: '1px solid red' }}> <Scroll onRefresh={(setSuccess, setLoading)=>{
+    console.log(5000+'后成功')
+    setTimeout(function() {
+      setSuccess();
+    }, 5000);
+
+  }}/></div>))
   .add('轮播', withReadme(carouselmd, () => <Page>
     <Carousel
       autoplay={true}
       selectedIndex={0}
       swipeSpeed={35}
+      infinite
       beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
       afterChange={index => console.log('slide to', index)}
     >

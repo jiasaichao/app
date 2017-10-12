@@ -52,6 +52,7 @@ module.exports = {
             '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>' +
             '<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">' +
             '<link href="css/global.css" rel="stylesheet" />' +
+            '<link href="css/kitchen-sink.css" rel="stylesheet" />' +
             '<title></title>' +
             '<meta charset="utf-8" />' +
             '</head>' +
@@ -127,6 +128,9 @@ module.exports = {
                 // options: {
                 //     runtimeCompat: true
                 // }
+            }, {
+                test: /\.css$/,
+                loader: "css-loader"
             }
             // {
             //     test: /\.(js|jsx)$/,
