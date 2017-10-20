@@ -6,6 +6,7 @@
 // When you add this file, we won't add the default configurations which is similar
 // to "React Create App". This only has babel loader to load JavaScript.
 var path = require('path');
+var webpack = require('webpack');
 module.exports = {
   // resolve: {
   //   mainFiles: ["index.web","index"],// 这里哦
@@ -22,6 +23,11 @@ module.exports = {
   //     'main',
   //   ],
   // },
+  plugins: [
+    new webpack.DefinePlugin({
+      DEVELOPMENT: JSON.stringify(true)
+    })
+  ],
   module: {
     rules: [{
       test: /\.md$/,
@@ -29,6 +35,9 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: "css-loader"
+    }, {
+      test: /\.(png|jpg)$/,
+      loader: "url-loader?limit=8192"
     }, {
       test: /\.svg$/,
       loader: "svg-sprite-loader"

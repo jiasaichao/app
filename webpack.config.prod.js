@@ -72,6 +72,9 @@ module.exports = {
                 include: path.resolve(__dirname, './src'),
                 loader: 'babel-loader'
             }, {
+                test: /\.(png|jpg)$/,
+                loader: "url-loader?limit=8192"
+              }, {
                 test: /\.css$/,
                 loader: "css-loader"
             }

@@ -11,7 +11,7 @@ export function Flex(
         /**垂直居中对齐*/vertical: boolean,
         /**水平和垂直都居中对齐*/HW: boolean,
         /**flex1为1，就是放大倍数为1*/flex1: boolean,
-        /**ref*/dom: ()=>{},
+        /**ref*/dom: () => {},
             other: Object
         }) {
     let classnames = '';
@@ -64,15 +64,15 @@ export function Placeholder() {
     );
 }
 //加入inline-block 是为了解决高度和fontSize不一致问题，style会覆盖其他
-export function Text({ label, color, fontSize, style, bold, className }) {
+export function Text({ label, color, fontSize, lineHeight, style, bold, className }) {
     let addStyle = {};
-    if (fontSize) {
+    if (fontSize && !lineHeight) {
         addStyle.lineHeight = fontSize;
     }
     if (bold) {
         addStyle.fontWeight = '600';
     }
-    let styles = Common.prepareStyles().merge({ color, fontSize, display: 'inline-block' }, addStyle, style).o;
+    let styles = Common.prepareStyles().merge({ color, fontSize, display: 'inline-block', lineHeight }, addStyle, style).o;
     return (
         <span className={className} style={styles}>{label}</span>
     );

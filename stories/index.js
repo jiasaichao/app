@@ -30,6 +30,8 @@ import kitchen from '../build/dev/css/kitchen-sink.css';
 
 import { Carousel } from 'antd-mobile';
 
+import { Home } from './pages/my';
+
 //引入样式
 //start====================================================================
 var style = document.createElement('style');
@@ -43,6 +45,34 @@ window.onresize = function () {
   document.querySelector("html").setAttribute("style", "font-size:" + document.body.clientWidth / 7.5 + "px");
 };
 document.querySelector("html").setAttribute("style", "font-size:" + document.body.clientWidth / 7.5 + "px");
+document.body.style.userSelect = 'auto'
+
+function loadScript(url, callback) {
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  if (typeof (callback) != "undefined") {
+    if (script.readyState) {
+      script.onreadystatechange = function () {
+        if (script.readyState == "loaded" || script.readyState == "complete") {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else {
+      script.onload = function () {
+        callback();
+      };
+    }
+  }
+  script.src = url;
+  document.body.appendChild(script);
+}
+// loadScript('js/cdoJS/Utility.js');
+// loadScript('js/cdoJS/CDO.js');
+// loadScript('js/cdoJS/HttpClient.js');
+// loadScript('js/cdoJS/MD5.js');
+// loadScript('js/ClientEngine.js');
+
 storiesOf('欢迎使用', module).addDecorator(withKnobs)
   .add('运行', withReadme(welcomedoc, () => <Page> <Touchable>aaaa</Touchable> </Page>));
 
@@ -110,6 +140,24 @@ storiesOf('基础组件', module).addDecorator(withKnobs)
         <ListIcon name='micOff' remarks='关闭麦克风' />
         <ListIcon name='search' remarks='搜索' />
       </Flex>
+      <Flex>
+        <ListIcon name='myBill' remarks='我的账单' />
+        <ListIcon name='youhuiquan' remarks='优惠券' />
+        <ListIcon name='shezhi' remarks='设置' />
+        <ListIcon name='jilu' remarks='记录' />
+      </Flex>
+      <Flex>
+        <ListIcon name='morentouxiang' remarks='默认头像' />
+        <ListIcon name='saoyisao' remarks='扫一扫' />
+        <ListIcon name='shouye' remarks='首页' />
+        <ListIcon name='wode' remarks='我的' />
+      </Flex>
+      <Flex>
+        <ListIcon name='xiaoxi' remarks='消息' />
+        <ListIcon name='xiangji' remarks='相机' />
+        <ListIcon name='shouye' remarks='首页' />
+        <ListIcon name='wode' remarks='我的' />
+      </Flex>
     </Page>
   )));
 
@@ -124,13 +172,13 @@ function ListIcon({ name, remarks }) {
 }
 
 storiesOf('下拉刷新', module).addDecorator(withKnobs)
-  .add('Base', withReadme(ButtonReadme, () => <div style={{ border: '1px solid red' }}> <Scroll onRefresh={(setSuccess, setLoading)=>{
-    console.log(5000+'后成功')
-    setTimeout(function() {
+  .add('Base', withReadme(ButtonReadme, () => <div style={{ border: '1px solid red' }}> <Scroll onRefresh={(setSuccess, setLoading) => {
+    console.log(5000 + '后成功')
+    setTimeout(function () {
       setSuccess();
     }, 5000);
 
-  }}/></div>))
+  }} /></div>))
   .add('轮播', withReadme(carouselmd, () => <Page>
     <Carousel
       autoplay={true}
@@ -159,3 +207,6 @@ storiesOf('List(列表)', module).addDecorator(withKnobs)
 storiesOf('Button', module).addDecorator(withKnobs)
   .add('with text', withReadme(ButtonReadme, () => <Button onClick={action('clicked')}>Hello Button {text('Label', 'Hello Button')}</Button>))
   .add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
+
+storiesOf('页面', module).addDecorator(withKnobs)
+  .add('我的', withReadme(ButtonReadme, () => <Home />));

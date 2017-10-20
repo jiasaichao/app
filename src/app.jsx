@@ -14,13 +14,16 @@ Number.prototype.map = function (fn) {
     }
     return arr1.map(fn);
 }
-import { Home } from './containers/index';
+import { Toast } from 'antd-mobile';
+window.info = Toast.info;
+//import { Home } from './containers/index';
+import { Home } from './containers/my';
 export default class Index extends React.Component {
     render() {
         return (
             <Router>
                 <div style={{ height: '100%' }}>
-                    <Route path="/" exact component={Home} />
+                    <Route path="/my" exact component={Home} />
                     <Route path="/about" component={App2} />
                     <Route component={App3} />
                 </div>

@@ -76,6 +76,11 @@ module.exports = {
         // 开启全局的模块热替换(HMR)
         new webpack.NamedModulesPlugin(),
         // 当模块热替换(HMR)时在浏览器控制台输出对用户更友好的模块名字信息
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        })
     ],
     devtool: "source-map",
     devServer: {    // 开启服务器
@@ -129,6 +134,9 @@ module.exports = {
                 //     runtimeCompat: true
                 // }
             }, {
+                test: /\.(png|jpg)$/,
+                loader: "url-loader?limit=8192"
+              }, {
                 test: /\.css$/,
                 loader: "css-loader"
             }
