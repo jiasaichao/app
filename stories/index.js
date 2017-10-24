@@ -23,6 +23,8 @@ import { Touchable } from '../src/components/touchable';
 
 import { List } from '../src/components/list';
 
+import { Home as My } from '../src/containers/my';
+
 import Button from './Button';
 import Welcome from './Welcome';
 import css from '../build/dev/css/global.css';
@@ -30,7 +32,7 @@ import kitchen from '../build/dev/css/kitchen-sink.css';
 
 import { Carousel } from 'antd-mobile';
 
-import { Home } from './pages/my';
+// import { Home } from './pages/my';
 
 //引入样式
 //start====================================================================
@@ -209,4 +211,4 @@ storiesOf('Button', module).addDecorator(withKnobs)
   .add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
 
 storiesOf('页面', module).addDecorator(withKnobs)
-  .add('我的', withReadme(ButtonReadme, () => <Home />));
+  .add('我的', withReadme(ButtonReadme, () => <My />));

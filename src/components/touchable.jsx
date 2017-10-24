@@ -282,7 +282,7 @@ export function Touchable({ style, className, classBase, children, push }) {
 export function TouchableFlex({ children, className = '', style, column, horizontal, vertical, HW, flex1, other, onTap, classBase, push }:
     {
 /***/className: string,
-/***/style: any,
+/***/style: React.CSSProperties,
 /**是否为垂直排列，加上这个属性为垂直排列*/column: boolean,
 /**水平居中对齐*/horizontal: boolean,
 /**垂直居中对齐*/vertical: boolean,

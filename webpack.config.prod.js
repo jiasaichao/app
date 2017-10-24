@@ -46,6 +46,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/template/index.html'),
             inject: 'body'
+        }),
+        new webpack.DefinePlugin({
+          DEVELOPMENTZIP: JSON.stringify(true),
+          DEVELOPMENT: JSON.stringify(false)
         })
     ],
     resolve: {

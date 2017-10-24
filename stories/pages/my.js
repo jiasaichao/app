@@ -61,8 +61,8 @@ export class Home extends React.Component {
                 <Icon name='arrowRight' color='#FFF' width='.24rem' height='.24rem' />
             </TouchableFlex>
         }
-        if (this.state.nIdentityState != '90' && this.state.nIdentityState != '10') {
-            认证状态 = <TouchableFlex vertical style={{ height: '.8rem', padding: '0 .32rem', overflow: 'hidden', borderTopLeftRadius: '.4rem', borderBottomLeftRadius: '.4rem', background: '#FF7E00' }}>
+        if (this.state.nIdentityState != '90' && this.state.nIdentityState != '100') {
+            认证状态 = <TouchableFlex onTap={() => { window.EngineClass.openWindow('myCenter/securityCenter/accountIdCard.htm', '实名认证', 'backURL=myCenter/myIndex.htm&nIdentityState=' + this.state.nIdentityState, 0, ''); }} vertical style={{ height: '.8rem', padding: '0 .32rem', overflow: 'hidden', borderTopLeftRadius: '.4rem', borderBottomLeftRadius: '.4rem', background: '#FF7E00' }}>
                 <Text label='去实名认证' color='#fff' fontSize='.26rem' style={{ marginRight: '.16rem' }} />
                 <Icon name='arrowRight' color='#FFF' width='.24rem' height='.24rem' />
             </TouchableFlex>
@@ -135,18 +135,20 @@ export class Home extends React.Component {
                         window.setStringValue("commoditylId", "0000");
                         window.openWindow('lineStage/GroupPurchase/cardpackage.htm', '卡券列表', '', 0, '', 0)
                     }} icon='youhuiquan' iconColor='#FD3F43' label='我的卡卷' />
-                    <ListItem onTap={()=>{window.EngineClass.openWindow('myCenter/fundDetail/fundList.htm', '资金明细', '', 0, '');}} icon='jilu' iconColor='#FFBB11' label='交易记录' />
-                    <ListItem  onTap={this.handleAccountCenter} icon='shezhi' iconColor='#00D4C5' label='设置' />
+                    {/* <ListItem onTap={()=>{window.EngineClass.openWindow('myCenter/fundDetail/fundList.htm', '资金明细', '', 0, '');}} icon='jilu' iconColor='#FFBB11' label='交易记录' /> */}
+                    <ListItem onTap={()=>{window.openWindow('myCenter/more/myAbout.htm', '设置', '', 0, '', 0)}} icon='shezhi' iconColor='#00D4C5' label='设置' />
                 </Flex>
                 <Flex style={{ height: '.98rem', paddingTop: '.19rem', overflow: 'hidden', position: 'absolute', bottom: 0, width: '100%', background: '#FAFAFA' }}>
-                    <Flex flex1 column vertical>
+                    <TouchableFlex onTap={() => {window.openWindow('lineStage/merchant/baseIndex.htm', '首页', '', 0, '', 0) }} flex1 column vertical>
                         <Icon name='shouye' color='#ccc' width='.4rem' height='.4rem' />
                         <Text label='首页' style={{ marginTop: '.09rem' }} fontSize='.2rem' color='#ccc' />
-                    </Flex>
-                    <Flex flex1 column vertical>
+                    </TouchableFlex>
+                    <TouchableFlex onTap={() => {
+                        window.userLoginStats("callBackUserLoginState");
+                    }} flex1 column vertical>
                         <Icon name='saoyisao' color='#ccc' width='.4rem' height='.4rem' />
                         <Text label='扫一扫' style={{ marginTop: '.09rem' }} fontSize='.2rem' color='#ccc' />
-                    </Flex>
+                    </TouchableFlex>
                     <Flex flex1 column vertical>
                         <Icon name='wode' color='#222' width='.4rem' height='.4rem' />
                         <Text label='我的' style={{ marginTop: '.09rem' }} fontSize='.2rem' color='#222' />
@@ -156,6 +158,16 @@ export class Home extends React.Component {
         )
     }
     componentDidMount() {
+        window.callBackUserLoginState = (isLogin) => {
+            //已经登录
+            if (isLogin) {
+                // _shade_layer.show("加载中,请稍候......");
+                // verifyIdentity("toScanPay");
+                window.openRichScan("scanBack");//扫码
+            } else {
+                window.openWindow('login/login.htm', '登录', '', 0);
+            }
+        }
         unreadCount((data) => {
             this.setState({ nMineUnreadCount: data.nMineUnreadCount });
         });
@@ -178,7 +190,7 @@ export class Home extends React.Component {
         window.EngineClass.openWindow("noticeNew/messageCenter.htm", "消息中心", "", 0, "");
     }
     handleAccountCenter = () => {
-        window.EngineClass.openWindow('myCenter/securityCenter/accountCenter.htm', '帐户管理', '', 0, '');
+        window.EngineClass.openWindow('myCenter/userInfo/personalInformation.htm', '帐户管理', '', 0, '');
     }
     handleOrderList = (v) => {
         window.setStringValue("backwhere", "2");
