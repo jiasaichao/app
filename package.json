@@ -7,7 +7,7 @@
     "start": "webpack-dev-server",
     "build": "webpack --config webpack.config.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook -s ./build/prod -p 6006",
+    "storybook": "start-storybook -s ./src/template -p 6006",
     "build-storybook": "build-storybook",
     "flow": "flow"
   },
@@ -46,6 +46,7 @@
     "babel-preset-stage-1": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.2",
@@ -62,8 +63,8 @@
     "storybook-readme": "^3.0.0",
     "style-loader": "^0.18.2",
     "svg-sprite-loader": "^0.3.1",
+    "url-loader": "^0.6.2",
     "webpack": "^2.5.1",
-    "webpack-dev-server": "^2.4.5",
-    "url-loader": "^0.6.2"
+    "webpack-dev-server": "^2.4.5"
   }
 }

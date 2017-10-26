@@ -13,7 +13,7 @@ export class Home extends React.Component {
             avatarPath = window.getAvatarPath(strLoginId);
         }
         if (!avatarPath) {
-            avatarPath = require('../../build/prod/img/DefaultAvatar.png');
+            avatarPath = require('../template/img/DefaultAvatar.png');
         }
         //endregion
         this.state = {
@@ -146,24 +146,24 @@ export class Home extends React.Component {
                 </Flex>
                 <Flex style={{ background: '#fff', padding: '.3rem 0', marginTop: '.2rem' }}>
                     <TouchableFlex onTap={() => { this.handleOrderList(0) }} column vertical flex1>
-                        <Image height='.36rem' width='.32rem' src={require('../../' + 'build/prod/img/dfkicon.png')} />
+                        <Image height='.36rem' width='.32rem' src={require('../template/img/dfkicon.png')} />
                         <Text label='待付款' style={{ marginTop: '.17rem' }} color='#222' fontSize='.24rem' lineHeight='.33rem' />
                     </TouchableFlex>
                     <TouchableFlex onTap={() => { this.handleOrderList(2) }} column vertical flex1>
-                        <Image height='.36rem' width='.32rem' src={require('../../build/prod/img/zfzicon.png')} />
+                        <Image height='.36rem' width='.32rem' src={require('../template/img/zfzicon.png')} />
                         <Text label='支付中' style={{ marginTop: '.17rem' }} color='#222' fontSize='.24rem' lineHeight='.33rem' />
                     </TouchableFlex>
                     <TouchableFlex onTap={() => { this.handleOrderList(2) }} column vertical flex1>
-                        <Image height='.36rem' width='.32rem' src={require('../../build/prod/img/ywcicon.png')} />
+                        <Image height='.36rem' width='.32rem' src={require('../template/img/ywcicon.png')} />
                         <Text label='已完成' style={{ marginTop: '.17rem' }} color='#222' fontSize='.24rem' lineHeight='.33rem' />
                     </TouchableFlex>
                     <TouchableFlex onTap={() => { this.handleOrderList(1) }} column vertical flex1>
-                        <Image height='.36rem' width='.32rem' src={require('../../build/prod/img/tkicon.png')} />
+                        <Image height='.36rem' width='.32rem' src={require('../template/img/tkicon.png')} />
                         <Text label='退款' style={{ marginTop: '.17rem' }} color='#222' fontSize='.24rem' lineHeight='.33rem' />
                     </TouchableFlex>
                     <Flex style={{ width: 1, height: '.8rem', background: '#d8d8d8' }}></Flex>
                     <TouchableFlex onTap={() => { this.handleOrderList(2) }} column vertical style={{ width: '1.5rem' }}>
-                        <Image height='.36rem' width='.32rem' src={require('../../build/prod/img/qbddicon.png')} />
+                        <Image height='.36rem' width='.32rem' src={require('../template/img/qbddicon.png')} />
                         <Text label='全部订单' style={{ marginTop: '.17rem' }} color='#222' fontSize='.24rem' lineHeight='.33rem' />
                     </TouchableFlex>
                 </Flex>

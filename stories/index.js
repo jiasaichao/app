@@ -27,8 +27,8 @@ import { Home as My } from '../src/containers/my';
 
 import Button from './Button';
 import Welcome from './Welcome';
-import css from '../build/dev/css/global.css';
-import kitchen from '../build/dev/css/kitchen-sink.css';
+import css from '../src/template/css/global.css';
+import kitchen from '../src/template/css/kitchen-sink.css';
 
 import { Carousel } from 'antd-mobile';
 
