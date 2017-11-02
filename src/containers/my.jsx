@@ -24,7 +24,7 @@ export class Home extends React.Component {
             avatarPath = window.getAvatarPath(strLoginId);
         }
         if (!avatarPath) {
-            avatarPath = require('../../build/prod/img/DefaultAvatar.png');
+            avatarPath = require('../template/img/DefaultAvatar.png');
         }
         //endregion
         this.state = {
@@ -185,7 +185,7 @@ export class Home extends React.Component {
                         <Text label='待付款' style={{ marginTop: '.17rem' }} color='#222' fontSize='.24rem' lineHeight='.33rem' />
                     </TouchableFlex>
                     <TouchableFlex onTap={() => { this.handleOrderList(2) }} column vertical flex1>
-                        <Image height='.36rem' width='.32rem' src={require('../../build/prod/img/zfzicon.png')} />
+                        <Image height='.36rem' width='.32rem' src={require('../template/img/zfzicon.png')} />
                         <Text label='支付中' style={{ marginTop: '.17rem' }} color='#222' fontSize='.24rem' lineHeight='.33rem' />
                     </TouchableFlex>
                     <TouchableFlex onTap={() => { this.handleOrderList(3) }} column vertical flex1>

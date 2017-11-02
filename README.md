@@ -26,6 +26,11 @@
 │   └── template             # 模板文件生成build用
 └── tests                    # 单元测试
 ```
+## 首先运行
+```
+npm i
+npm i -g @storybook/cli
+```
 ## 启动程序
 * 组件开发`npm run storybook`
 * 项目调试`npm run start`
