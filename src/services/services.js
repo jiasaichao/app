@@ -50,7 +50,7 @@ function raiseTrans(cdoRequest, callBack, load, defaultData, nCode = false) {
             data.data = JSON.parse(cdoResponse.toJSON());
             data.data.__nCode = cdoReturn.nCode;
             //调试用
-        window.raiseTransCallBack.DEV_DataList[cdoRequest.getStringValue('strServiceName') + '_' + cdoRequest.getStringValue('strTransName')] =data ;
+            window.raiseTransCallBack.DEV_DataList[cdoRequest.getStringValue('strServiceName') + '_' + cdoRequest.getStringValue('strTransName')] = data;
             callBack(data);
             return;
         }

@@ -49,17 +49,17 @@ module.exports = {
             inject: 'body'
         }),
         new webpack.DefinePlugin({
-          DEVELOPMENTZIP: JSON.stringify(true),
-          DEVELOPMENT: JSON.stringify(false)
+            DEVELOPMENTZIP: JSON.stringify(true),
+            DEVELOPMENT: JSON.stringify(false)
         }),
-        new CleanWebpackPlugin(
-            ['build'],　 //匹配删除的文件
-            {
-                root: __dirname,       　　　　　　　　　　//根目录
-                verbose:  true,        　　　　　　　　　　//开启在控制台输出信息
-                dry:      false        　　　　　　　　　　//启用删除文件
-            }
-        )
+        // new CleanWebpackPlugin(
+        //     ['build'], //匹配删除的文件
+        //     {
+        //         root: __dirname,       //根目录
+        //         verbose: true,        //开启在控制台输出信息
+        //         dry: false        //启用删除文件
+        //     }
+        // )
     ],
     resolve: {
         // 用于查找模块的目录
@@ -87,7 +87,7 @@ module.exports = {
             }, {
                 test: /\.(png|jpg)$/,
                 loader: "url-loader?limit=8192&outputPath=images/"
-              }, {
+            }, {
                 test: /\.css$/,
                 loader: "css-loader"
             }

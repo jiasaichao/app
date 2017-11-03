@@ -29,6 +29,7 @@ import Button from './Button';
 import Welcome from './Welcome';
 import css from '../src/template/css/global.css';
 import kitchen from '../src/template/css/kitchen-sink.css';
+import app_popup from '../src/template/css/app_popup.css';
 
 import { Carousel } from 'antd-mobile';
 
@@ -38,7 +39,7 @@ import { Carousel } from 'antd-mobile';
 //start====================================================================
 var style = document.createElement('style');
 style.type = 'text/css';
-style.innerHTML = css.toString() + kitchen.toString();
+style.innerHTML = css.toString() + kitchen.toString() + app_popup.toString();
 document.getElementsByTagName('HEAD').item(0).appendChild(style);
 //end======================================================================
 document.getElementById('root').style.height = '100%';

@@ -52,7 +52,7 @@ import { icons } from '../utils/iconsbase';
 
 export function Icon({ color, width, height, background, name }) {
     return (
-        <div style={{ display: 'inline-block', width: width, height: height }}>
+        <div style={{ display: 'inline-block', width: width, height: height, lineHeight: height }}>
             <svg dangerouslySetInnerHTML={{ __html: icons[name].content }} width='100%' height='100%' fill={color} style={{ background }} version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" xmlSpace="preserve">
             </svg>
         </div>

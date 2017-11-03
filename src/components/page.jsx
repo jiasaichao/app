@@ -59,7 +59,15 @@ export function Page({ title, backName, headBg = '#108ee9', headColor = '#fff', 
                         } else {
                             document.getElementById('code').style.display = 'none'
                         }
-                    }}>显示接口</TouchableFlex>
+                    }}>接口</TouchableFlex>
+                    <TouchableFlex style={{ marginLeft: '.2rem' }} onTap={() => {
+                        if (document.getElementById('code').style.display == 'none') {
+                            document.getElementById('code').style.display = 'block'
+                            document.getElementById('code').innerHTML=JSON.stringify(window.__State)
+                        } else {
+                            document.getElementById('code').style.display = 'none'
+                        }
+                    }}>状态</TouchableFlex>
                     <TouchableFlex onTap={() => {
                         if (document.getElementById('xianshijiekou').style.left == '0px') {
                             document.getElementById('xianshijiekou').style.left = 'auto'

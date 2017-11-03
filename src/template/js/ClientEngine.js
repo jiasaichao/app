@@ -52,6 +52,10 @@ function HashMap() {
 		}
 		return null;
 	};
+	this.removeAll=function(){
+		this.arrKey = new Array();
+		this.arrValue = new Array();
+	};
 	this.getKeys = function() {
 		return this.arrKey;
 	};
