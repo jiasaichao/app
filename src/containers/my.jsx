@@ -108,8 +108,9 @@ export class Home extends React.Component {
             /**待支付数量 */
             orderNotCount: 0,
         }
-        
-        window.__State=this.state;
+        window.getState=()=>{
+            return this.state;
+        }
     }
     render() {
 
@@ -300,7 +301,7 @@ export class Home extends React.Component {
     }
     //endregion
 
-    //region加载所有数据
+    //region 加载所有数据
     loadAllData = () => {
         window.raiseTransMap.removeAll();
         window.setState({ isLOgin: User.isLogin() });
@@ -350,7 +351,7 @@ export class Home extends React.Component {
     }
     //endregion
 
-    //region事件
+    //region 事件
     /**扫一扫 */
     handleSys = () => {
         if (this.state.isLOgin) {

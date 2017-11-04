@@ -63,7 +63,7 @@ export function Page({ title, backName, headBg = '#108ee9', headColor = '#fff', 
                     <TouchableFlex style={{ marginLeft: '.2rem' }} onTap={() => {
                         if (document.getElementById('code').style.display == 'none') {
                             document.getElementById('code').style.display = 'block'
-                            document.getElementById('code').innerHTML=JSON.stringify(window.__State)
+                            document.getElementById('code').innerHTML=JSON.stringify(window.getState())
                         } else {
                             document.getElementById('code').style.display = 'none'
                         }
