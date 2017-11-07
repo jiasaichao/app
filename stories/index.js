@@ -33,6 +33,7 @@ import app_popup from '../src/template/css/app_popup.css';
 
 import { Carousel } from 'antd-mobile';
 
+import {A1} from './demo/jicheng'
 // import { Home } from './pages/my';
 
 //引入样式
@@ -213,3 +214,6 @@ storiesOf('Button', module).addDecorator(withKnobs)
 
 storiesOf('页面', module).addDecorator(withKnobs)
   .add('我的', withReadme(ButtonReadme, () => <My />));
+
+storiesOf('demo', module).addDecorator(withKnobs)
+  .add('我的', withReadme(ButtonReadme, () => <A1 />));

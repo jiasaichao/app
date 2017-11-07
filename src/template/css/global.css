@@ -102,8 +102,13 @@ textarea:focus, keygen:focus, select:focus {
   -ms-user-select: none;
   user-select: none;
 }
-
+.Tappable-inactive{
+  -webkit-transition: opacity .2s linear;
+  transition: opacity .2s linear;
+}
 .Tappable-active {
+  -webkit-transition: opacity .2s linear;
+  transition: opacity .2s linear;
   opacity: 0.3;
 }
 

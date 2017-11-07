@@ -25,6 +25,7 @@ module.exports = {
   // },
   plugins: [
     new webpack.DefinePlugin({
+      DEVELOPMENTZIP: JSON.stringify(false),
       DEVELOPMENT: JSON.stringify(true)
     })
   ],

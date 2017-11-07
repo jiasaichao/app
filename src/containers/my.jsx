@@ -4,6 +4,7 @@ import { unreadCount, queryIdentity, getAccountBalance, getGrant, getQueryCredit
 import { User } from '../utils/user';
 import { Global } from '../utils/common';
 import Toast from 'antd-mobile/lib/toast';
+import { Container } from '../components/base';
 //region默认状态
 const defaultState = {
     GrantState: {
@@ -40,29 +41,14 @@ const defaultState = {
     orderNotCount: 0,
 }
 //endregion
-export class Home extends React.Component {
+export class Home extends Container {
 
-    //region生命周期
+    //region 生命周期
     constructor(props) {
         super(props)
         window.setState = (state, callback) => {
             this.setState(state, callback)
         };
-        window.refreshPage = () => {
-            window.alert('refreshPage')
-            // alert('refreshPage')
-            window.raiseTransCallBack.loadList = new Set();
-            Toast.hide();
-            //alert('refreshPage')
-            this.loadAllData();
-        }
-        window.openRefreshPage = () => {
-            window.alert('openRefreshPage')
-            window.raiseTransCallBack.loadList = new Set();
-            Toast.hide();
-            //alert('refreshPage')
-            this.loadAllData();
-        }
         //region 头像
         let strLoginId = window.getStringValue("strLoginId");
         let avatarPath = window.getStringValue(strLoginId);
@@ -108,7 +94,7 @@ export class Home extends React.Component {
             /**待支付数量 */
             orderNotCount: 0,
         }
-        window.getState=()=>{
+        window.getState = () => {
             return this.state;
         }
     }
@@ -124,8 +110,10 @@ export class Home extends React.Component {
             姓名 = this.state.strName;
         }
         //endregion
+        
         /**为了解决安卓文字不居中 */
         let textMarginTop = Global.Device.OS == 'Android' ? '.05rem' : '0';
+        
         //region 认证状态
         let 认证状态 = null;
         if (this.state.GrantState.nGrantState == '2') {
@@ -135,9 +123,9 @@ export class Home extends React.Component {
             </TouchableFlex>
         } else {
             认证状态 = <TouchableFlex onTap={() => {
-                this.handleMyLimit();
-                // var param = "sourceUrl=lineStage/merchant/checked.htm&successUrl=lineStage/merchant/checked.htm&sourceCode=dfq&successTitle=达分期";
-                // window.openWindow('autoCredit/automaticTrial/automaticOneStep.htm', '自动授信', param, 0, '');
+                // this.handleMyLimit();
+                var param = "sourceUrl=myCenter/new/index.html&sourceCode=dfq&successTitle=达分期";
+                window.openWindow('autoCredit/automaticTrial/automaticOneStep.htm', '自动授信', param, 0, '');
             }} vertical style={{ height: '.8rem', padding: '0 .32rem', overflow: 'hidden', borderTopLeftRadius: '.4rem', borderBottomLeftRadius: '.4rem', background: '#FF7E00' }}>
                 <Text label='去申请额度' color='#fff' fontSize='.26rem' style={{ marginRight: '.16rem', marginTop: textMarginTop }} />
                 <Icon name='arrowRight' color='#FFF' width='.3rem' height='.3rem' />
@@ -190,8 +178,9 @@ export class Home extends React.Component {
             )
         }
         //endregion
+        
         return (
-            <Page>
+            <Page >
                 {
                     //region 头部
 
@@ -214,12 +203,12 @@ export class Home extends React.Component {
                         }
                         window.openWindow('myCenter/recharge/recharge_nav.htm', '充值提现', 'backURL=my', 0, '');
                     }} flex1 style={{ marginLeft: '.3rem' }} column>
-                        <Text label={this.state.lAvailablebalance1} fontSize='.4rem' lineHeight='.56rem' color={this.state.lAvailablebalance1 == 0 ? '#999' : '#000'} style={{ marginTop: '.39rem' }} />
+                        <Text label={(this.state.lAvailablebalance1/100).toFixed(2)} fontSize='.4rem' lineHeight='.56rem' color={this.state.lAvailablebalance1 == 0 ? '#999' : '#000'} style={{ marginTop: '.39rem' }} />
                         <Text label='账户余额(元)' fontSize='.26rem' lineHeight='.39rem' color='#999' style={{ marginTop: '.1rem', marginBottom: '.38rem' }} />
                     </TouchableFlex>
                     <Flex style={{ width: 1, height: '1.2rem', background: '#d8d8d8', marginTop: '.3rem' }}></Flex>
                     <TouchableFlex onTap={this.handleMyLimit} flex1 style={{ marginLeft: '.3rem' }} column>
-                        <Text label={this.state.lCreditAvailable} fontSize='.4rem' lineHeight='.56rem' color={this.state.lCreditAvailable == 0 ? '#999' : '#000'} style={{ marginTop: '.39rem' }} />
+                        <Text label={(this.state.lCreditAvailable/100).toFixed(2)} fontSize='.4rem' lineHeight='.56rem' color={this.state.lCreditAvailable == 0 ? '#999' : '#000'} style={{ marginTop: '.39rem' }} />
                         <Text label='可用额度(元)' fontSize='.26rem' lineHeight='.39rem' color='#999' style={{ marginTop: '.1rem', marginBottom: '.38rem' }} />
                     </TouchableFlex>
                     <Flex style={{ height: 1, background: '#e8e8e8', position: 'absolute', bottom: 0, left: 0, right: 0 }}></Flex>
@@ -299,6 +288,24 @@ export class Home extends React.Component {
     componentDidMount() {
         this.loadAllData();
     }
+
+    //region back返回的回调
+    refreshPage() {
+
+        window.raiseTransCallBack.loadList = new Set();
+        Toast.hide();
+        this.loadAllData();
+    }
+    //endregion
+
+    //region 缓存页面openwindow的回调 
+    openRefreshPage() {
+        window.raiseTransCallBack.loadList = new Set();
+        Toast.hide();
+        this.loadAllData();
+    }
+    //endregion
+
     //endregion
 
     //region 加载所有数据
@@ -329,14 +336,15 @@ export class Home extends React.Component {
                 window.setState({ lCreditAvailable: data.data.cdoCredit.lCreditAvailable });
             });
             getGrant((data) => {
-                let GrantState = { isLoad: true };
+                let GrantState=this.state.GrantState;
+                GrantState.isLoad= true ;
                 if (data.data.cdoGrant) {
-                    GrantState.nCreditState = data.data.cdoGrant.nCreditState
-                    GrantState.nGrantState = data.data.cdoGrant.nGrantState
+                    GrantState.nCreditState = data.data.cdoGrant.nCreditState||this.state.GrantState.nCreditState
+                    GrantState.nGrantState = data.data.cdoGrant.nGrantState||this.GrantState.nGrantState
                 }
                 if (data.data.cdoUser) {
-                    GrantState.nCreditWay = data.data.cdoUser.nCreditWay
-                    GrantState.nRegCreditWay = data.data.cdoUser.nRegCreditWay
+                    GrantState.nCreditWay = data.data.cdoUser.nCreditWay||this.state.GrantState.nCreditWay
+                    GrantState.nRegCreditWay = data.data.cdoUser.nRegCreditWay||this.state.GrantState.nRegCreditWay
                 }
                 window.setState({
                     GrantState: GrantState
@@ -391,6 +399,7 @@ export class Home extends React.Component {
     }
     /**我的额度 */
     handleMyLimit = () => {
+        debugger
         if (this.state.isLOgin) {
             if (this.state.GrantState.isLoad) {
                 //nCreditState 信审状态 0-未审核,1-待信审，2-信审中,3-信审通过,4-信审退回,5-信审拒绝,6变更待提交
@@ -411,48 +420,48 @@ export class Home extends React.Component {
                 /*var param="sourceCode=dfq&sourceUrl=myCenter/myIndex.htm";
                   EngineClass.openWindow('autoCredit/automaticTrial/automaticOneStep.htm', '自动授信',param, 0, '');
                   return false;*/
-                if (_autoGrantObj.nGrantState == 0) {
-                    if (_autoGrantObj.nRegCreditWay == 2 && _autoGrantObj.nCreditState == 0) {
-                        // window._credit.lUserId = window.getStringValue("lUserId");//登录用户ID
-                        // window._credit.phone = window.getStringValue("strLoginId");//登录用户电话
-                        // window._credit.pageFrom = 0;
-                        // window.setStringValue("toBorrow_proj", "0");
-                        // window._credit.getAutoState();
-                    }
-                    if (_autoGrantObj.nRegCreditWay == 2 && (_autoGrantObj.nCreditState == 1 || _autoGrantObj.nCreditState == 2)) {
-                        window.openWindow('borrow/myLimit/myLimitOnlineProcessing.html', '我的额度', "", 0, '');
-                    }
-                    if (_autoGrantObj.nRegCreditWay == 3) {
-                        var param = "sourceCode=yd&sourceUrl=myCenter/myIndex.htm";
-                        window.openWindow('autoCredit/automaticTrial/automaticOneStep.htm', '自动授信', param, 0, '');
-                        return;
-                    }
-                    if (_autoGrantObj.nRegCreditWay == 0) {
-                        window.openWindow('autoCredit/automaticTrial/goToCredit.htm', '申请授信', "autoParam=" + params, 0, '');
-                        return;
-                    }
-                    if (_autoGrantObj.nRegCreditWay == 1 && _autoGrantObj.nCreditState == 0) {
-                        window.openWindow('borrow/myLimit/myLimitNotOpen.html', '我的额度', "", 0, '');
-                        return;
-                    }
-                    if (_autoGrantObj.nRegCreditWay == 1 && (_autoGrantObj.nCreditState == 1 || _autoGrantObj.nCreditState == 2)) {
-                        window.openWindow('borrow/myLimit/myLimitOnlineProcessing.html', '我的额度', "", 0, '');
-                        return;
-                    }
-                    window.openWindow('borrow/noLogin_toBorrow/noLogin_borrowFirst.htm', '我的额度', "", 0, '');
-                    return;
-                }
-                if (_autoGrantObj.nGrantState == 2) {
-                    if (_autoGrantObj.nRegCreditWay == 2) {
-                        window.openWindow('borrow/myLimit/myLimitOfflineSuccess.html', '我的额度', "", 0, '');
-                    }
-                    if (_autoGrantObj.nRegCreditWay == 3) {
-                        window.openWindow('borrow/myLimit/myLimitOnlineSuccess.html', '我的额度', "", 0, '');
-                    }
-                    if (_autoGrantObj.nRegCreditWay == 1) {
-                        window.openWindow('borrow/myLimit/myLimitOnlineSuccess.html', '我的额度', "", 0, '');
-                    }
-                }
+                // if (_autoGrantObj.nGrantState == 0) {
+                //     if (_autoGrantObj.nRegCreditWay == 2 && _autoGrantObj.nCreditState == 0) {
+                //         // window._credit.lUserId = window.getStringValue("lUserId");//登录用户ID
+                //         // window._credit.phone = window.getStringValue("strLoginId");//登录用户电话
+                //         // window._credit.pageFrom = 0;
+                //         // window.setStringValue("toBorrow_proj", "0");
+                //         // window._credit.getAutoState();
+                //     }
+                //     if (_autoGrantObj.nRegCreditWay == 2 && (_autoGrantObj.nCreditState == 1 || _autoGrantObj.nCreditState == 2)) {
+                //         window.openWindow('borrow/myLimit/myLimitOnlineProcessing.html', '我的额度', "", 0, '');
+                //     }
+                //     if (_autoGrantObj.nRegCreditWay == 3) {
+                //         var param = "sourceCode=yd&sourceUrl=myCenter/new/index.html";
+                //         window.openWindow('autoCredit/automaticTrial/automaticOneStep.htm', '自动授信', param, 0, '');
+                //         return;
+                //     }
+                //     if (_autoGrantObj.nRegCreditWay == 0) {
+                //         window.openWindow('autoCredit/automaticTrial/goToCredit.htm', '申请授信', "autoParam=" + params, 0, '');
+                //         return;
+                //     }
+                //     if (_autoGrantObj.nRegCreditWay == 1 && _autoGrantObj.nCreditState == 0) {
+                //         window.openWindow('borrow/myLimit/myLimitNotOpen.html', '我的额度', "", 0, '');
+                //         return;
+                //     }
+                //     if (_autoGrantObj.nRegCreditWay == 1 && (_autoGrantObj.nCreditState == 1 || _autoGrantObj.nCreditState == 2)) {
+                //         window.openWindow('borrow/myLimit/myLimitOnlineProcessing.html', '我的额度', "", 0, '');
+                //         return;
+                //     }
+                //     window.openWindow('borrow/noLogin_toBorrow/noLogin_borrowFirst.htm', '我的额度', "", 0, '');
+                //     return;
+                // }
+                // if (_autoGrantObj.nGrantState == 2) {
+                //     if (_autoGrantObj.nRegCreditWay == 2) {
+                //         window.openWindow('borrow/myLimit/myLimitOfflineSuccess.html', '我的额度', "", 0, '');
+                //     }
+                //     if (_autoGrantObj.nRegCreditWay == 3) {
+                //         window.openWindow('borrow/myLimit/myLimitOnlineSuccess.html', '我的额度', "", 0, '');
+                //     }
+                //     if (_autoGrantObj.nRegCreditWay == 1) {
+                //         window.openWindow('borrow/myLimit/myLimitOnlineSuccess.html', '我的额度', "", 0, '');
+                //     }
+                // }
 
 
 
@@ -470,6 +479,15 @@ export class Home extends React.Component {
                 // } else {
                 //     window.openWindow('borrow/myLimit/myLimitNotOpen.html', '我的额度', '', 0, '');
                 // }
+                if (this.state.GrantState.nGrantState == 2 && this.state.GrantState.nCreditState == 3) { // 审核通过使用中
+                    if (this.state.GrantState.nCreditWay == 1) { // 线上通过
+                        window.openWindow('borrow/myLimit/myLimitOnlineSuccess.html', '我的额度', '', 0, '');
+                    } else { // 线下通过
+                        window.openWindow('borrow/myLimit/myLimitOfflineSuccess.html', '我的额度', '', 0, '');
+                    }
+                } else {
+                    window.openWindow('borrow/myLimit/myLimitNotOpen.html', '我的额度', '', 0, '');
+                }
             }
         } else {
             window.EngineClass.openWindow('login/login.htm', '登录', '', 0, '');

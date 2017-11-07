@@ -49,7 +49,7 @@ module.exports = {
             inject: 'body'
         }),
         new webpack.DefinePlugin({
-            DEVELOPMENTZIP: JSON.stringify(true),
+            DEVELOPMENTZIP: JSON.stringify(false),
             DEVELOPMENT: JSON.stringify(false)
         }),
         // new CleanWebpackPlugin(
