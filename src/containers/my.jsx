@@ -36,7 +36,7 @@ const defaultState = {
     /**可用额度 */
     lCreditAvailable: 0,
     /**是否登录 */
-    isLOgin: User.isLogin(),
+    isLOgin: false,
     /**待支付数量 */
     orderNotCount: 0,
 }
@@ -46,9 +46,16 @@ export class Home extends Container {
     //region 生命周期
     constructor(props) {
         super(props)
+        window.setBackURL("lineStage/merchant/baseIndex.htm", "首页", "", 2, "");
         window.setState = (state, callback) => {
             this.setState(state, callback)
         };
+        window.scanBack = function (val) {
+            if (val == 0) {
+                //setStringValue("stage_strEncode",val);
+                window.openWindow('lineStage/scanPay/scanPay.htm', '打开窗口', '', 0, '', 1);
+            }
+        }
         //region 头像
         let strLoginId = window.getStringValue("strLoginId");
         let avatarPath = window.getStringValue(strLoginId);
@@ -96,10 +103,10 @@ export class Home extends Container {
         }
         window.getState = () => {
             return this.state;
-        }
+        }        
     }
     render() {
-
+        //window.starttime2 = new Date().getTime();
         //region 未读消息
         let 未读消息Icon = null;
         if (this.state.nMineUnreadCount > 0) {
@@ -110,10 +117,10 @@ export class Home extends Container {
             姓名 = this.state.strName;
         }
         //endregion
-        
+
         /**为了解决安卓文字不居中 */
         let textMarginTop = Global.Device.OS == 'Android' ? '.05rem' : '0';
-        
+
         //region 认证状态
         let 认证状态 = null;
         if (this.state.GrantState.nGrantState == '2') {
@@ -178,7 +185,7 @@ export class Home extends Container {
             )
         }
         //endregion
-        
+
         return (
             <Page >
                 {
@@ -203,12 +210,12 @@ export class Home extends Container {
                         }
                         window.openWindow('myCenter/recharge/recharge_nav.htm', '充值提现', 'backURL=my', 0, '');
                     }} flex1 style={{ marginLeft: '.3rem' }} column>
-                        <Text label={(this.state.lAvailablebalance1/100).toFixed(2)} fontSize='.4rem' lineHeight='.56rem' color={this.state.lAvailablebalance1 == 0 ? '#999' : '#000'} style={{ marginTop: '.39rem' }} />
+                        <Text label={(this.state.lAvailablebalance1 / 100).toFixed(2)} fontSize='.4rem' lineHeight='.56rem' color={this.state.lAvailablebalance1 == 0 ? '#999' : '#000'} style={{ marginTop: '.39rem' }} />
                         <Text label='账户余额(元)' fontSize='.26rem' lineHeight='.39rem' color='#999' style={{ marginTop: '.1rem', marginBottom: '.38rem' }} />
                     </TouchableFlex>
                     <Flex style={{ width: 1, height: '1.2rem', background: '#d8d8d8', marginTop: '.3rem' }}></Flex>
                     <TouchableFlex onTap={this.handleMyLimit} flex1 style={{ marginLeft: '.3rem' }} column>
-                        <Text label={(this.state.lCreditAvailable/100).toFixed(2)} fontSize='.4rem' lineHeight='.56rem' color={this.state.lCreditAvailable == 0 ? '#999' : '#000'} style={{ marginTop: '.39rem' }} />
+                        <Text label={(this.state.lCreditAvailable / 100).toFixed(2)} fontSize='.4rem' lineHeight='.56rem' color={this.state.lCreditAvailable == 0 ? '#999' : '#000'} style={{ marginTop: '.39rem' }} />
                         <Text label='可用额度(元)' fontSize='.26rem' lineHeight='.39rem' color='#999' style={{ marginTop: '.1rem', marginBottom: '.38rem' }} />
                     </TouchableFlex>
                     <Flex style={{ height: 1, background: '#e8e8e8', position: 'absolute', bottom: 0, left: 0, right: 0 }}></Flex>
@@ -236,7 +243,10 @@ export class Home extends Container {
                         <Text label='退款' style={{ marginTop: '.17rem' }} color='#222' fontSize='.24rem' lineHeight='.33rem' />
                     </TouchableFlex>
                     <Flex style={{ width: 1, height: '.8rem', background: '#d8d8d8' }}></Flex>
-                    <TouchableFlex onTap={() => { this.handleOrderList(0) }} column vertical style={{ width: '1.5rem' }}>
+                    <TouchableFlex onTap={() => {
+                        this.handleOrderList(0)
+                        //window.openWindow("myCenter/new/index.html", "我的", "path=/my", 0, "")
+                    }} column vertical style={{ width: '1.5rem' }}>
                         <Image height='.36rem' width='.32rem' src={require('../template/img/qbddicon.png')} />
                         <Text label='全部订单' style={{ marginTop: '.17rem' }} color='#222' fontSize='.24rem' lineHeight='.33rem' />
                     </TouchableFlex>
@@ -286,12 +296,12 @@ export class Home extends Container {
         )
     }
     componentDidMount() {
+        //window.alert('渲染时间：' + (new Date().getTime() - window.starttime + '渲染时间2：' + (new Date().getTime() - window.starttime2)));
         this.loadAllData();
     }
 
     //region back返回的回调
     refreshPage() {
-
         window.raiseTransCallBack.loadList = new Set();
         Toast.hide();
         this.loadAllData();
@@ -309,9 +319,9 @@ export class Home extends Container {
     //endregion
 
     //region 加载所有数据
-    loadAllData = () => {
-        window.raiseTransMap.removeAll();
+    loadAllData = () => {        
         window.setState({ isLOgin: User.isLogin() });
+        window.raiseTransMap.removeAll();
         if (User.isLogin()) {
             let strLoginId = window.getStringValue("strLoginId");
             let avatarPath = window.getStringValue(strLoginId);
@@ -336,15 +346,15 @@ export class Home extends Container {
                 window.setState({ lCreditAvailable: data.data.cdoCredit.lCreditAvailable });
             });
             getGrant((data) => {
-                let GrantState=this.state.GrantState;
-                GrantState.isLoad= true ;
+                let GrantState = this.state.GrantState;
+                GrantState.isLoad = true;
                 if (data.data.cdoGrant) {
-                    GrantState.nCreditState = data.data.cdoGrant.nCreditState||this.state.GrantState.nCreditState
-                    GrantState.nGrantState = data.data.cdoGrant.nGrantState||this.GrantState.nGrantState
+                    GrantState.nCreditState = data.data.cdoGrant.nCreditState || this.state.GrantState.nCreditState
+                    GrantState.nGrantState = data.data.cdoGrant.nGrantState || this.GrantState.nGrantState
                 }
                 if (data.data.cdoUser) {
-                    GrantState.nCreditWay = data.data.cdoUser.nCreditWay||this.state.GrantState.nCreditWay
-                    GrantState.nRegCreditWay = data.data.cdoUser.nRegCreditWay||this.state.GrantState.nRegCreditWay
+                    GrantState.nCreditWay = data.data.cdoUser.nCreditWay || this.state.GrantState.nCreditWay
+                    GrantState.nRegCreditWay = data.data.cdoUser.nRegCreditWay || this.state.GrantState.nRegCreditWay
                 }
                 window.setState({
                     GrantState: GrantState
@@ -399,7 +409,6 @@ export class Home extends Container {
     }
     /**我的额度 */
     handleMyLimit = () => {
-        debugger
         if (this.state.isLOgin) {
             if (this.state.GrantState.isLoad) {
                 //nCreditState 信审状态 0-未审核,1-待信审，2-信审中,3-信审通过,4-信审退回,5-信审拒绝,6变更待提交

@@ -21,10 +21,28 @@ export function Flex(
     if (HW) classnames += ' justify-content align-items';
     if (flex1) classnames += ' flex1';
     return (
-        <div ref={dom} className={Common.classnames('display-flex', className, classnames)} style={style} {...other}>
+        <div ref={dom} className={'display-flex '+className+classnames} style={style} {...other}>
             {children}
         </div>
     );
+}
+export class Flex1 extends Component{
+    constructor(props){
+        super(props)
+    }
+    render(){
+        let classnames = '';
+        if (this.props.column) classnames += ' flex-direction-column';
+        if (this.props.horizontal) classnames += ' justify-content';
+        if (this.props.vertical) classnames += ' align-items';
+        if (this.props.HW) classnames += ' justify-content align-items';
+        if (this.props.flex1) classnames += ' flex1';
+        return(
+            <div ref={this.props.dom} className={Common.classnames('display-flex', this.props.className||'', classnames)} style={this.props.style} {...this.props.other}>
+            {this.props.children}
+        </div>
+        );
+    }
 }
 // class FLexBase extends PureComponent {
 //     constructor(props) {

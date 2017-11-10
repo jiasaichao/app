@@ -16,7 +16,7 @@ export const User = {
         var flag = true;
         var lUserId = window.getStringValue("lUserId");//获取用户id
         var strLoginToken = window.getStringValue("strLoginToken");
-        if (!lUserId || "null" == lUserId || !strLoginToken || "null" == strLoginToken) {
+        if (!lUserId || lUserId == '' || "null" == lUserId || !strLoginToken || "null" == strLoginToken) {
             flag = false;
         }
         return flag;

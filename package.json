@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/jiasaichao/app#readme",
   "dependencies": {
-    "antd-mobile": "^2.0.0-beta.3",
+    "antd-mobile": "^2.0.2",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

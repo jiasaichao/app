@@ -211,7 +211,7 @@ storiesOf('List(列表)', module).addDecorator(withKnobs)
 storiesOf('Button', module).addDecorator(withKnobs)
   .add('with text', withReadme(ButtonReadme, () => <Button onClick={action('clicked')}>Hello Button {text('Label', 'Hello Button')}</Button>))
   .add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
-
+  
 storiesOf('页面', module).addDecorator(withKnobs)
   .add('我的', withReadme(ButtonReadme, () => <My />));
 
