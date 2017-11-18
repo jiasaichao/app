@@ -5,7 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: {
         index: "./src/index.jsx",
-        vendor: ['react', 'react-dom']//, 'react-router-dom'
+        // vendor: ['react', 'react-dom']//, 'react-router-dom'
     },
     output: {
         path: path.resolve(__dirname, './build/prod'),
@@ -27,9 +27,9 @@ module.exports = {
     // Enable sourcemaps for debugging webpack's output.
     // devtool: "source-map",
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['vendor'/*,'manifest'*/],
-        }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     names: ['vendor'/*,'manifest'*/],
+        // }),
         // js 压缩
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,    // 不美化输出
@@ -47,6 +47,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/template/index.html'),
             inject: 'body'
+        }),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require('./build/bundle.manifest.json'),
         }),
         new webpack.DefinePlugin({
             DEVELOPMENTZIP: JSON.stringify(true),
