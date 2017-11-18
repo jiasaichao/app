@@ -42,10 +42,10 @@ export function Page({ title, backName, headBg = '#108ee9', headColor = '#fff', 
                 color: 'red',
                 fontSize: '.4rem',
                 zIndex: 9999,
-                webkitTouchCallout: 'all',
-                webkitUserSelect: 'all',
+                WebkitTouchCallout: 'all',
+                WebkitUserSelect: 'all',
                 khtmlUserSelect: 'all',
-                mozUserSelect: 'all',
+                MozUserSelect: 'all',
                 msUserSelect: 'all',
                 userSelect: 'all',
                 width: '100%',
@@ -55,7 +55,7 @@ export function Page({ title, backName, headBg = '#108ee9', headColor = '#fff', 
                 overflowY: 'auto',
                 display: 'none'
             }}></div>
-            <Flex style={{ zIndex: 9999, position: 'absolute', bottom: 0, left: 0 }} other={{ id: 'xianshijiekou' }}>
+            <Flex style={{ zIndex: 9999, position: 'absolute', bottom: 0, left: 0, background:'#f7f7f7' }} other={{ id: 'xianshijiekou' }}>
                 <TouchableFlex onTap={() => {
                     if (document.getElementById('code').style.display == 'none') {
                         document.getElementById('code').style.display = 'block'

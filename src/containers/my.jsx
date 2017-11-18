@@ -39,6 +39,9 @@ const defaultState = {
     isLOgin: false,
     /**待支付数量 */
     orderNotCount: 0,
+    /**支付中数量 */
+    orderCount: 0,
+    show: false
 }
 //endregion
 export class Home extends Container {
@@ -100,10 +103,13 @@ export class Home extends Container {
             isLOgin: User.isLogin(),
             /**待支付数量 */
             orderNotCount: 0,
+            /**支付中数量 */
+            orderCount: 0,
+            show: false
         }
         window.getState = () => {
             return this.state;
-        }        
+        }
     }
     render() {
         //window.starttime2 = new Date().getTime();
@@ -185,7 +191,9 @@ export class Home extends Container {
             )
         }
         //endregion
-
+        // if (!this.state.show) {
+        //     return <div onTouchStart={()=>{window.openWindow('myCenter/new/index1.html', '设置', '', 0, '', 0)}}>设置</div>
+        // }
         return (
             <Page >
                 {
@@ -208,7 +216,9 @@ export class Home extends Container {
                             window.openWindow('login/login.htm', '登录', '', 0);
                             return;
                         }
-                        window.openWindow('myCenter/recharge/recharge_nav.htm', '充值提现', 'backURL=my', 0, '');
+                        User.verifyIdentity(() => {
+                            window.openWindow('myCenter/recharge/recharge_nav.htm', '充值提现', 'backURL=my', 0, '');
+                        });
                     }} flex1 style={{ marginLeft: '.3rem' }} column>
                         <Text label={(this.state.lAvailablebalance1 / 100).toFixed(2)} fontSize='.4rem' lineHeight='.56rem' color={this.state.lAvailablebalance1 == 0 ? '#999' : '#000'} style={{ marginTop: '.39rem' }} />
                         <Text label='账户余额(元)' fontSize='.26rem' lineHeight='.39rem' color='#999' style={{ marginTop: '.1rem', marginBottom: '.38rem' }} />
@@ -231,7 +241,12 @@ export class Home extends Container {
                         <Text label='待付款' style={{ marginTop: '.17rem' }} color='#222' fontSize='.24rem' lineHeight='.33rem' />
                     </TouchableFlex>
                     <TouchableFlex onTap={() => { this.handleOrderList(2) }} column vertical flex1>
-                        <Image height='.33rem' width='.30rem' src={require('../template/img/zfzicon.png')} />
+                        <Flex style={{ position: 'relative' }}>
+                            {this.state.orderCount > 0 ? <Text label={this.state.orderCount > 99 ? '99+' : this.state.orderCount} color='#fff' fontSize='.24rem' style={{ lineHeight: '.4rem', height: '.4rem', background: '#F33925', borderRadius: '.4rem', minWidth: '.4rem', textAlign: 'center', position: 'absolute', top: '-.2rem', right: '-.24rem', padding: '0 .08rem', boxSizing: 'border-box' }} /> : null}
+
+                            {/* <svg id="loading" viewBox="0 -2 59.75 60.25" width="100%" height="100%"><path fill="#ccc" d="M29.69-.527C14.044-.527 1.36 12.158 1.36 27.806S14.043 56.14 29.69 56.14c15.65 0 28.334-12.686 28.334-28.334S45.34-.527 29.69-.527zm.185 53.75c-14.037 0-25.417-11.38-25.417-25.417S15.838 2.39 29.875 2.39s25.417 11.38 25.417 25.417-11.38 25.416-25.417 25.416z"></path><path fill="none" stroke="#108ee9" strokeWidth="3" strokeLinecap="round" strokeMiterlimit="10" d="M56.587 29.766c.37-7.438-1.658-14.7-6.393-19.552"></path></svg> */}
+                            <Image height='.33rem' width='.30rem' src={require('../template/img/zfzicon.png')} />
+                        </Flex>
                         <Text label='支付中' style={{ marginTop: '.17rem' }} color='#222' fontSize='.24rem' lineHeight='.33rem' />
                     </TouchableFlex>
                     <TouchableFlex onTap={() => { this.handleOrderList(3) }} column vertical flex1>
@@ -267,13 +282,14 @@ export class Home extends Container {
                         window.setStringValue("commoditylId", "0000");
                         window.openWindow('lineStage/GroupPurchase/cardpackage.htm', '卡券列表', '', 0, '', 0)
                     }} icon='youhuiquan' iconColor='#FD3F43' label='我的卡券' />
-                    {/* <ListItem onTap={()=>{window.EngineClass.openWindow('myCenter/fundDetail/fundList.htm', '资金明细', '', 0, '');}} icon='jilu' iconColor='#FFBB11' label='交易记录' /> */}
+                    {/* <ListItem onTap={() => { window.EngineClass.openWindow('myCenter/fundDetail/fundList.htm', '资金明细', '', 0, ''); }} icon='jilu' iconColor='#FFBB11' label='交易记录' /> */}
                     <ListItem onTap={() => {
                         if (!this.state.isLOgin) {
                             window.openWindow('login/login.htm', '登录', '', 0);
                             return;
                         }
-                        window.openWindow('myCenter/more/myAbout.htm', '设置', '', 0, '', 0)
+                        // window.openWindow('myCenter/more/myAbout.htm', '设置', '', 0, '', 0)
+                        window.openWindow('myCenter/new/index1.html', '设置', '', 0, '', 0)
                     }} icon='shezhi' iconColor='#00D4C5' label='设置' line={false} />
                 </Flex>
                 <Flex style={{ height: '.98rem', paddingTop: '.19rem', overflow: 'hidden', position: 'absolute', bottom: 0, width: '100%', background: '#FAFAFA', boxSizing: 'border-box', boxShadow: '0 0 4px 0 rgba(0,0,0,0.10)' }}>
@@ -319,7 +335,8 @@ export class Home extends Container {
     //endregion
 
     //region 加载所有数据
-    loadAllData = () => {        
+    loadAllData = () => {
+        window.setBackURL("lineStage/merchant/baseIndex.htm", "首页", "", 2, "");
         window.setState({ isLOgin: User.isLogin() });
         window.raiseTransMap.removeAll();
         if (User.isLogin()) {
@@ -335,16 +352,16 @@ export class Home extends Container {
             window.setState({ strLoginId, avatarPath });
             unreadCount((data) => {
                 window.setState({ nMineUnreadCount: data.data.nMineUnreadCount });
-            });
+            }, {}, false);
             queryIdentity((data) => {
                 window.setState({ nIdentityState: data.data.nIdentityState, strName: data.data.strName });
-            });
+            }, {}, false);
             getAccountBalance((data) => {
                 window.setState({ lAvailablebalance1: data.data.cdoAccountAmount.lAvailablebalance1 });
-            });
+            }, {}, false);
             getQueryCredit((data) => {
                 window.setState({ lCreditAvailable: data.data.cdoCredit.lCreditAvailable });
-            });
+            }, {}, false);
             getGrant((data) => {
                 let GrantState = this.state.GrantState;
                 GrantState.isLoad = true;
@@ -359,10 +376,16 @@ export class Home extends Container {
                 window.setState({
                     GrantState: GrantState
                 });
-            });
+            }, {}, false);
             orderNotCount((data) => {
                 window.setState({ orderNotCount: data.data.nCount.nCount || 0 });
-            });
+                orderNotCount((data1) => {
+                    window.setState({ orderCount: data1.data.nCount.nCount || 0 });
+                }, { nStatus: 1 }, false);
+            }, { nStatus: 0 }, false);
+            // setTimeout(() => {
+
+            // }, 500);
         } else {
             window.setState(defaultState);
         }
@@ -495,6 +518,8 @@ export class Home extends Container {
                         window.openWindow('borrow/myLimit/myLimitOfflineSuccess.html', '我的额度', '', 0, '');
                     }
                 } else {
+                    // var param = "sourceUrl=myCenter/new/index.html&sourceCode=dfq&successTitle=达分期";
+                    // window.openWindow('autoCredit/automaticTrial/automaticOneStep.htm', '自动授信', param, 0, '');
                     window.openWindow('borrow/myLimit/myLimitNotOpen.html', '我的额度', '', 0, '');
                 }
             }

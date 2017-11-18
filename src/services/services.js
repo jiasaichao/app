@@ -34,8 +34,9 @@ function raiseTrans(cdoRequest, callBack, load, defaultData, nCode = false) {
         }
     }
     window[callBackName] = (cdoRequest, cdoResponse, cdoReturn) => {
-        //调试用
-        window.raiseTransCallBack.DEV_DataList[cdoRequest.getStringValue('strServiceName') + '_' + cdoRequest.getStringValue('strTransName')] = JSON.parse(cdoResponse.toJSON());
+        if (DEVELOPMENTZIP || DEVELOPMENT) {
+            window.raiseTransCallBack.DEV_DataList[cdoRequest.getStringValue('strServiceName') + '_' + cdoRequest.getStringValue('strTransName')] = JSON.parse(cdoResponse.toJSON());
+        }
         if (load) {
             window.raiseTransCallBack.loadList.delete(callBackName);
             if (window.raiseTransCallBack.loadList.size == 0) {
@@ -51,8 +52,9 @@ function raiseTrans(cdoRequest, callBack, load, defaultData, nCode = false) {
             // data.data = JSON.parse(cdoResponse.toJSON().replace(',,', ','));
             data.data = JSON.parse(cdoResponse.toJSON());
             data.data.__nCode = cdoReturn.nCode;
-            //调试用
-            window.raiseTransCallBack.DEV_DataList[cdoRequest.getStringValue('strServiceName') + '_' + cdoRequest.getStringValue('strTransName')] = data;
+            if (DEVELOPMENTZIP || DEVELOPMENT) {
+                window.raiseTransCallBack.DEV_DataList[cdoRequest.getStringValue('strServiceName') + '_' + cdoRequest.getStringValue('strTransName')] = data;
+            }
             callBack(data);
             return;
         }
@@ -104,7 +106,7 @@ export function unreadCount(callBack, data, load = true) {
     let cdoRequest = new window.CDO();
     cdoRequest.setStringValue("strServiceName", "NoticeMsgConsumerService");
     cdoRequest.setStringValue("strTransName", "getMineMsgCount");
-    cdoRequest.setIntegerValue("nChannel", 1); //渠道 1:达飞云贷,2:口袋助手
+    cdoRequest.setIntegerValue("nChannel", 6); //渠道 1:达飞云贷,2:口袋助手
     cdoRequest.setLongValue("lUserId", window.getStringValue("lUserId")); //用户ID，向哪个用户发送
     raiseTrans(cdoRequest, callBack, load);
 }
@@ -147,7 +149,8 @@ export function orderNotCount(callBack, data, load = true) {
     cdoRequest.setStringValue("strServiceName", "StageOrderService");
     cdoRequest.setStringValue("strTransName", "getToPayCount");
     cdoRequest.setLongValue("lUserId", window.getStringValue("lUserId") || 1071);
-    cdoRequest.setLongValue("nStatus", 0);
+    //0-待支付,1-支付中,2-支付成功,3-支付失败,4-订单关闭
+    cdoRequest.setLongValue("nStatus", data.nStatus);
     raiseTrans(cdoRequest, callBack, load);
 }
 /**效验实名认证等相关处理 */

@@ -33,7 +33,8 @@ npm i -g @storybook/cli
 ```
 ## 启动程序
 * 组件开发`npm run storybook`
-* 项目调试`npm run start`
+* 项目调试`npm run start`(暂时不用)
+* 项目发布开发者版本`npm run dev`
 * 项目发布`npm run build`
 ## 环境配置
 [React开发，在VS Code中配置ESLint, Prettier, and Flow](http://www.zcfy.cc/article/configure-eslint-prettier-and-flow-in-vs-code-for-react-development-2962.html)

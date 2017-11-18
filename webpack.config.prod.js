@@ -5,7 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: {
         index: "./src/index.jsx",
-        vendor: ['react', 'react-dom', 'react-router-dom']
+        vendor: ['react', 'react-dom']//, 'react-router-dom'
     },
     output: {
         path: path.resolve(__dirname, './build/prod'),

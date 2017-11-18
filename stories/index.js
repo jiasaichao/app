@@ -24,6 +24,7 @@ import { Touchable } from '../src/components/touchable';
 import { List } from '../src/components/list';
 
 import { Home as My } from '../src/containers/my';
+import { ZhangDan } from '../src/containers/zhangdang';
 
 import Button from './Button';
 import Welcome from './Welcome';
@@ -33,7 +34,7 @@ import app_popup from '../src/template/css/app_popup.css';
 
 import { Carousel } from 'antd-mobile';
 
-import {A1} from './demo/jicheng'
+import { A1 } from './demo/jicheng'
 // import { Home } from './pages/my';
 
 //引入样式
@@ -211,9 +212,12 @@ storiesOf('List(列表)', module).addDecorator(withKnobs)
 storiesOf('Button', module).addDecorator(withKnobs)
   .add('with text', withReadme(ButtonReadme, () => <Button onClick={action('clicked')}>Hello Button {text('Label', 'Hello Button')}</Button>))
   .add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
-  
+
 storiesOf('页面', module).addDecorator(withKnobs)
   .add('我的', withReadme(ButtonReadme, () => <My />));
 
 storiesOf('demo', module).addDecorator(withKnobs)
   .add('我的', withReadme(ButtonReadme, () => <A1 />));
+
+storiesOf('账单', module).addDecorator(withKnobs)
+  .add('首页', withReadme(ButtonReadme, () => <ZhangDan />));

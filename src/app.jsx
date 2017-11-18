@@ -1,12 +1,12 @@
 import React from 'react';
-import {
-    HashRouter as Router,
-    Route,
-    Link,
-    withRouter,
-    Switch,
-    Redirect
-} from 'react-router-dom';
+// import {
+//     HashRouter as Router,
+//     Route,
+//     Link,
+//     withRouter,
+//     Switch,
+//     Redirect
+// } from 'react-router-dom';
 
 Number.prototype.map = function (fn) {
     let arr1 = [];
@@ -21,17 +21,22 @@ window.info = Toast.info;
 import { Home } from './containers/my';
 import { Page } from './components/page';
 import { Container } from './components/base';
+// export default class Index extends React.Component {
+//     render() {
+//         return (
+//             <Router>
+//                 <div style={{ height: '100%' }}>
+//                     <Route path="/my" exact component={Home} />
+//                     <Route path="/about" exact component={App2} />
+//                     <Route path="/" exact component={Default} />
+//                 </div>
+//             </Router>
+//         );
+//     }
+// }
 export default class Index extends React.Component {
     render() {
-        return (
-            <Router>
-                <div style={{ height: '100%' }}>
-                    <Route path="/my" exact component={Home} />
-                    <Route path="/about" exact component={App2} />
-                    <Route path="/" exact component={Default} />
-                </div>
-            </Router>
-        );
+        return <Home/>;
     }
 }
 function App2() {

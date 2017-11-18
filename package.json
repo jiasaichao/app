@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack --config webpack.config.prod.js",
+    "dev": "webpack --config webpack.config.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -s ./src/template -p 6006",
     "build-storybook": "build-storybook",
